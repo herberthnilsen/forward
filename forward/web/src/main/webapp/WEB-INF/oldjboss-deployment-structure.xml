@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+	<deployment>
+		<exclusions>
+			<module name="javax.faces.api" />
+			<module name="com.sun.jsf-impl.main" />
+		</exclusions>
+		<dependencies>
+			<module name="javax.faces.api"/>
+			<module name="com.sun.jsf-impl" />
+		</dependencies>
+	</deployment>
+</jboss-deployment-structure>

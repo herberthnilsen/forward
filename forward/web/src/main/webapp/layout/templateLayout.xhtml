@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT" />
+	<title>#{msg['application.name']}</title>
+
+	<script language="JavaScript">
+        if (navigator.appName == "Microsoft Internet Explorer") {
+            //alert(navigator.appVersion);
+            var badBrowser = (
+                navigator.appVersion.indexOf("MSIE 7") != -1 ||
+                navigator.appVersion.indexOf("MSIE 6") != -1 ||
+                navigator.appVersion.indexOf("MSIE 5.5") != -1 ||
+                navigator.appVersion.indexOf("MSIE 5") != -1
+            );
+
+            if (badBrowser) {
+                alert("A versão do seu navegador não é suportada pelo sistema.\nAtualize seu navegador!");
+            }
+        }
+    </script>
+	<h:outputScript name="jsf.js" library="javax.faces" target="head" />
+</h:head>
+<h:body>
+
+	<h:outputScript
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" />
+	<h:outputScript src="/js/jquery.meio.mask.js" />
+	<h:outputScript src="/js/functions.js" />
+
+	<h:form>
+
+		<p:layout style="height:250px">
+
+			<p:layoutUnit position="north" resizable="true">
+				<ui:include src="menu.xhtml" />
+			</p:layoutUnit>
+			<p:layoutUnit position="east" rendered="false">leste</p:layoutUnit>
+			<p:layoutUnit position="center">centro</p:layoutUnit>
+			<p:layoutUnit position="west" rendered="false">oeste</p:layoutUnit>
+
+		</p:layout>
+	</h:form>
+
+</h:body>
+</html>

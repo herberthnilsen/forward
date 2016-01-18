@@ -1,0 +1,45 @@
+<f:subview xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+	<p:modalPanel id="dlgShowMessages" minWidth="500" minHeight="50"
+		autosized="true" moveable="false"
+		style="background: #0E8EBA; padding: 0px; margin: 0px;"
+		headerClass="rich-mpnl-header-kindle-style"
+		rendered="#{(not fn:startsWith(facesContext.maximumSeverity,'ERROR')) and (not empty facesContext.maximumSeverity)}"
+		onshow="if (#{fn:startsWith(facesContext.maximumSeverity,'INFO')}) { setTimeout(function(){ Richfaces.hideModalPanel('dlgShowMessages'); }, 1200); }"
+		onmaskclick="Richfaces.hideModalPanel('dlgShowMessages')">
+		<f:facet name="header">
+			<h:panelGroup layout="block" styleClass="titulo">
+				<h:outputText value="#{msgs['legenda.show.messages']}" />
+			</h:panelGroup>
+		</f:facet>
+		<h:form>
+			<p:messages layout="list" level="fatal,warn,info" styleClass="text_common bold white_color">
+				<f:facet name="fatalMarker">
+					<h:graphicImage value="/img/template/delete.gif" styleClass="messageImage" />
+				</f:facet>
+				<f:facet name="warnMarker">
+					<h:graphicImage value="/img/template/alert.png" styleClass="messageImage" />
+				</f:facet>
+				<f:facet name="infoMarker">
+					<h:graphicImage value="/img/template/info_white.png"
+						styleClass="messageImage" />
+				</f:facet>
+			</p:messages>
+			<h:panelGrid columns="2" styleClass="showMessagesButtons">
+				<p:commandButton id="confirmDlg" value="#{msgs['button.ok']}"
+					styleClass="button_100 right" ajaxSingle="true" limitToList="true" />
+				<p:componentControl for="dlgShowMessages" attachTo="confirmDlg"
+					operation="hide" event="onclick" />
+			</h:panelGrid>
+			<!-- Propriedade para efetuar o click do botao "OK" atraves do "Enter" do teclado -->
+			<p:hotKey key="return"
+				handler="#{p:element('confirmDlg')}.click();" />
+		</h:form>
+	</p:modalPanel>
+</f:subview>

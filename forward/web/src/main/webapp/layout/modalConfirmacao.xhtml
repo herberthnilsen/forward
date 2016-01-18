@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+                xmlns:f="http://xmlns.jcp.org/jsf/core" 
+                xmlns:h="http://xmlns.jcp.org/jsf/html" 
+                xmlns:p="http://primefaces.org/ui" >
+
+  <p:modalPanel id="#{modalConfirmacaoID}" minWidth="100" minHeight="100" resizeable="false" 
+                   autosized="true" moveable="false">
+
+    <f:facet name="header">
+      <h:outputFormat value="#{msgs['titulo.modal.alerta']}" />
+    </f:facet>
+
+    <h:form>
+      <h:panelGroup layout="block" styleClass="padrao-visual">
+        <h:panelGroup styleClass="pv-linha-formulario" layout="block">
+          <h:panelGroup styleClass="pv-col-2de5">
+            <h:outputFormat value="#{mensagem}" />
+          </h:panelGroup>
+        </h:panelGroup>
+
+        <h:panelGrid columns="3" width="100%" style="text-align: center;">
+            <p:commandButton value="#{msgs['modal.sim']}" action="#{defaultBean[action]}" style="float: right;" />
+
+            <p:spacer width="15px" />
+
+            <p:commandButton value="#{msgs['modal.nao']}" id="btNaoConfirmaOperacao"
+                               action="#{defaultBean[clearAction]}"
+                               onclick="Richfaces.hideModalPanel('#{modalConfirmacaoID}')" />
+        </h:panelGrid>
+
+        <p:componentControl for="#{modalConfirmacaoID}" attachTo="btRemoveGrupo" operation="hide" event="onclick" />
+      </h:panelGroup>
+    </h:form>
+
+  </p:modalPanel>
+</ui:composition>

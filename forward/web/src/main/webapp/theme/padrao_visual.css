@@ -1,0 +1,123 @@
+/* definições @font-face */
+@import url(fonts/fonts.css);
+
+/*Override classes richfaces*/
+*.rf-p-b {
+	padding: 0px !important;
+}
+
+*.rf-p {
+	border: none;
+	padding: 10px;
+	font-size: 20px;
+}
+
+textarea, input[type="text"], input[type="password"], select {
+	background-image: none;
+	font-size: 20px;
+}
+
+table {
+	border: none !important;
+}
+
+div {
+	display: block;
+}
+
+/*Estilo para Grids*/
+.pn_grid {
+	clear: both;
+	width: 100%;
+	padding: 0px !important;
+}
+
+.pn_grid .ui-panel-content {
+	padding: 0px !important;
+}
+
+.pn_grid .ui-datatable-header{
+	border-top: none;
+	border-radius:0px;
+}
+
+.pn_buttons .ui-panel-titlebar{
+	border-bottom: none;
+	border-radius:0px;
+}
+
+
+
+/*Panel Transparent*/
+.pn_transparent {
+	border: none;
+	background-color: transparent !important;
+}
+
+/*ToolBar para Grids*/
+.tb_grid {
+	height: 10px;
+}
+
+/*Icones para botões*/
+.img_ico_button {
+	float: left;
+	height: 10px;
+}
+
+/*Colunas de Ações (Editar e Excluir)*/
+.cl_actions {
+	width: 20px;
+}
+
+.fm_label_field {
+	display: block;
+	float: left;
+	width: 80px;
+	clear: both;
+	padding-top: 5px;
+	font-size: 15px;
+}
+
+.fm_field {
+	display: block;
+	float: left;
+	width: 50px;
+}
+
+.fm_label_field, .fm_field {
+	height: 35px;
+}
+
+.fm_area{
+	
+	margin-top:10px;
+	display: table;
+	width: 100%;
+}
+
+.fm_buttons{
+	
+	clear: both;
+	
+}
+
+.fm_button .ui-panel-content{
+
+	padding: 2px 5px;
+}	
+
+.fm_button{
+	
+	display: block;
+	float: left;
+	background: transparent;
+	border : none;
+}
+
+
+.fm_button img{
+	
+	width:20px;
+	
+}
