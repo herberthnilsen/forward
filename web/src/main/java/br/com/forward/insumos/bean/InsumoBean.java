@@ -29,7 +29,8 @@ public class InsumoBean extends BasicBean {
 	}
 
 	public void setInsumoVO(InsumoVO insumoVO) {
-		this.insumoVO = insumoVO ;
+		this.insumoVO = insumoVO;
+		//teste
 	}
 
 	public List<InsumoVO> getResultList() {
