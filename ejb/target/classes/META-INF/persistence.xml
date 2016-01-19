@@ -24,6 +24,7 @@
 		<class>br.com.forward.entity.PacoteEvento</class>
 		<class>br.com.forward.entity.PacoteEventoPK</class>
 		<class>br.com.forward.entity.Pessoa</class>
+		<class>br.com.forward.entity.SubItemInsumo</class>
 		<class>br.com.forward.entity.StatusAlocacao</class>
 		<class>br.com.forward.entity.TipoEvento</class>
 		<class>br.com.forward.entity.TipoLogradouro</class>

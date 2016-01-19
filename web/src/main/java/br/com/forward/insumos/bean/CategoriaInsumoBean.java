@@ -44,8 +44,8 @@ public class CategoriaInsumoBean extends BasicBean {
 	public void salvar() {
 		LOGGER.info("CategoriaInsumoBean.salvar - INICIO = " + this.categoriaVO);
 		this.categoriaInsumoFacade.salvar(this.categoriaVO);
-		pesquisar();
 		reset();
+		pesquisar();
 		hideForm();
 		LOGGER.info("CategoriaInsumoBean.salvar - FIM");
 	}

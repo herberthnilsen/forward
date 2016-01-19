@@ -9,7 +9,8 @@
 
 		<h:outputText value="#{msgs['menu.cadastro.insumos.categoria']}" />
 
-		<fw:formSearch bean="#{categoriaInsumoBean}" id="formSearch">
+		<fw:formSearch bean="#{categoriaInsumoBean}" id="formSearch"
+			idGrid="form:gridCategoriaInsumo">
 			<h:panelGroup styleClass="fm_label_field">
 				<h:outputText value="#{msgs['categoria.insumo.codigo']}" />
 			</h:panelGroup>
@@ -70,6 +71,10 @@
 			<fw:dataGrid id="listaCategoriaInsumo"
 				resultList="#{categoriaInsumoBean.resultList}"
 				bean="#{categoriaInsumoBean}">
+				<p:column headerText="#{msgs['categoria.insumo.codigo']}"
+					styleClass="cl_codigo" filterBy="#{value.codigoCategoria}">
+					<h:outputText value="#{value.codigoCategoria}" />
+				</p:column>
 				<p:column headerText="#{msgs['categoria.insumo.nome']}"
 					filterBy="#{value.nomeCategoria}">
 					<h:outputText value="#{value.nomeCategoria}" />

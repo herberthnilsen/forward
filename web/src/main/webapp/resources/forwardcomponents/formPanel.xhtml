@@ -10,6 +10,7 @@
 <cc:interface>
 	<cc:attribute name="bean" required="true"
 		type="br.com.forward.insumos.bean.BasicBean" />
+	<cc:attribute name="idGrid" />
 	<cc:attribute name="id" />
 </cc:interface>
 
@@ -27,7 +28,7 @@
 			<h:panelGroup layout="block" styleClass="fm_buttons">
 				<p:panel styleClass="fm_button" id="bt_salvar">
 					<p:commandLink actionListener="#{cc.attrs.bean.salvar()}"
-						update="form form:gridCategoriaInsumo">
+						update="form #{cc.attrs.idGrid}">
 						<h:graphicImage value="/img/bt/salvar.ico" />
 						<p:tooltip trackMouse="true" for="bt_salvar">
 							<h:outputText value="#{msgs['button.salvar']}" />

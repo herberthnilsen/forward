@@ -18,9 +18,9 @@ import br.com.forward.exception.EntityManagerException;
 import br.com.forward.interfaces.business.CategoriaInsumoBusinessLocal;
 
 @Stateless
-@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class CategoriaInsumoBusiness extends GenericBusiness implements CategoriaInsumoBusinessLocal {
-	/* 26 */ public static final Logger LOGGER = Logger.getLogger(CategoriaInsumoBusiness.class);
+	 public static final Logger LOGGER = Logger.getLogger(CategoriaInsumoBusiness.class);
 	private CategoriaInsumoDAO categoriaInsumoDAO;
 
 	@PostConstruct
@@ -33,8 +33,8 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 
 		List<CategoriaInsumoVO> listaCategoriaInsumoVO = new ArrayList<CategoriaInsumoVO>();
 		try {
-			if ((categoriaInsumoVO.getCodigoCategoria() == null) && (categoriaInsumoVO.getNomeCategoria() == null)
-					&& (categoriaInsumoVO.getDescricaoCategoria() == null)) {
+			if ((categoriaInsumoVO.getCodigoCategoria() == null) && (categoriaInsumoVO.getNomeCategoria().isEmpty())
+					&& (categoriaInsumoVO.getDescricaoCategoria().isEmpty())) {
 				ConverterCategoriaInsumoToCategoriaInsumoVO.converterListCategoriaInsumoToListCategoriaInsumoVO(
 						this.categoriaInsumoDAO.getListaCategoriaInsumos(), listaCategoriaInsumoVO);
 			} else {
@@ -53,7 +53,7 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 		CategoriaInsumo categoriaInsumo = new CategoriaInsumo();
 
 		ConverterCategoriaInsumoToCategoriaInsumoVO.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO,
-				/* 68 */ categoriaInsumo);
+				 categoriaInsumo);
 		try {
 			this.categoriaInsumoDAO.salvar(categoriaInsumo);
 		} catch (EntityManagerException e) {
@@ -65,7 +65,7 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 		CategoriaInsumo categoriaInsumo = new CategoriaInsumo();
 
 		ConverterCategoriaInsumoToCategoriaInsumoVO.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO,
-				/* 88 */ categoriaInsumo);
+				 categoriaInsumo);
 		try {
 			this.categoriaInsumoDAO.excluir(categoriaInsumo);
 		} catch (EntityManagerException e) {

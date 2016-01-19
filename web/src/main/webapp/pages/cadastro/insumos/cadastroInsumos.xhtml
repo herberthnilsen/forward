@@ -2,14 +2,106 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:fw="http://xmlns.jcp.org/jsf/composite/forwardcomponents"
 	template="../../../layout/template.xhtml">
+	<ui:define name="content">
 
-	<ui:define name="body">
-		<p:panel id="cadastroInsumo" width="100%">
-			<h:form>
-			</h:form>
+		<h:outputText value="#{msgs['menu.cadastro.insumos']}" />
+
+		<fw:formSearch bean="#{insumoBean}" id="formSearch">
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['campo.codigo']}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText id="codigoIns"
+					value="#{insumoBean.insumoVO.codigoInsumo}">
+				</h:inputText>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['campo.nome']}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText id="nomeCatIns"
+					value="#{insumoBean.insumoVO.nomeInsumo}">
+				</h:inputText>
+			</h:panelGroup>
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['campo.descricao']}" />
+			</h:panelGroup>
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText
+					value="#{insumoBean.insumoVO.descricaoInsumo}" />
+			</h:panelGroup>
+		</fw:formSearch>
+
+		<fw:formPanel bean="#{insumoBean}" id="formInsumo" idGrid="form:gridInsumo">
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['campo.nome']}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText id="nomeCatIns"
+					value="#{insumoBean.insumoVO.nomeInsumo}">
+				</h:inputText>
+			</h:panelGroup>
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['campo.descricao']}" />
+			</h:panelGroup>
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText
+					value="#{insumoBean.insumoVO.descricaoInsumo}" />
+			</h:panelGroup>
+		</fw:formPanel>
+		<!-- 		GRID -->
+		<p:panel id="gridInsumo" styleClass="pn_grid pn_buttons">
+			<f:facet name="header">
+				<p:commandLink id="bt_adicionar"
+					actionListener="#{insumoBean.showForm}" update="form">
+					<h:graphicImage value="/img/bt/add.png" alt="Adicionar" />
+					<p:tooltip trackMouse="true" for="bt_adicionar">
+						<h:outputText value="#{msgs['button.adicionar']}" />
+					</p:tooltip>
+				</p:commandLink>
+			</f:facet>
+			<fw:dataGrid id="listaInsumo"
+				resultList="#{insumoBean.resultList}"
+				bean="#{insumoBean}">
+				<p:column headerText="#{msgs['campo.codigo']}" styleClass="cl_codigo"
+					filterBy="#{value.codigoInsumo}">
+					<h:outputText value="#{value.codigoInsumo}" />
+				</p:column>
+				<p:column headerText="#{msgs['campo.nome']}"
+					filterBy="#{value.nomeInsumo}">
+					<h:outputText value="#{value.nomeInsumo}" />
+				</p:column>
+				<p:column headerText="#{msgs['campo.descricao']}"
+					filterBy="#{value.nomeInsumo}">
+					<h:outputText value="#{value.descricaoInsumo}" />
+				</p:column>
+				<p:column styleClass="cl_actions">
+					<p:commandLink actionListener="#{insumoBean.showForm}"
+						update="form">
+						<f:setPropertyActionListener value="#{value}"
+							target="#{insumoBean.insumoVO}" />
+						<h:graphicImage title="#{msgs['button.editar']}"
+							value="/img/bt/edit.png" />
+					</p:commandLink>
+				</p:column>
+				<p:column styleClass="cl_actions">
+					<p:commandLink action="#{insumoBean.excluir}"
+						update="listaInsumo">
+						<f:setPropertyActionListener value="#{value}"
+							target="#{insumoBean.insumoVO}" />
+						<h:graphicImage title="#{msgs['button.excluir']}"
+							value="/img/bt/delete.png" />
+					</p:commandLink>
+				</p:column>
+
+			</fw:dataGrid>
 		</p:panel>
 	</ui:define>
 </ui:composition>

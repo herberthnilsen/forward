@@ -10,6 +10,7 @@
 <cc:interface>
 	<cc:attribute name="bean" required="true"
 		type="br.com.forward.insumos.bean.BasicBean" />
+	<cc:attribute name="idGrid" />
 	<cc:attribute name="id" />
 </cc:interface>
 
@@ -17,7 +18,7 @@
 	<p:panel id="#{cc.attrs.id}" rendered="#{!cc.attrs.bean.flagShowForm}"
 		width="100%">
 		<f:facet name="header">
-			<h:outputText value="#{msgs['button.adicionar']}" />
+			<h:outputText value="#{msgs['titulo.consultar']}" />
 		</f:facet>
 
 		<h:panelGroup styleClass="fm_area" layout="block">
@@ -27,7 +28,7 @@
 			<h:panelGroup layout="block" styleClass="fm_buttons">
 				<p:panel styleClass="fm_button" id="bt_pesquisar">
 					<p:commandLink actionListener="#{cc.attrs.bean.pesquisar()}"
-						update="form form:gridCategoriaInsumo">
+						update="form #{cc.attrs.idGrid}">
 						<h:graphicImage value="/img/bt/find.png" />
 						<p:tooltip trackMouse="true" for="bt_pesquisar">
 							<h:outputText value="#{msgs['button.pesquisar']}" />

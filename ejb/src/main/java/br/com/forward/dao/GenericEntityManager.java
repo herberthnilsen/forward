@@ -1,5 +1,7 @@
 package br.com.forward.dao;
 
+import java.util.Map;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -243,5 +245,21 @@ public class GenericEntityManager {
 		} catch (IllegalStateException ise) {
 			throw new EntityManagerException("EntityManager esta sendo executada no contexto JTA", ise);
 		}
+	}
+	
+	/**
+	 * Preencher automaticamente todos os parâmetros da query
+	 * @param query
+	 * @param parametros
+	 */
+	protected void preencherParametrosQuery(Query query, Map<String, Object> parametros){
+		
+		for(String parametro : parametros.keySet()){
+			
+			//Percorrendo o Map para setar o parametro
+			query.setParameter(parametro, parametros.get(parametro));
+			
+		}
+
 	}
 }

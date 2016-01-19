@@ -65,6 +65,12 @@ div {
 	height: 10px;
 }
 
+.cl_codigo{
+	
+	width: 100px;
+	text-align: center;
+}
+
 /*Colunas de Ações (Editar e Excluir)*/
 .cl_actions {
 	width: 20px;
