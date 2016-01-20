@@ -10,32 +10,23 @@
 		<h:outputText value="#{msgs['menu.cadastro.insumos']}" />
 
 		<fw:formSearch bean="#{insumoBean}" id="formSearch">
-			<h:panelGroup styleClass="fm_label_field">
+			<p:panelGrid layout="grid" columns="3">
 				<h:outputText value="#{msgs['campo.codigo']}" />
-			</h:panelGroup>
 
-			<h:panelGroup styleClass="fm_field">
 				<h:inputText id="codigoIns"
 					value="#{insumoBean.insumoVO.codigoInsumo}">
 				</h:inputText>
-			</h:panelGroup>
+				<h:outputText value="#{msgs['campo.codigo']}" />
 
-			<h:panelGroup styleClass="fm_label_field">
-				<h:outputText value="#{msgs['campo.nome']}" />
-			</h:panelGroup>
-
-			<h:panelGroup styleClass="fm_field">
-				<h:inputText id="nomeCatIns"
-					value="#{insumoBean.insumoVO.nomeInsumo}">
+				<h:inputText id="codigoInss"
+					value="#{insumoBean.insumoVO.codigoInsumo}">
 				</h:inputText>
-			</h:panelGroup>
-			<h:panelGroup styleClass="fm_label_field">
-				<h:outputText value="#{msgs['campo.descricao']}" />
-			</h:panelGroup>
-			<h:panelGroup styleClass="fm_field">
-				<h:inputText
-					value="#{insumoBean.insumoVO.descricaoInsumo}" />
-			</h:panelGroup>
+				<h:outputText value="#{msgs['campo.codigo']}" />
+
+				<h:inputText id="codigoInsd"
+					value="#{insumoBean.insumoVO.codigoInsumo}">
+				</h:inputText>
+			</p:panelGrid>
 		</fw:formSearch>
 
 		<fw:formPanel bean="#{insumoBean}" id="formInsumo" idGrid="form:gridInsumo">

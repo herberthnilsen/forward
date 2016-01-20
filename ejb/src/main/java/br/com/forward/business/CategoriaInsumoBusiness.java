@@ -11,7 +11,7 @@ import javax.ejb.TransactionAttributeType;
 import org.jboss.logging.Logger;
 
 import br.com.forward.common.CategoriaInsumoVO;
-import br.com.forward.converters.ConverterCategoriaInsumoToCategoriaInsumoVO;
+import br.com.forward.converters.ConverterCategoriaInsumo;
 import br.com.forward.dao.CategoriaInsumoDAO;
 import br.com.forward.entity.CategoriaInsumo;
 import br.com.forward.exception.EntityManagerException;
@@ -35,14 +35,16 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 		try {
 			if ((categoriaInsumoVO.getCodigoCategoria() == null) && (categoriaInsumoVO.getNomeCategoria().isEmpty())
 					&& (categoriaInsumoVO.getDescricaoCategoria().isEmpty())) {
-				ConverterCategoriaInsumoToCategoriaInsumoVO.converterListCategoriaInsumoToListCategoriaInsumoVO(
+				ConverterCategoriaInsumo.converterListCategoriaInsumoToListCategoriaInsumoVO(
 						this.categoriaInsumoDAO.getListaCategoriaInsumos(), listaCategoriaInsumoVO);
 			} else {
-				ConverterCategoriaInsumoToCategoriaInsumoVO.converterListCategoriaInsumoToListCategoriaInsumoVO(
+				ConverterCategoriaInsumo.converterListCategoriaInsumoToListCategoriaInsumoVO(
 						this.categoriaInsumoDAO.getListaCategoriaInsumos(categoriaInsumoVO), listaCategoriaInsumoVO);
 			}
 		} catch (EntityManagerException e) {
-			e.printStackTrace();
+			
+			LOGGER.error("Ocorreu um erro ao buscar as categorias de insumo", e);
+			
 		}
 
 		LOGGER.info("CategoriaInsumoBusiness.carregarCategoriaInsumo [FIM] - retorno=" + listaCategoriaInsumoVO);
@@ -52,7 +54,7 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 	public void salvar(CategoriaInsumoVO categoriaInsumoVO) {
 		CategoriaInsumo categoriaInsumo = new CategoriaInsumo();
 
-		ConverterCategoriaInsumoToCategoriaInsumoVO.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO,
+		ConverterCategoriaInsumo.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO,
 				 categoriaInsumo);
 		try {
 			this.categoriaInsumoDAO.salvar(categoriaInsumo);
@@ -64,7 +66,7 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 	public void excluir(CategoriaInsumoVO categoriaInsumoVO) {
 		CategoriaInsumo categoriaInsumo = new CategoriaInsumo();
 
-		ConverterCategoriaInsumoToCategoriaInsumoVO.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO,
+		ConverterCategoriaInsumo.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO,
 				 categoriaInsumo);
 		try {
 			this.categoriaInsumoDAO.excluir(categoriaInsumo);

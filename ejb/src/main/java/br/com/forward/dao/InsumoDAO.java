@@ -44,7 +44,7 @@ public class InsumoDAO extends GenericEntityManager {
 		return resultList;
 	}
 
-	public List<Insumo> getListaInsumos(InsumoVO Insumo) throws EntityManagerException {
+	public List<Insumo> getListaInsumos(InsumoVO insumo) throws EntityManagerException {
 		LOGGER.info("InsumoDAO.getListaInsumos - INICIO -  PARAMETROS");
 
 		Map<String, Object> parametros = new HashMap<String, Object>();
@@ -53,17 +53,17 @@ public class InsumoDAO extends GenericEntityManager {
 		jpql.append("select ins from Insumo ins ");
 		jpql.append("where 1=1 ");
 
-		if (Insumo.getCodigoInsumo() != null) {
+		if (insumo.getCodigoInsumo() != null) {
 			jpql.append(" and ins.codigoInsumo=:codigoInsumo");
-			parametros.put("codigoInsumo", Insumo.getCodigoInsumo());
+			parametros.put("codigoInsumo", insumo.getCodigoInsumo());
 		}
-		if (!Insumo.getDescricaoInsumo().isEmpty()) {
+		if (!insumo.getDescricaoInsumo().isEmpty()) {
 			jpql.append(" and ins.descricao like :descricao");
-			parametros.put("descricao", "%" + Insumo.getDescricaoInsumo());
+			parametros.put("descricao", "%" + insumo.getDescricaoInsumo());
 		}
-		if (!Insumo.getNomeInsumo().isEmpty()) {
+		if (!insumo.getNomeInsumo().isEmpty()) {
 			jpql.append(" and ins.nome like :nome");
-			parametros.put("nome", "%" + Insumo.getNomeInsumo());
+			parametros.put("nome", "%" + insumo.getNomeInsumo());
 		}
 		// TODO veirifcar todos os campos que são preenchidos para efetuar a
 		// busca

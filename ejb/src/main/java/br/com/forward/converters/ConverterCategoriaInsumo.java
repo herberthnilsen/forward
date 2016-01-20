@@ -9,13 +9,13 @@ import br.com.forward.common.CategoriaInsumoVO;
 import br.com.forward.entity.CategoriaInsumo;
 import br.com.forward.util.Utils;
 
-public class ConverterCategoriaInsumoToCategoriaInsumoVO {
-	public static final Logger logger = LogManager.getLogger(ConverterCategoriaInsumoToCategoriaInsumoVO.class);
+public class ConverterCategoriaInsumo {
+	public static final Logger logger = LogManager.getLogger(ConverterCategoriaInsumo.class);
 
 	public static void converterListCategoriaInsumoToListCategoriaInsumoVO(List<CategoriaInsumo> listaCategoriaInsumo,
 			List<CategoriaInsumoVO> listaCategoriaInsumoVO) {
 		logger.info(
-				"ConverterCategoriaInsumoToCategoriaInsumoVO.converterListCategoriaInsumoToListCategoriaInsumoVO [INICIO] - parametros: ListaCategoriaInsumo="
+				"ConverterCategoriaInsumo.converterListCategoriaInsumoToListCategoriaInsumoVO [INICIO] - parametros: ListaCategoriaInsumo="
 						+ listaCategoriaInsumo + ", ListaCategoriaInsumoVO=" + listaCategoriaInsumoVO);
 
 		if (Utils.isCollectionNotNullAndNotEmpty(listaCategoriaInsumo).booleanValue()) {
@@ -28,7 +28,7 @@ public class ConverterCategoriaInsumoToCategoriaInsumoVO {
 			}
 		}
 		logger.info(
-				"ConverterCategoriaInsumoToCategoriaInsumoVO.converterListCategoriaInsumoToListCategoriaInsumoVO [FIM] - parametros: ListaCategoriaInsumo="
+				"ConverterCategoriaInsumo.converterListCategoriaInsumoToListCategoriaInsumoVO [FIM] - parametros: ListaCategoriaInsumo="
 						+ listaCategoriaInsumo + ", ListaCategoriaInsumoVO=" + listaCategoriaInsumoVO);
 	}
 

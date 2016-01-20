@@ -1,18 +1,23 @@
  package br.com.forward.entity;
  
  import java.math.BigDecimal;
- import java.sql.Timestamp;
- import java.util.List;
- import javax.persistence.Column;
- import javax.persistence.Entity;
- import javax.persistence.GeneratedValue;
- import javax.persistence.GenerationType;
- import javax.persistence.Id;
- import javax.persistence.JoinColumn;
- import javax.persistence.ManyToOne;
- import javax.persistence.NamedQuery;
- import javax.persistence.OneToMany;
- import javax.persistence.Table;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
  
  @Entity
  @Table(name="fwdins")
@@ -25,13 +30,14 @@
    @Id
    @GeneratedValue(strategy=GenerationType.AUTO)
    @Column(name="idfwdins", unique=true, nullable=false)
-   private int codigoInsumo;
+   private Integer codigoInsumo;
  
    @Column(name="dscins", length=200)
    private String descricaoInsumo;
  
    @Column(name="dtacad", nullable=false)
-   private Timestamp dataCadastro;
+   @Temporal(TemporalType.TIMESTAMP)
+   private Date dataCadastro;
  
    @Column(name="nomins", nullable=false, length=45)
    private String nomeInsumo;
@@ -45,27 +51,27 @@
    @Column(precision=9, scale=2, name="vlrvnd")
    private BigDecimal valorVenda;
  
-   @OneToMany(mappedBy="insumo")
+   @OneToMany(mappedBy="insumo", fetch=FetchType.LAZY)
    private List<AlocacaoInsumo> alocacaoInsumos;
  
-   @OneToMany(mappedBy="insumo")
+   @OneToMany(mappedBy="insumo", fetch=FetchType.LAZY)
    private List<EstoqueInsumo> estoqueInsumos;
  
-   @ManyToOne
+   @ManyToOne(fetch=FetchType.LAZY)
    @JoinColumn(name="fwdcatinscod", nullable=false)
    private CategoriaInsumo categoriaInsumo;
  
-   @ManyToOne
+   @ManyToOne(fetch=FetchType.LAZY)
    @JoinColumn(name="fwdundcod", nullable=false)
    private Unidade unidade;
  
-   @OneToMany(mappedBy="insumo")
+   @OneToMany(mappedBy="insumo", fetch=FetchType.LAZY)
    private List<InsumoPacote> insumoPacotes;
  
-   @OneToMany(mappedBy="insumo")
+   @OneToMany(mappedBy="insumo", fetch=FetchType.LAZY)
    private List<SubItemInsumo> subItens;
  
-   public int getCodigoInsumo()
+   public Integer getCodigoInsumo()
    {
      return this.codigoInsumo;
    }
@@ -82,7 +88,7 @@
      this.descricaoInsumo = descricaoInsumo;
    }
  
-   public Timestamp getDataCadastro() {
+   public Date getDataCadastro() {
      return this.dataCadastro;
    }
  

@@ -31,7 +31,7 @@
 		<class>br.com.forward.entity.Unidade</class>
 		<properties>
 			<!-- Properties for Hibernate -->
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
 <!-- 			<property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->
 			<property name="hibernate.show_sql" value="true" />
 		</properties>

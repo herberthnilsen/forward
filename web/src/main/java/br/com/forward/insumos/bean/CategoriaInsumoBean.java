@@ -17,7 +17,7 @@ public class CategoriaInsumoBean extends BasicBean {
 	private static final long serialVersionUID = 10150539659042223L;
 	public static final Logger LOGGER = Logger.getLogger("CategoriaInsumoBean.class");
 
-	private List<CategoriaInsumoVO> resultList = new ArrayList();
+	private List<CategoriaInsumoVO> resultList = new ArrayList<CategoriaInsumoVO>();
 
 	private CategoriaInsumoVO categoriaVO = new CategoriaInsumoVO();
 

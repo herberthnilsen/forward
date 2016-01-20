@@ -1,10 +1,12 @@
 package br.com.forward.insumos.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.com.forward.common.InsumoVO;
@@ -17,12 +19,20 @@ public class InsumoBean extends BasicBean {
 	private static final long serialVersionUID = 5575143542410735935L;
 	public static final Logger LOGGER = Logger.getLogger("InsumoBean.class");
 
-	private InsumoVO insumoVO;
+	private InsumoVO insumoVO = new InsumoVO();;
 
-	private List<InsumoVO> resultList;
+	private List<InsumoVO> resultList = new ArrayList<InsumoVO>();
 
 	@EJB
 	private InsumoFacadeLocal insumoFacadeLocal;
+
+	@PostConstruct
+	public void init() {
+		LOGGER.info("InsumoBean.init - INICIO");
+
+		this.pesquisar();
+		LOGGER.info("InsumoBean.init - FIM");
+	}
 
 	public InsumoVO getInsumoVO() {
 		return insumoVO;
@@ -30,7 +40,7 @@ public class InsumoBean extends BasicBean {
 
 	public void setInsumoVO(InsumoVO insumoVO) {
 		this.insumoVO = insumoVO;
-		//teste
+		// teste
 	}
 
 	public List<InsumoVO> getResultList() {
@@ -49,7 +59,9 @@ public class InsumoBean extends BasicBean {
 	@Override
 	public void pesquisar() {
 		LOGGER.info("InsumoBean.pesquisar - INICIO = " + this.insumoVO);
-
+		
+		this.insumoFacadeLocal.carregarInsumos(this.insumoVO);
+		
 		LOGGER.info("InsumoBean.pesquisar - FIM = " + this.insumoVO);
 	}
 

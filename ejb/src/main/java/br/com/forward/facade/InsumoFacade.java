@@ -30,7 +30,8 @@ public class InsumoFacade implements InsumoFacadeLocal{
 	 */
 	@Override
 	public List<InsumoVO> carregarInsumos(InsumoVO paramInsumoVO) {
-		// TODO Auto-generated method stub
+
+		this.insumoBusinessLocal.carregarInsumos(paramInsumoVO);
 		return null;
 	}
 
