@@ -76,7 +76,7 @@ div {
 	width: 20px;
 }
 
-.fm_label_field {
+.fm_label_field, {
 	display: block;
 	float: left;
 	width: 80px;
@@ -89,6 +89,12 @@ div {
 	display: block;
 	float: left;
 	width: 50px;
+}
+
+.ui-panelgrid-content{
+	
+	border: none;
+	
 }
 
 .fm_label_field, .fm_field {

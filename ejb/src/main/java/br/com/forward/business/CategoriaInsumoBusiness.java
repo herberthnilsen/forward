@@ -20,7 +20,7 @@ import br.com.forward.interfaces.business.CategoriaInsumoBusinessLocal;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class CategoriaInsumoBusiness extends GenericBusiness implements CategoriaInsumoBusinessLocal {
-	 public static final Logger LOGGER = Logger.getLogger(CategoriaInsumoBusiness.class);
+	public static final Logger LOGGER = Logger.getLogger(CategoriaInsumoBusiness.class);
 	private CategoriaInsumoDAO categoriaInsumoDAO;
 
 	@PostConstruct
@@ -33,8 +33,9 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 
 		List<CategoriaInsumoVO> listaCategoriaInsumoVO = new ArrayList<CategoriaInsumoVO>();
 		try {
-			if ((categoriaInsumoVO.getCodigoCategoria() == null) && (categoriaInsumoVO.getNomeCategoria().isEmpty())
-					&& (categoriaInsumoVO.getDescricaoCategoria().isEmpty())) {
+			if (categoriaInsumoVO == null || ((categoriaInsumoVO.getCodigoCategoria() == null)
+					&& (categoriaInsumoVO.getNomeCategoria().isEmpty())
+					&& (categoriaInsumoVO.getDescricaoCategoria().isEmpty()))) {
 				ConverterCategoriaInsumo.converterListCategoriaInsumoToListCategoriaInsumoVO(
 						this.categoriaInsumoDAO.getListaCategoriaInsumos(), listaCategoriaInsumoVO);
 			} else {
@@ -42,9 +43,9 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 						this.categoriaInsumoDAO.getListaCategoriaInsumos(categoriaInsumoVO), listaCategoriaInsumoVO);
 			}
 		} catch (EntityManagerException e) {
-			
+
 			LOGGER.error("Ocorreu um erro ao buscar as categorias de insumo", e);
-			
+
 		}
 
 		LOGGER.info("CategoriaInsumoBusiness.carregarCategoriaInsumo [FIM] - retorno=" + listaCategoriaInsumoVO);
@@ -54,8 +55,7 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 	public void salvar(CategoriaInsumoVO categoriaInsumoVO) {
 		CategoriaInsumo categoriaInsumo = new CategoriaInsumo();
 
-		ConverterCategoriaInsumo.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO,
-				 categoriaInsumo);
+		ConverterCategoriaInsumo.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO, categoriaInsumo);
 		try {
 			this.categoriaInsumoDAO.salvar(categoriaInsumo);
 		} catch (EntityManagerException e) {
@@ -66,8 +66,7 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 	public void excluir(CategoriaInsumoVO categoriaInsumoVO) {
 		CategoriaInsumo categoriaInsumo = new CategoriaInsumo();
 
-		ConverterCategoriaInsumo.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO,
-				 categoriaInsumo);
+		ConverterCategoriaInsumo.converterCategoriaInsumoVoToCategoriaInsumo(categoriaInsumoVO, categoriaInsumo);
 		try {
 			this.categoriaInsumoDAO.excluir(categoriaInsumo);
 		} catch (EntityManagerException e) {

@@ -9,7 +9,9 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import br.com.forward.common.CategoriaInsumoVO;
 import br.com.forward.common.InsumoVO;
+import br.com.forward.interfaces.facade.CategoriaInsumoFacadeLocal;
 import br.com.forward.interfaces.facade.InsumoFacadeLocal;
 
 @ViewScoped
@@ -21,10 +23,15 @@ public class InsumoBean extends BasicBean {
 
 	private InsumoVO insumoVO = new InsumoVO();;
 
+	private List<CategoriaInsumoVO> listaCategoriaInsumo;
+	
 	private List<InsumoVO> resultList = new ArrayList<InsumoVO>();
 
 	@EJB
 	private InsumoFacadeLocal insumoFacadeLocal;
+	
+	@EJB
+	private CategoriaInsumoFacadeLocal categoriaLocal;
 
 	@PostConstruct
 	public void init() {
@@ -32,6 +39,21 @@ public class InsumoBean extends BasicBean {
 
 		this.pesquisar();
 		LOGGER.info("InsumoBean.init - FIM");
+	}
+
+	public List<CategoriaInsumoVO> getListaCategoriaInsumo() {
+		
+		if(this.listaCategoriaInsumo == null || this.listaCategoriaInsumo.isEmpty()){
+			
+			this.listaCategoriaInsumo = this.categoriaLocal.carregarCategoriaInsumos(null);
+			
+		}
+		
+		return this.listaCategoriaInsumo;
+	}
+
+	public void setListaCategoriaInsumo(List<CategoriaInsumoVO> listaCategoriaInsumo) {
+		this.listaCategoriaInsumo = listaCategoriaInsumo;
 	}
 
 	public InsumoVO getInsumoVO() {
