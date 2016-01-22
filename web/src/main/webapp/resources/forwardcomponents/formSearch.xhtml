@@ -11,11 +11,11 @@
 	<cc:attribute name="bean" required="true"
 		type="br.com.forward.insumos.bean.BasicBean" />
 	<cc:attribute name="idGrid" />
-	<cc:attribute name="id" />
+	<cc:attribute name="idt" />
 </cc:interface>
 
 <cc:implementation>
-	<p:panel id="#{cc.attrs.id}" rendered="#{!cc.attrs.bean.flagShowForm}"
+	<p:panel id="#{cc.attrs.idt}" rendered="#{!cc.attrs.bean.flagShowForm}"
 		width="100%">
 		<f:facet name="header">
 			<h:outputText value="#{msgs['titulo.consultar']}" />

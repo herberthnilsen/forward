@@ -11,12 +11,13 @@
 	<cc:attribute name="label" required="true" />
 	<cc:attribute name="idt" required="true" />
 	<cc:attribute name="value" required="true" />
+	<cc:attribute name="mask"/>
 </cc:interface>
 
 <cc:implementation>
 
 	<h:panelGroup layout="block" styleClass="fm_field">
-		<p:inputMask mask="999999999" id="#{cc.attrs.idt}" value="#{cc.attrs.value}" />
+		<p:inputMask mask="#{ cc.attrs.mask == null ? 999999999 : cc.attrs.mask == null}" id="#{cc.attrs.idt}" value="#{cc.attrs.value}" />
 		<p:watermark value="#{cc.attrs.label}" for="#{cc.attrs.idt}" />
 	</h:panelGroup>
 </cc:implementation>

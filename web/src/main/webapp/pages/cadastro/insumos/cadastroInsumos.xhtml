@@ -9,27 +9,27 @@
 
 		<h:outputText value="#{msgs['menu.cadastro.insumos']}" />
 
-		<fw:formSearch bean="#{insumoBean}" id="formSearch">
+		<fw:formSearch bean="#{insumoBean}" idt="formSearch">
 			<p:panelGrid layout="grid" columns="3">
 
 				<fw:inputNumber idt="codigoIns" label="#{msgs['campo.codigo']}"
 					value="#{insumoBean.insumoVO.codigoInsumo}" />
 
 				<fw:inputText idt="nomeIns" label="#{msgs['campo.nome']}"
-					value="#{insumoBean.insumoVO.nomeInsumo}"/>
+					value="#{insumoBean.insumoVO.nomeInsumo}" />
 
 				<fw:inputText idt="descIns" label="#{msgs['campo.descricao']}"
-					value="#{insumoBean.insumoVO.descricaoInsumo}"/>
+					value="#{insumoBean.insumoVO.descricaoInsumo}" />
 
 				<fw:inputText idt="numSerIns" label="#{msgs['campo.numero.serie']}"
-					value="#{insumoBean.insumoVO.numeroSerie}"/>
+					value="#{insumoBean.insumoVO.numeroSerie}" />
 
 
-				<h:selectOneMenu value="#{insumoBean.insumoVO.categoriaInsumoVO}"
-					id="categoriaInsumo">
-					<f:selectItem noSelectionOption="true" itemValue="0"
+				<h:selectOneMenu value="#{insumoBean.insumoVO.codigoCategoriaInsumo}"
+					id="comboCategoriaInsumo">
+					<f:selectItem noSelectionOption="true" 
 						itemLabel="#{msgs['campo.categoria.insumo']}" />
-					<f:selectItem noSelectionOption="true" itemValue="0"
+					<f:selectItem noSelectionOption="true" 
 						itemLabel="#{msgs['legenda.selecione']}" />
 					<f:selectItems value="#{insumoBean.listaCategoriaInsumo}"
 						var="categoriaInsumo" itemValue="#{categoriaInsumo}"
@@ -39,23 +39,37 @@
 			</p:panelGrid>
 		</fw:formSearch>
 
-		<fw:formPanel bean="#{insumoBean}" id="formInsumo"
+		<fw:formPanel bean="#{insumoBean}" idt="formInsumo"
 			idGrid="form:gridInsumo">
-			<h:panelGroup>
-				<h:outputText value="#{msgs['campo.nome']}" />
-			</h:panelGroup>
+			<p:panelGrid layout="grid" columns="3">
 
-			<h:panelGroup>
-				<h:inputText id="nomeCatIns"
-					value="#{insumoBean.insumoVO.nomeInsumo}">
-				</h:inputText>
-			</h:panelGroup>
-			<h:panelGroup>
-				<h:outputText value="#{msgs['campo.descricao']}" />
-			</h:panelGroup>
-			<h:panelGroup>
-				<h:inputText value="#{insumoBean.insumoVO.descricaoInsumo}" />
-			</h:panelGroup>
+				<fw:inputText idt="nomeIns" label="#{msgs['campo.nome']}"
+					value="#{insumoBean.insumoVO.nomeInsumo}" />
+
+				<fw:inputText idt="descIns" label="#{msgs['campo.descricao']}"
+					value="#{insumoBean.insumoVO.descricaoInsumo}" />
+
+				<fw:inputText idt="numSerIns" label="#{msgs['campo.numero.serie']}"
+					value="#{insumoBean.insumoVO.numeroSerie}" />
+				
+				<fw:inputNumber idt="vlrMerc" label="#{msgs['campo.valor.mercado']}" mask="999.999.999,99
+					value="#{insumoBean.insumoVO.valorMercado}" />
+				
+				<fw:inputText idt="numSerIns" label="#{msgs['campo.numero.serie']}"
+					value="#{insumoBean.insumoVO.numeroSerie}" />
+
+				<h:selectOneMenu value="#{insumoBean.insumoVO.codigoCategoriaInsumo}"
+					id="categoriaInsumo">
+					<f:selectItem noSelectionOption="true" itemValue="0"
+						itemLabel="#{msgs['campo.categoria.insumo']}" />
+					<f:selectItem noSelectionOption="true" itemValue="0"
+						itemLabel="#{msgs['legenda.selecione']}" />
+					<f:selectItems value="#{insumoBean.listaCategoriaInsumo}"
+						var="categoriaInsumo" itemValue="#{categoriaInsumo.codigoCategoria}"
+						itemLabel="#{categoriaInsumo.nomeCategoria}" />
+				</h:selectOneMenu>
+
+			</p:panelGrid>
 		</fw:formPanel>
 		<!-- 		GRID -->
 		<p:panel id="gridInsumo" styleClass="pn_grid pn_buttons">

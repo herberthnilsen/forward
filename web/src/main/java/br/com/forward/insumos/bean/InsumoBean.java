@@ -95,7 +95,7 @@ public class InsumoBean extends BasicBean {
 	@Override
 	public void salvar() {
 		LOGGER.info("InsumoBean.salvar - INICIO = " + this.insumoVO);
-
+		this.insumoFacadeLocal.salvar(this.insumoVO);
 		LOGGER.info("InsumoBean.salvar - FIM = " + this.insumoVO);
 	}
 

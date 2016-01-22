@@ -8,6 +8,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import br.com.forward.common.InsumoVO;
+import br.com.forward.exception.InsumoException;
 
 /**
  * @author Herberth Nilsen
@@ -18,7 +19,7 @@ public interface InsumoFacadeLocal {
 
 	public List<InsumoVO> carregarInsumos(InsumoVO paramInsumoVO);
 
-	public void salvar(InsumoVO paramInsumoVO);
+	public void salvar(InsumoVO paramInsumoVO) throws InsumoException;
 
-	public void excluir(InsumoVO paramInsumoVO);
+	public void excluir(InsumoVO paramInsumoVO) throws InsumoException;
 }

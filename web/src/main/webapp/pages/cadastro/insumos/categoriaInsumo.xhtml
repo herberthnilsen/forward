@@ -9,7 +9,7 @@
 
 		<h:outputText value="#{msgs['menu.cadastro.insumos.categoria']}" />
 
-		<fw:formSearch bean="#{categoriaInsumoBean}" id="formSearch"
+		<fw:formSearch bean="#{categoriaInsumoBean}" idt="formSearch"
 			idGrid="form:gridCategoriaInsumo">
 			<h:panelGroup styleClass="fm_label_field">
 				<h:outputText value="#{msgs['categoria.insumo.codigo']}" />
@@ -39,7 +39,7 @@
 			</h:panelGroup>
 		</fw:formSearch>
 
-		<fw:formPanel bean="#{categoriaInsumoBean}" id="formCategoriaInsumo">
+		<fw:formPanel bean="#{categoriaInsumoBean}" idt="formCategoriaInsumo">
 			<h:panelGroup styleClass="fm_label_field">
 				<h:outputText value="#{msgs['categoria.insumo.nome']}" />
 			</h:panelGroup>

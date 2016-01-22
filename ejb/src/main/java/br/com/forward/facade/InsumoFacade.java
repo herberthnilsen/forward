@@ -10,7 +10,10 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
+import org.apache.log4j.Logger;
+
 import br.com.forward.common.InsumoVO;
+import br.com.forward.exception.InsumoException;
 import br.com.forward.interfaces.business.InsumoBusinessLocal;
 import br.com.forward.interfaces.facade.InsumoFacadeLocal;
 
@@ -22,6 +25,8 @@ import br.com.forward.interfaces.facade.InsumoFacadeLocal;
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class InsumoFacade implements InsumoFacadeLocal{
 
+	private static Logger LOGGER = Logger.getLogger(InsumoFacade.class);
+	
 	@EJB
 	private InsumoBusinessLocal insumoBusinessLocal;
 	
@@ -39,8 +44,10 @@ public class InsumoFacade implements InsumoFacadeLocal{
 	 * @see br.com.forward.interfaces.facade.InsumoFacadeLocal#salvar(br.com.forward.common.InsumoVO)
 	 */
 	@Override
-	public void salvar(InsumoVO paramInsumoVO) {
-		// TODO Auto-generated method stub
+	public void salvar(InsumoVO insumoVO)throws InsumoException {
+		LOGGER.info("InsumoBean.salvar - INICIO = " + insumoVO);
+		this.insumoBusinessLocal.salvar(insumoVO);
+		LOGGER.info("InsumoBean.salvar - FIM = " + insumoVO);
 		
 	}
 

@@ -16,7 +16,10 @@ import org.jboss.logging.Logger;
 import br.com.forward.common.InsumoVO;
 import br.com.forward.converters.ConverterInsumo;
 import br.com.forward.dao.InsumoDAO;
+import br.com.forward.entity.Insumo;
+import br.com.forward.enumcode.ExceptionEnum;
 import br.com.forward.exception.EntityManagerException;
+import br.com.forward.exception.InsumoException;
 import br.com.forward.interfaces.business.InsumoBusinessLocal;
 
 /**
@@ -26,7 +29,7 @@ import br.com.forward.interfaces.business.InsumoBusinessLocal;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLocal {
-	public static final Logger LOGGER = Logger.getLogger(CategoriaInsumoBusiness.class);
+	public static final Logger LOGGER = Logger.getLogger(InsumoBusiness.class);
 	
 	private InsumoDAO insumoDAO;
 	
@@ -69,9 +72,22 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 	 * forward.common.InsumoVO)
 	 */
 	@Override
-	public void salvar(InsumoVO paramInsumoVO) {
-		// TODO Auto-generated method stub
-
+	public void salvar(InsumoVO insumoVO) throws InsumoException {
+		LOGGER.info("InsumoBean.salvar - INICIO = " + insumoVO);
+		
+		Insumo insumo = new Insumo();
+		
+		//Convertendo VO em Entidade
+		ConverterInsumo.convertVoToEntity(insumoVO, insumo);
+		
+		try {
+			this.insumoDAO.salvar(insumo);
+		} catch (EntityManagerException e) {
+			String msg = new String("Ocorreu um erro ao persistir o insumo");
+			LOGGER.error(msg, e);
+			throw new InsumoException(msg, e);
+		}
+		LOGGER.info("InsumoBean.salvar - FIM = " + insumoVO);
 	}
 
 	/*
@@ -82,7 +98,7 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 	 * forward.common.InsumoVO)
 	 */
 	@Override
-	public void excluir(InsumoVO paramInsumoVO) {
+	public void excluir(InsumoVO paramInsumoVO) throws InsumoException {
 		// TODO Auto-generated method stub
 
 	}

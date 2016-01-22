@@ -2,18 +2,8 @@ package br.com.forward.common;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * @author Herberth Nilsen
- *
- */
-
-/**
- * @author Herberth Nilsen
- *
- */
 /**
  * @author Herberth Nilsen
  *
@@ -32,12 +22,12 @@ public class InsumoVO implements Serializable {
 
 	private BigDecimal numeroSerie;
 
-	private BigDecimal valorMercado;
+	private Double valorMercado;
 
-	private BigDecimal valorVenda;
+	private Double valorVenda;
 
-	private CategoriaInsumoVO categoriaInsumoVO;
-	private UnidadeVO unidadeVO;
+	private Integer codigoCategoriaInsumo;
+	private Integer codigoUnidade;
 	
 	public Integer getCodigoInsumo() {
 		return codigoInsumo;
@@ -69,29 +59,29 @@ public class InsumoVO implements Serializable {
 	public void setNumeroSerie(BigDecimal numeroSerie) {
 		this.numeroSerie = numeroSerie;
 	}
-	public BigDecimal getValorMercado() {
+	public Double getValorMercado() {
 		return valorMercado;
 	}
-	public void setValorMercado(BigDecimal valorMercado) {
+	public void setValorMercado(Double valorMercado) {
 		this.valorMercado = valorMercado;
 	}
-	public BigDecimal getValorVenda() {
+	public Double getValorVenda() {
 		return valorVenda;
 	}
-	public void setValorVenda(BigDecimal valorVenda) {
+	public void setValorVenda(Double valorVenda) {
 		this.valorVenda = valorVenda;
 	}
-	public CategoriaInsumoVO getCategoriaInsumoVO() {
-		return categoriaInsumoVO;
+	public Integer getCodigoCategoriaInsumo() {
+		return codigoCategoriaInsumo;
 	}
-	public void setCategoriaInsumoVO(CategoriaInsumoVO categoriaInsumoVO) {
-		this.categoriaInsumoVO = categoriaInsumoVO;
+	public void setCodigoCategoriaInsumo(Integer categoriaInsumoVO) {
+		this.codigoCategoriaInsumo = categoriaInsumoVO;
 	}
-	public UnidadeVO getUnidadeVO() {
-		return unidadeVO;
+	public Integer getCodigoUnidade() {
+		return codigoUnidade;
 	}
-	public void setUnidadeVO(UnidadeVO unidadeVO) {
-		this.unidadeVO = unidadeVO;
+	public void setCodigoUnidade(Integer codigoUnidade) {
+		this.codigoUnidade = codigoUnidade;
 	}
 
 }

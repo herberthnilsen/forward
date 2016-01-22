@@ -91,8 +91,3 @@
      return stringBuilder.toString();
    }
  }
-
-/* Location:           D:\Projetos\Showtime\bkpforward-ear.ear - Copia\forward-ejb.jar\
- * Qualified Name:     br.com.forward.exception.BusinessRuntimeException
- * JD-Core Version:    0.6.0
- */
