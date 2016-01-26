@@ -17,7 +17,7 @@
 <cc:implementation>
 
 	<h:panelGroup layout="block" styleClass="fm_field">
-		<p:inputMask mask="#{ cc.attrs.mask == null ? 999999999 : cc.attrs.mask == null}" id="#{cc.attrs.idt}" value="#{cc.attrs.value}" />
+		<p:inputMask mask="#{ cc.attrs.mask == null ? 999999999 : cc.attrs.mask}" id="#{cc.attrs.idt}" value="#{cc.attrs.value}" />
 		<p:watermark value="#{cc.attrs.label}" for="#{cc.attrs.idt}" />
 	</h:panelGroup>
 </cc:implementation>
