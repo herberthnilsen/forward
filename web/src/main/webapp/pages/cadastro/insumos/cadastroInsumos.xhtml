@@ -55,9 +55,23 @@
 				<fw:inputNumber idt="vlrMerc" label="#{msgs['campo.valor.mercado']}" 
 					value="#{insumoBean.insumoVO.valorMercado}" />
 				
+				<fw:inputNumber idt="vlrMerc" label="#{msgs['campo.valor.mercado']}" 
+					value="#{insumoBean.insumoVO.valorVenda}" />
+				
 				<fw:inputText idt="numSerIns" label="#{msgs['campo.numero.serie']}"
 					value="#{insumoBean.insumoVO.numeroSerie}" />
 
+				<h:selectOneMenu value="#{insumoBean.insumoVO.codigoUnidade}"
+					id="unidade">
+					<f:selectItem noSelectionOption="true" itemValue="0"
+						itemLabel="#{msgs['campo.unidade']}" />
+					<f:selectItem noSelectionOption="true" itemValue="0"
+						itemLabel="#{msgs['legenda.selecione']}" />
+					<f:selectItems value="#{insumoBean.listaUnidades}"
+						var="unidade" itemValue="#{unidade.codigoUnidade}"
+						itemLabel="#{unidade.siglaUnidade} - #{unidade.nomeUnidade} " />
+				</h:selectOneMenu>
+				
 				<h:selectOneMenu value="#{insumoBean.insumoVO.codigoCategoriaInsumo}"
 					id="categoriaInsumo">
 					<f:selectItem noSelectionOption="true" itemValue="0"

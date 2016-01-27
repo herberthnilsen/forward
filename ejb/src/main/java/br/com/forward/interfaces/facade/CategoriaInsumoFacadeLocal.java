@@ -8,6 +8,8 @@ import javax.ejb.Local;
 public interface CategoriaInsumoFacadeLocal
 {
   public  List<CategoriaInsumoVO> carregarCategoriaInsumos(CategoriaInsumoVO paramCategoriaInsumoVO);
+  
+  public  List<CategoriaInsumoVO> carregarCategoriaInsumos();
 
   public void salvar(CategoriaInsumoVO paramCategoriaInsumoVO);
 

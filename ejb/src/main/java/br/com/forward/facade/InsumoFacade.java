@@ -36,8 +36,8 @@ public class InsumoFacade implements InsumoFacadeLocal{
 	@Override
 	public List<InsumoVO> carregarInsumos(InsumoVO paramInsumoVO) {
 
-		this.insumoBusinessLocal.carregarInsumos(paramInsumoVO);
-		return null;
+		return this.insumoBusinessLocal.carregarInsumos(paramInsumoVO);
+
 	}
 
 	/* (non-Javadoc)

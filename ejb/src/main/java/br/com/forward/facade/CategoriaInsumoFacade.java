@@ -20,9 +20,20 @@ public class CategoriaInsumoFacade implements CategoriaInsumoFacadeLocal {
 	private CategoriaInsumoBusinessLocal categoriaInsumoBusiness;
 
 	public List<CategoriaInsumoVO> carregarCategoriaInsumos(CategoriaInsumoVO categoriaInsumoVO) {
+		LOGGER.info("CategoriaInsumoBusiness.carregarCategoriaInsumo(CategoriaInsumoVO) [INICIO] parametro="
+				+ categoriaInsumoVO);
+
+		List<CategoriaInsumoVO> carregarCategoriaInsumo = this.categoriaInsumoBusiness
+				.carregarCategoriaInsumo(categoriaInsumoVO);
+
+		LOGGER.info("CategoriaInsumoBusiness.carregarCategoriaInsumo(CategoriaInsumoVO) [FIM]");
+		return carregarCategoriaInsumo;
+	}
+
+	public List<CategoriaInsumoVO> carregarCategoriaInsumos() {
 		LOGGER.info("CategoriaInsumoBusiness.carregarCategoriaInsumo [INICIO]");
 
-		List<CategoriaInsumoVO> carregarCategoriaInsumo = this.categoriaInsumoBusiness.carregarCategoriaInsumo(categoriaInsumoVO);
+		List<CategoriaInsumoVO> carregarCategoriaInsumo = this.categoriaInsumoBusiness.carregarCategoriaInsumo();
 
 		LOGGER.info("CategoriaInsumoBusiness.carregarCategoriaInsumo [FIM]");
 		return carregarCategoriaInsumo;

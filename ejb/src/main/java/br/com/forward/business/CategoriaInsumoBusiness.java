@@ -52,6 +52,24 @@ public class CategoriaInsumoBusiness extends GenericBusiness implements Categori
 		return listaCategoriaInsumoVO;
 	}
 
+	public List<CategoriaInsumoVO> carregarCategoriaInsumo() {
+		LOGGER.info("CategoriaInsumoBusiness.carregarCategoriaInsumo [INICIO]");
+
+		List<CategoriaInsumoVO> listaCategoriaInsumoVO = new ArrayList<CategoriaInsumoVO>();
+
+		try {
+			ConverterCategoriaInsumo.converterListCategoriaInsumoToListCategoriaInsumoVO(
+					this.categoriaInsumoDAO.getListaCategoriaInsumos(), listaCategoriaInsumoVO);
+		} catch (EntityManagerException e) {
+
+			LOGGER.error("Ocorreu um erro ao buscar as categorias de insumo", e);
+
+		}
+
+		LOGGER.info("CategoriaInsumoBusiness.carregarCategoriaInsumo [FIM] - retorno=" + listaCategoriaInsumoVO);
+		return listaCategoriaInsumoVO;
+	}
+
 	public void salvar(CategoriaInsumoVO categoriaInsumoVO) {
 		CategoriaInsumo categoriaInsumo = new CategoriaInsumo();
 

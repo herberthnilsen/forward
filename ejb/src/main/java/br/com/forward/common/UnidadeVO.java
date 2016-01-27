@@ -11,8 +11,8 @@ public class UnidadeVO implements Serializable {
 	private static final long serialVersionUID = -999598864845217390L;
 
 	private Integer codigoUnidade;
-	private String siglaUnidade;
 	private String nomeUnidade;
+	private String siglaUnidade;
 
 	/**
 	 * @return

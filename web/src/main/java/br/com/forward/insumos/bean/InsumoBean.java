@@ -2,17 +2,21 @@ package br.com.forward.insumos.bean;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.apache.log4j.Logger;
+
 import br.com.forward.common.CategoriaInsumoVO;
 import br.com.forward.common.InsumoVO;
+import br.com.forward.common.UnidadeVO;
+import br.com.forward.exception.InsumoException;
 import br.com.forward.interfaces.facade.CategoriaInsumoFacadeLocal;
 import br.com.forward.interfaces.facade.InsumoFacadeLocal;
+import br.com.forward.interfaces.facade.UnidadeFacadeLocal;
 
 @ViewScoped
 @Named
@@ -26,12 +30,17 @@ public class InsumoBean extends BasicBean {
 	private List<CategoriaInsumoVO> listaCategoriaInsumo;
 	
 	private List<InsumoVO> resultList = new ArrayList<InsumoVO>();
+	
+	private List<UnidadeVO> listaUnidades;
 
 	@EJB
 	private InsumoFacadeLocal insumoFacadeLocal;
 	
 	@EJB
 	private CategoriaInsumoFacadeLocal categoriaLocal;
+	
+	@EJB
+	private UnidadeFacadeLocal unidadeLocal;
 
 	@PostConstruct
 	public void init() {
@@ -45,7 +54,7 @@ public class InsumoBean extends BasicBean {
 		
 		if(this.listaCategoriaInsumo == null || this.listaCategoriaInsumo.isEmpty()){
 			
-			this.listaCategoriaInsumo = this.categoriaLocal.carregarCategoriaInsumos(null);
+			this.listaCategoriaInsumo = this.categoriaLocal.carregarCategoriaInsumos();
 			
 		}
 		
@@ -54,6 +63,20 @@ public class InsumoBean extends BasicBean {
 
 	public void setListaCategoriaInsumo(List<CategoriaInsumoVO> listaCategoriaInsumo) {
 		this.listaCategoriaInsumo = listaCategoriaInsumo;
+	}
+
+	public List<UnidadeVO> getListaUnidades() {
+		if(this.listaUnidades == null){
+			
+			this.listaUnidades = this.unidadeLocal.carregarUnidades();
+			
+		}
+		
+		return this.listaUnidades;
+	}
+
+	public void setListaUnidades(List<UnidadeVO> listaUnidades) {
+		this.listaUnidades = listaUnidades;
 	}
 
 	public InsumoVO getInsumoVO() {
@@ -95,7 +118,12 @@ public class InsumoBean extends BasicBean {
 	@Override
 	public void salvar() {
 		LOGGER.info("InsumoBean.salvar - INICIO = " + this.insumoVO);
-		this.insumoFacadeLocal.salvar(this.insumoVO);
+		try {
+			this.insumoFacadeLocal.salvar(this.insumoVO);
+		} catch (InsumoException e) {
+
+			//TODO Gerar mensagem no Modal
+		}
 		LOGGER.info("InsumoBean.salvar - FIM = " + this.insumoVO);
 	}
 
