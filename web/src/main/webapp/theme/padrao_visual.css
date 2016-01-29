@@ -1,6 +1,14 @@
 /* definições @font-face */
 @import url(fonts/fonts.css);
 
+select {
+	width: 236px;
+	height: 32px;
+	-webkit-box-shadow: inset 0 2px 2px #8f8f8f;
+	box-shadow: inset 0 2px 2px #8f8f8f;
+	border-radius: 4px;
+}
+
 /*Override classes richfaces*/
 *.rf-p-b {
 	padding: 0px !important;
@@ -36,17 +44,15 @@ div {
 	padding: 0px !important;
 }
 
-.pn_grid .ui-datatable-header{
+.pn_grid .ui-datatable-header {
 	border-top: none;
-	border-radius:0px;
+	border-radius: 0px;
 }
 
-.pn_buttons .ui-panel-titlebar{
+.pn_buttons .ui-panel-titlebar {
 	border-bottom: none;
-	border-radius:0px;
+	border-radius: 0px;
 }
-
-
 
 /*Panel Transparent*/
 .pn_transparent {
@@ -65,8 +71,7 @@ div {
 	height: 10px;
 }
 
-.cl_codigo{
-	
+.cl_codigo {
 	width: 100px;
 	text-align: center;
 }
@@ -76,60 +81,90 @@ div {
 	width: 20px;
 }
 
-.fm_label_field, {
-	display: block;
-	float: left;
-	width: 80px;
-	clear: both;
-	padding-top: 5px;
-	font-size: 15px;
-}
+.fm_label_field
+,
+{
+display
+:
+ 
+block
+;
 
+	
+float
+:
+ 
+left
+;
+
+	
+width
+:
+ 
+80
+px
+;
+
+	
+clear
+:
+ 
+both
+;
+
+	
+padding-top
+:
+ 
+5
+px
+;
+
+	
+font-size
+:
+ 
+15
+px
+;
+
+
+}
 .fm_field {
 	display: block;
 	float: left;
 	width: 50px;
 }
 
-.ui-panelgrid-content{
-	
+.ui-panelgrid-content {
 	border: none;
-	
 }
 
 .fm_label_field, .fm_field {
 	height: 35px;
 }
 
-.fm_area{
-	
-	margin-top:10px;
+.fm_area {
+	margin-top: 10px;
 	display: table;
 	width: 100%;
 }
 
-.fm_buttons{
-	
+.fm_buttons {
 	clear: both;
-	
 }
 
-.fm_button .ui-panel-content{
-
+.fm_button .ui-panel-content {
 	padding: 2px 5px;
-}	
+}
 
-.fm_button{
-	
+.fm_button {
 	display: block;
 	float: left;
 	background: transparent;
-	border : none;
+	border: none;
 }
 
-
-.fm_button img{
-	
-	width:20px;
-	
+.fm_button img {
+	width: 20px;
 }

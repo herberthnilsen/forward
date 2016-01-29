@@ -43,9 +43,7 @@ public class UnidadeFacade implements UnidadeFacadeLocal{
 	public List<UnidadeVO> carregarUnidades() {
 		LOGGER.info("UnidadeFacade.carregarUnidades - INICIO");
 		
-		this.unidadeBusinessLocal.carregarUnidades();
-		LOGGER.info("UnidadeFacade.carregarUnidades - FIM");
-		return null;
+		return this.unidadeBusinessLocal.carregarUnidades();
 	}
 
 	/* (non-Javadoc)

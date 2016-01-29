@@ -92,7 +92,7 @@ import javax.persistence.TemporalType;
      return this.dataCadastro;
    }
  
-   public void setDataCadastro(Timestamp dataCadastro) {
+   public void setDataCadastro(Date dataCadastro) {
      this.dataCadastro = dataCadastro;
    }
  
@@ -211,7 +211,3 @@ import javax.persistence.TemporalType;
    }
  }
 
-/* Location:           D:\Projetos\Showtime\bkpforward-ear.ear - Copia\forward-ejb.jar\
- * Qualified Name:     br.com.forward.entity.Insumo
- * JD-Core Version:    0.6.0
- */

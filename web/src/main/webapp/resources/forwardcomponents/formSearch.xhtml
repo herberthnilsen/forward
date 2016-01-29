@@ -15,36 +15,33 @@
 </cc:interface>
 
 <cc:implementation>
-	<p:panel id="#{cc.attrs.idt}" rendered="#{!cc.attrs.bean.flagShowForm}"
+	<p:panel styleClass="fm_area" id="#{cc.attrs.idt}" rendered="#{!cc.attrs.bean.flagShowForm}"
 		width="100%">
 		<f:facet name="header">
 			<h:outputText value="#{msgs['titulo.consultar']}" />
 		</f:facet>
 
-		<h:panelGroup styleClass="fm_area" layout="block">
+		<cc:insertChildren />
 
-			<cc:insertChildren />
-
-			<h:panelGroup layout="block" styleClass="fm_buttons">
-				<p:panel styleClass="fm_button" id="bt_pesquisar">
-					<p:commandLink actionListener="#{cc.attrs.bean.pesquisar()}"
-						update="form #{cc.attrs.idGrid}">
-						<h:graphicImage value="/img/bt/find.png" />
-						<p:tooltip trackMouse="true" for="bt_pesquisar">
-							<h:outputText value="#{msgs['button.pesquisar']}" />
-						</p:tooltip>
-					</p:commandLink>
-				</p:panel>
-				<p:panel styleClass="fm_button" id="bt_limpar_pesquisa">
-					<p:commandLink actionListener="#{cc.attrs.bean.reset()}"
-						update="form">
-						<h:graphicImage value="/img/bt/limpar.ico" />
-						<p:tooltip trackMouse="true" for="bt_limpar_pesquisa">
-							<h:outputText value="#{msgs['button.limpar']}" />
-						</p:tooltip>
-					</p:commandLink>
-				</p:panel>
-			</h:panelGroup>
+		<h:panelGroup layout="block" styleClass="fm_buttons">
+			<p:panel styleClass="fm_button" id="bt_pesquisar">
+				<p:commandLink actionListener="#{cc.attrs.bean.pesquisar()}"
+					update="form #{cc.attrs.idGrid}">
+					<h:graphicImage value="/img/bt/find.png" />
+					<p:tooltip trackMouse="true" for="bt_pesquisar">
+						<h:outputText value="#{msgs['button.pesquisar']}" />
+					</p:tooltip>
+				</p:commandLink>
+			</p:panel>
+			<p:panel styleClass="fm_button" id="bt_limpar_pesquisa">
+				<p:commandLink actionListener="#{cc.attrs.bean.reset()}"
+					update="form">
+					<h:graphicImage value="/img/bt/limpar.ico" />
+					<p:tooltip trackMouse="true" for="bt_limpar_pesquisa">
+						<h:outputText value="#{msgs['button.limpar']}" />
+					</p:tooltip>
+				</p:commandLink>
+			</p:panel>
 		</h:panelGroup>
 	</p:panel>
 </cc:implementation>

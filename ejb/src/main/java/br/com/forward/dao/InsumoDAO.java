@@ -44,29 +44,72 @@ public class InsumoDAO extends GenericEntityManager {
 		return resultList;
 	}
 
-	public List<Insumo> getListaInsumos(InsumoVO insumo) throws EntityManagerException {
+	@SuppressWarnings("unchecked")
+	public List<Insumo> getListaInsumos(InsumoVO insumoVO) throws EntityManagerException {
 		LOGGER.info("InsumoDAO.getListaInsumos - INICIO -  PARAMETROS");
 
 		Map<String, Object> parametros = new HashMap<String, Object>();
 
 		StringBuilder jpql = new StringBuilder();
-		jpql.append("select ins from Insumo ins ");
+		jpql.append("select ins "
+				+ "from Insumo ins "
+//				+ "join insumo.categoriaInsumo cat"
+//				+ "join insumo.unidade un"
+				);
 		jpql.append("where 1=1 ");
 
-		if (insumo.getCodigoInsumo() != null) {
-			jpql.append(" and ins.codigoInsumo=:codigoInsumo");
-			parametros.put("codigoInsumo", insumo.getCodigoInsumo());
+		if (!insumoVO.getDescricaoInsumo().isEmpty()) {
+			jpql.append(" and ins.descricaoInsumo like :descricao");
+			parametros.put("descricao", "%" + insumoVO.getDescricaoInsumo());
 		}
-		if (!insumo.getDescricaoInsumo().isEmpty()) {
-			jpql.append(" and ins.descricao like :descricao");
-			parametros.put("descricao", "%" + insumo.getDescricaoInsumo());
+		if (!insumoVO.getNomeInsumo().isEmpty()) {
+			jpql.append(" and ins.nomeInsumo like :nome");
+			parametros.put("nome", "%" + insumoVO.getNomeInsumo());
 		}
-		if (!insumo.getNomeInsumo().isEmpty()) {
-			jpql.append(" and ins.nome like :nome");
-			parametros.put("nome", "%" + insumo.getNomeInsumo());
+
+		if (insumoVO.getCategoriaInsumoVO() != null && insumoVO.getCategoriaInsumoVO().getCodigoCategoria() != null) {
+
+			jpql.append(" and ins.categoriaInsumo.codigoCategoriaInsumo = :codCatIns");
+			parametros.put("codCatIns", insumoVO.getCategoriaInsumoVO().getCodigoCategoria());
+			
 		}
-		// TODO veirifcar todos os campos que são preenchidos para efetuar a
-		// busca
+		
+		if (insumoVO.getUnidadeVO() != null && insumoVO.getUnidadeVO().getCodigoUnidade() != null) {
+			
+			jpql.append(" and ins.unidade.codigoUnidade = :codUnidade");
+			parametros.put("codUnidade", insumoVO.getUnidadeVO().getCodigoUnidade());
+			
+		}
+		
+		if (insumoVO.getNumeroSerie() != null) {
+			
+			jpql.append(" and ins.numeroSerie = :numeroSerie");
+			parametros.put("numeroSerie", insumoVO.getNumeroSerie());
+			
+		}
+
+		
+		//Filtro pelo valor de mercado
+		if(insumoVO.getValorMercadoDe() != null && insumoVO.getValorMercadoAte() != null){
+			
+			jpql.append(" and ins.valorMercado between :valorMercadoDe and :valorMercadoAte");
+			parametros.put("valorMercadoDe", insumoVO.getValorMercadoDe());
+			parametros.put("valorMercadoAte", insumoVO.getValorMercadoAte());
+			
+		}
+		
+		
+		//Filtro pelo valor de venda
+		if(insumoVO.getValorVendaDe() != null && insumoVO.getValorVendaAte() != null){
+			
+			jpql.append(" and ins.valorVenda between :valorVendaDe and :valorVendaAte");
+			parametros.put("valorVendaDe", insumoVO.getValorVendaDe());
+			parametros.put("valorVendaAte", insumoVO.getValorVendaAte());
+			
+		}
+		
+		
+		
 		Query query = getEntityManager().createQuery(jpql.toString());
 
 		this.preencherParametrosQuery(query, parametros);

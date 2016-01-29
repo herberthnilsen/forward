@@ -20,6 +20,7 @@ public abstract class BasicBean implements Serializable {
 
 	public void hideForm() {
 		this.flagShowForm = Boolean.FALSE.toString();
+		this.reset();
 	}
 
 	public String getFlagShowForm() {
@@ -29,10 +30,12 @@ public abstract class BasicBean implements Serializable {
 	public void setFlagShowForm(Boolean flagShowForm) {
 		this.flagShowForm = flagShowForm.toString();
 	}
-	
+
 	public abstract void pesquisar();
 
-	public abstract void salvar() ;
+	public abstract void reset();
+
+	public abstract void salvar();
 
 	public abstract void excluir();
 }

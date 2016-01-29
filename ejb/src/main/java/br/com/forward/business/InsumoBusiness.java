@@ -27,19 +27,19 @@ import br.com.forward.interfaces.business.InsumoBusinessLocal;
  *
  */
 @Stateless
-@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLocal {
 	public static final Logger LOGGER = Logger.getLogger(InsumoBusiness.class);
-	
+
 	private InsumoDAO insumoDAO;
-	
+
 	@PostConstruct
-	public void init(){
-		
+	public void init() {
+
 		this.insumoDAO = new InsumoDAO(this.entityManager);
-		
+
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,15 +51,23 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 	public List<InsumoVO> carregarInsumos(InsumoVO paramInsumoVO) {
 
 		ArrayList<InsumoVO> insumos = new ArrayList<InsumoVO>();
-		
+
 		try {
-			
-			ConverterInsumo.convertListEntityToListVo(this.insumoDAO.getListaInsumos(), insumos);
-			
+			if (paramInsumoVO.getNomeInsumo() != null || paramInsumoVO.getDescricaoInsumo() != null
+					|| paramInsumoVO.getNumeroSerie() != null || paramInsumoVO.getUnidadeVO().getCodigoUnidade() != null
+					|| (paramInsumoVO.getValorMercadoDe() != null && paramInsumoVO.getValorMercadoAte() != null)
+					|| (paramInsumoVO.getValorVendaDe() != null && paramInsumoVO.getValorVendaAte() != null)) {
+
+				ConverterInsumo.convertListEntityToListVo(this.insumoDAO.getListaInsumos(paramInsumoVO), insumos);
+			} else {
+
+				ConverterInsumo.convertListEntityToListVo(this.insumoDAO.getListaInsumos(), insumos);
+			}
+
 		} catch (EntityManagerException e) {
 
 			LOGGER.error("Ocorreu um erro ao buscar as categorias de insumo", e);
-			
+
 		}
 		return insumos;
 	}
@@ -74,12 +82,12 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 	@Override
 	public void salvar(InsumoVO insumoVO) throws InsumoException {
 		LOGGER.info("InsumoBean.salvar - INICIO = " + insumoVO);
-		
+
 		Insumo insumo = new Insumo();
-		
-		//Convertendo VO em Entidade
+
+		// Convertendo VO em Entidade
 		ConverterInsumo.convertVoToEntity(insumoVO, insumo);
-		
+
 		try {
 			this.insumoDAO.salvar(insumo);
 		} catch (EntityManagerException e) {

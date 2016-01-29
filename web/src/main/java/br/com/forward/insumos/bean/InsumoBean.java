@@ -25,7 +25,7 @@ public class InsumoBean extends BasicBean {
 	private static final long serialVersionUID = 5575143542410735935L;
 	public static final Logger LOGGER = Logger.getLogger("InsumoBean.class");
 
-	private InsumoVO insumoVO = new InsumoVO();;
+	private InsumoVO insumoVO = new InsumoVO();
 
 	private List<CategoriaInsumoVO> listaCategoriaInsumo;
 	
@@ -105,7 +105,7 @@ public class InsumoBean extends BasicBean {
 	public void pesquisar() {
 		LOGGER.info("InsumoBean.pesquisar - INICIO = " + this.insumoVO);
 		
-		this.insumoFacadeLocal.carregarInsumos(this.insumoVO);
+		this.resultList = this.insumoFacadeLocal.carregarInsumos(this.insumoVO);
 		
 		LOGGER.info("InsumoBean.pesquisar - FIM = " + this.insumoVO);
 	}
@@ -120,10 +120,15 @@ public class InsumoBean extends BasicBean {
 		LOGGER.info("InsumoBean.salvar - INICIO = " + this.insumoVO);
 		try {
 			this.insumoFacadeLocal.salvar(this.insumoVO);
+			this.reset();
+			this.pesquisar();
+			this.hideForm();
 		} catch (InsumoException e) {
 
 			//TODO Gerar mensagem no Modal
 		}
+		
+		
 		LOGGER.info("InsumoBean.salvar - FIM = " + this.insumoVO);
 	}
 
@@ -137,6 +142,19 @@ public class InsumoBean extends BasicBean {
 		LOGGER.info("InsumoBean.excluir - INICIO = " + this.insumoVO);
 
 		LOGGER.info("InsumoBean.excluir - FIM = " + this.insumoVO);
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.forward.insumos.bean.BasicBean#reset()
+	 */
+	@Override
+	public void reset() {
+		LOGGER.info("InsumoBean.reset - INICIO = " + this.insumoVO);
+
+		this.insumoVO = new InsumoVO();
+
+		LOGGER.info("InsumoBean.reset - FIM");
+		
 	}
 
 }
