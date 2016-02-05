@@ -1,6 +1,8 @@
 package br.com.forward.util;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -14,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
@@ -34,6 +35,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import br.com.forward.common.InsumoVO;
+
 public final class Utils {
 	private static final Logger LOGGER = LogManager.getLogger(Utils.class);
 
@@ -41,30 +44,71 @@ public final class Utils {
 		throw new AssertionError();
 	}
 
-//	public static <T> void sort(List<T> list, String propertyName, boolean asc) {
-//		if ((list != null) && (list.size() > 0))
-//			Collections.sort(list, comparator(list, propertyName, asc));
-//	}
-//
-//	public static <T> T max(List<T> list, String propertyName) {
-//		Object type = null;
-//
-//		if ((list != null) && (list.size() > 0)) {
-//			type = Collections.max(list, comparator(list, propertyName, Boolean.TRUE.booleanValue()));
-//		}
-//
-//		return (T) type;
-//	}
-//
-//	public static <T> T min(List<T> list, String propertyName) {
-//		Object type = null;
-//
-//		if ((list != null) && (list.size() > 0)) {
-//			type = Collections.min(list, comparator(list, propertyName, Boolean.TRUE.booleanValue()));
-//		}
-//
-//		return (T) type;
-//	}
+	/**
+	 * Método que verifica se há algum valor nulo no objeto
+	 * 
+	 * @param objeto
+	 * @return Boolean
+	 */
+	@SuppressWarnings("unchecked")
+	public static Boolean isObjectValuesNull(Object objeto) {
+		LOGGER.info("Utils.isObjectValuesNull - INICIO");
+		Boolean retorno = Boolean.TRUE;
+		if (!isEmpty(objeto)) {
+
+			Class<Object> obj = (Class<Object>) objeto.getClass();
+			// TODO Verificar a possíbilidade de pegar uma anotação da classe
+			// pai para gerar um GenericVO com uma Anotação Própria indicando
+			// que deve ser verificado os parametros
+			for (Field field : obj.getDeclaredFields()) {
+				try {
+
+					Object value = obj.getMethod("get" + StringUtils.capitalize(field.getName())).invoke(objeto);
+
+					retorno = isObjectValuesNull(value);
+
+					if (!retorno) {
+						break;
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					LOGGER.warn("Método não encontrado na verificação de nulidade");
+				}
+
+			}
+		}
+		LOGGER.info("Utils.isObjectValuesNull - FIM");
+		return retorno;
+
+	}
+
+	// public static <T> void sort(List<T> list, String propertyName, boolean
+	// asc) {
+	// if ((list != null) && (list.size() > 0))
+	// Collections.sort(list, comparator(list, propertyName, asc));
+	// }
+	//
+	// public static <T> T max(List<T> list, String propertyName) {
+	// Object type = null;
+	//
+	// if ((list != null) && (list.size() > 0)) {
+	// type = Collections.max(list, comparator(list, propertyName,
+	// Boolean.TRUE.booleanValue()));
+	// }
+	//
+	// return (T) type;
+	// }
+	//
+	// public static <T> T min(List<T> list, String propertyName) {
+	// Object type = null;
+	//
+	// if ((list != null) && (list.size() > 0)) {
+	// type = Collections.min(list, comparator(list, propertyName,
+	// Boolean.TRUE.booleanValue()));
+	// }
+	//
+	// return (T) type;
+	// }
 
 	public static Object getValueMethodGetter(String attribute, Object object) {
 		Object value = null;
@@ -724,55 +768,56 @@ public final class Utils {
 		return newValor;
 	}
 
-
-//	public static <T> Comparator<T> comparator(List<T> list, String propertyName, boolean asc) {
-//		Comparator comparator = null;
-//
-//		if ((list != null) && (list.size() > 0)) {
-//			comparator = new Comparator() {
-//				public int compare(Object type1, Object type2) {
-//					try {
-//						Object value1 = Utils.getValueMethodGetter(Utils.this, type1);
-//						Object value2 = Utils.getValueMethodGetter(Utils.this, type2);
-//
-//						if ((value1 != null) && (value2 != null)) {
-//							if ((value1 instanceof String))
-//								return this.val$asc ? ((String) value1).compareTo((String) value2)
-//										: ((String) value2).compareTo((String) value1);
-//							if ((value1 instanceof Long))
-//								return this.val$asc ? ((Long) value1).compareTo((Long) value2)
-//										: ((Long) value2).compareTo((Long) value1);
-//							if ((value1 instanceof Short))
-//								return this.val$asc ? ((Short) value1).compareTo((Short) value2)
-//										: ((Short) value2).compareTo((Short) value1);
-//							if ((value1 instanceof Integer))
-//								return this.val$asc ? ((Integer) value1).compareTo((Integer) value2)
-//										: ((Integer) value2).compareTo((Integer) value1);
-//							if ((value1 instanceof Date))
-//								return this.val$asc ? ((Date) value1).compareTo((Date) value2)
-//										: ((Date) value2).compareTo((Date) value1);
-//							if ((value1 instanceof Character))
-//								return this.val$asc ? ((Character) value1).compareTo((Character) value2)
-//										: ((Character) value2).compareTo((Character) value1);
-//							if ((value1 instanceof Boolean))
-//								return this.val$asc ? ((Boolean) value1).compareTo((Boolean) value2)
-//										: ((Boolean) value2).compareTo((Boolean) value1);
-//							if ((value1 instanceof BigDecimal)) {
-//								return this.val$asc ? ((BigDecimal) value1).compareTo((BigDecimal) value2)
-//										: ((BigDecimal) value2).compareTo((BigDecimal) value1);
-//							}
-//						}
-//						return 0;
-//					} catch (Exception e) {
-//						Utils.LOGGER.warn("Erro m�todo sort", e);
-//					}
-//					return 0;
-//				}
-//			};
-//		}
-//
-//		return comparator;
-//	}
+	// public static <T> Comparator<T> comparator(List<T> list, String
+	// propertyName, boolean asc) {
+	// Comparator comparator = null;
+	//
+	// if ((list != null) && (list.size() > 0)) {
+	// comparator = new Comparator() {
+	// public int compare(Object type1, Object type2) {
+	// try {
+	// Object value1 = Utils.getValueMethodGetter(Utils.this, type1);
+	// Object value2 = Utils.getValueMethodGetter(Utils.this, type2);
+	//
+	// if ((value1 != null) && (value2 != null)) {
+	// if ((value1 instanceof String))
+	// return this.val$asc ? ((String) value1).compareTo((String) value2)
+	// : ((String) value2).compareTo((String) value1);
+	// if ((value1 instanceof Long))
+	// return this.val$asc ? ((Long) value1).compareTo((Long) value2)
+	// : ((Long) value2).compareTo((Long) value1);
+	// if ((value1 instanceof Short))
+	// return this.val$asc ? ((Short) value1).compareTo((Short) value2)
+	// : ((Short) value2).compareTo((Short) value1);
+	// if ((value1 instanceof Integer))
+	// return this.val$asc ? ((Integer) value1).compareTo((Integer) value2)
+	// : ((Integer) value2).compareTo((Integer) value1);
+	// if ((value1 instanceof Date))
+	// return this.val$asc ? ((Date) value1).compareTo((Date) value2)
+	// : ((Date) value2).compareTo((Date) value1);
+	// if ((value1 instanceof Character))
+	// return this.val$asc ? ((Character) value1).compareTo((Character) value2)
+	// : ((Character) value2).compareTo((Character) value1);
+	// if ((value1 instanceof Boolean))
+	// return this.val$asc ? ((Boolean) value1).compareTo((Boolean) value2)
+	// : ((Boolean) value2).compareTo((Boolean) value1);
+	// if ((value1 instanceof BigDecimal)) {
+	// return this.val$asc ? ((BigDecimal) value1).compareTo((BigDecimal)
+	// value2)
+	// : ((BigDecimal) value2).compareTo((BigDecimal) value1);
+	// }
+	// }
+	// return 0;
+	// } catch (Exception e) {
+	// Utils.LOGGER.warn("Erro m�todo sort", e);
+	// }
+	// return 0;
+	// }
+	// };
+	// }
+	//
+	// return comparator;
+	// }
 
 	public static String preencheZerosEsquerda(String str, int tamanho) {
 		return StringUtils.leftPad(str, tamanho, "0");

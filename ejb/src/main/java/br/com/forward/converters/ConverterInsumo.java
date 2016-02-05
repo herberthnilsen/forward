@@ -4,7 +4,7 @@
 package br.com.forward.converters;
 
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import br.com.forward.common.InsumoVO;
 import br.com.forward.entity.CategoriaInsumo;
 import br.com.forward.entity.Insumo;
+import br.com.forward.entity.SubItemInsumo;
 import br.com.forward.entity.Unidade;
 
 /**
@@ -50,6 +51,12 @@ public class ConverterInsumo {
 			insumo.setCategoriaInsumo(categoriaInsumo);
 			insumo.setUnidade(unidade);
 
+			List<SubItemInsumo> listaSubItemInsumo = new ArrayList<SubItemInsumo>();
+			
+			ConverterSubItemInsumo.convertListVoToListEntity(insumoVO, listaSubItemInsumo);
+			
+			insumo.setSubItens(listaSubItemInsumo);
+			
 		} catch (IllegalAccessException | InvocationTargetException e) {
 
 			LOGGER.error("Ocorreu erro na conversão do InsumoVO para Insumo", e);
@@ -76,16 +83,21 @@ public class ConverterInsumo {
 				"ConverterInsumo.convertVoToEntity - INICIO - PARAMETROS: insumoVO=" + insumoVO + ", Insumo=" + insumo);
 	}
 
-	public static void convertListEntityToListVo(final List<Insumo> listaInsumo, final List<InsumoVO> listaInsumoVO) {
+	public static void convertListEntityToListVo(final List<Insumo> listaInsumo, List<InsumoVO> listaInsumoVO) {
 
-		for (Insumo insumo : listaInsumo) {
-			InsumoVO insumoVO = new InsumoVO();
+		if (!listaInsumo.isEmpty()) {
+			for (Insumo insumo : listaInsumo) {
+				InsumoVO insumoVO = new InsumoVO();
 
-			ConverterInsumo.convertEntityToVO(insumo, insumoVO);
+				ConverterInsumo.convertEntityToVO(insumo, insumoVO);
 
-			listaInsumoVO.add(insumoVO);
+				listaInsumoVO.add(insumoVO);
+			}
+		}else{
+			
+			listaInsumoVO = new ArrayList<InsumoVO>();
+			
 		}
-
 	}
 
 	public static void convertListVoToListEntity(final List<InsumoVO> listaInsumoVO, final List<Insumo> listaInsumo) {

@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fw="http://xmlns.jcp.org/jsf/composite/forwardcomponents">
+
+	<fw:dialog idt="cadastroSubItemInsumo"
+		titulo="#{msgs['titulo.subitem']}" bean="#{insumoBean}">
+
+		<fw:formPanel bean="#{insumoBean}" idt="formInsumoSubItem"
+			idGrid="form:gridInsumo">
+
+			<p:outputLabel
+				value="#{msgs['titulo.insumo']} #{insumoBean.insumoVO.nomeInsumo}" />
+
+			<p:pickList id="pickInsumos" value="#{insumoBean.listaSubItens}"
+				converter="converterPickListInsumoVO" var="item"
+				itemLabel="#{item.nomeInsumo}" itemValue="#{item}" />
+
+		</fw:formPanel>
+
+	</fw:dialog>
+
+</ui:composition>

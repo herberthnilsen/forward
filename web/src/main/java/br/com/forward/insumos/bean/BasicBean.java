@@ -38,4 +38,36 @@ public abstract class BasicBean implements Serializable {
 	public abstract void salvar();
 
 	public abstract void excluir();
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((flagShowForm == null) ? 0 : flagShowForm.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof BasicBean))
+			return false;
+		BasicBean other = (BasicBean) obj;
+		if (flagShowForm == null) {
+			if (other.flagShowForm != null)
+				return false;
+		} else if (!flagShowForm.equals(other.flagShowForm))
+			return false;
+		return true;
+	}
+
 }

@@ -23,41 +23,67 @@ import br.com.forward.interfaces.facade.InsumoFacadeLocal;
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class InsumoFacade implements InsumoFacadeLocal{
+public class InsumoFacade implements InsumoFacadeLocal {
 
 	private static Logger LOGGER = Logger.getLogger(InsumoFacade.class);
-	
+
 	@EJB
 	private InsumoBusinessLocal insumoBusinessLocal;
-	
-	/* (non-Javadoc)
-	 * @see br.com.forward.interfaces.facade.InsumoFacadeLocal#carregarInsumos(br.com.forward.common.InsumoVO)
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.forward.interfaces.facade.InsumoFacadeLocal#carregarInsumos(br.com
+	 * .forward.common.InsumoVO)
 	 */
 	@Override
 	public List<InsumoVO> carregarInsumos(InsumoVO paramInsumoVO) {
+		LOGGER.info("InsumoFacade.carregarSubItensInsumos - INICIO = " + paramInsumoVO);
 
-		return this.insumoBusinessLocal.carregarInsumos(paramInsumoVO);
+		List<InsumoVO> listaInsumos = this.insumoBusinessLocal.carregarInsumos(paramInsumoVO);
+
+		LOGGER.info("InsumoFacade.carregarSubItensInsumos - INICIO = " + paramInsumoVO);
+
+		return listaInsumos;
 
 	}
 
-	/* (non-Javadoc)
-	 * @see br.com.forward.interfaces.facade.InsumoFacadeLocal#salvar(br.com.forward.common.InsumoVO)
+	public List<InsumoVO> carregarSubItensInsumos(InsumoVO insumoVO) {
+		LOGGER.info("InsumoFacade.carregarSubItensInsumos - INICIO = " + insumoVO);
+
+		List<InsumoVO> carregarSubItensInsumos = this.insumoBusinessLocal.carregarSubItensInsumos(insumoVO);
+
+		LOGGER.info("InsumoFacade.carregarSubItensInsumos - FIM = " + insumoVO);
+		return carregarSubItensInsumos;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.forward.interfaces.facade.InsumoFacadeLocal#salvar(br.com.forward.
+	 * common.InsumoVO)
 	 */
 	@Override
-	public void salvar(InsumoVO insumoVO)throws InsumoException {
-		LOGGER.info("InsumoBean.salvar - INICIO = " + insumoVO);
+	public void salvar(InsumoVO insumoVO) throws InsumoException {
+		LOGGER.info("InsumoFacade.salvar - INICIO = " + insumoVO);
 		this.insumoBusinessLocal.salvar(insumoVO);
-		LOGGER.info("InsumoBean.salvar - FIM = " + insumoVO);
-		
+		LOGGER.info("InsumoFacade.salvar - FIM = " + insumoVO);
+
 	}
 
-	/* (non-Javadoc)
-	 * @see br.com.forward.interfaces.facade.InsumoFacadeLocal#excluir(br.com.forward.common.InsumoVO)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * br.com.forward.interfaces.facade.InsumoFacadeLocal#excluir(br.com.forward
+	 * .common.InsumoVO)
 	 */
 	@Override
 	public void excluir(InsumoVO paramInsumoVO) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

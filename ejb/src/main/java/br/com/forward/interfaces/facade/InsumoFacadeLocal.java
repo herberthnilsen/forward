@@ -18,6 +18,8 @@ import br.com.forward.exception.InsumoException;
 public interface InsumoFacadeLocal {
 
 	public List<InsumoVO> carregarInsumos(InsumoVO paramInsumoVO);
+	
+	public List<InsumoVO> carregarSubItensInsumos(InsumoVO paramInsumoVO);
 
 	public void salvar(InsumoVO paramInsumoVO) throws InsumoException;
 

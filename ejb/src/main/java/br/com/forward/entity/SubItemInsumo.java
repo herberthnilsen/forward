@@ -1,32 +1,31 @@
- package br.com.forward.entity;
- 
- import javax.persistence.EmbeddedId;
- import javax.persistence.Entity;
- import javax.persistence.ManyToOne;
- import javax.persistence.Table;
- 
- @Entity
- @Table(name="fwdsubins")
- public class SubItemInsumo
- {
- 
-   @EmbeddedId
-   private SubItemInsumoPK subItemPK;
- 
-   @ManyToOne
-   private Insumo insumo;
- 
-   public SubItemInsumoPK getSubItemPK()
-   {
-     return this.subItemPK;
-   }
- 
-   public void setSubItemPK(SubItemInsumoPK subItemPK) {
-     this.subItemPK = subItemPK;
-   }
- }
+package br.com.forward.entity;
 
-/* Location:           D:\Projetos\Showtime\bkpforward-ear.ear - Copia\forward-ejb.jar\
- * Qualified Name:     br.com.forward.entity.SubItemInsumo
- * JD-Core Version:    0.6.0
- */
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "fwdsubitm")
+public class SubItemInsumo {
+
+	@EmbeddedId
+	private SubItemInsumoPK subItemPK;
+
+	@ManyToOne
+	@JoinColumn(name = "idfwdinspai", insertable = false, updatable = false, unique = true, nullable = false)
+	private Insumo insumoPai;
+
+	@ManyToOne
+	@JoinColumn(name = "subfwdinsid", insertable = false, updatable = false, unique = true, nullable = false)
+	private Insumo subItemInsumo;
+
+	public SubItemInsumoPK getSubItemPK() {
+		return this.subItemPK;
+	}
+
+	public void setSubItemPK(SubItemInsumoPK subItemPK) {
+		this.subItemPK = subItemPK;
+	}
+}

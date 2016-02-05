@@ -15,9 +15,11 @@ import org.jboss.logging.Logger;
 
 import br.com.forward.common.InsumoVO;
 import br.com.forward.converters.ConverterInsumo;
+import br.com.forward.converters.ConverterSubItemInsumo;
 import br.com.forward.dao.InsumoDAO;
+import br.com.forward.dao.SubItemInsumoDAO;
 import br.com.forward.entity.Insumo;
-import br.com.forward.enumcode.ExceptionEnum;
+import br.com.forward.entity.SubItemInsumo;
 import br.com.forward.exception.EntityManagerException;
 import br.com.forward.exception.InsumoException;
 import br.com.forward.interfaces.business.InsumoBusinessLocal;
@@ -32,12 +34,13 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 	public static final Logger LOGGER = Logger.getLogger(InsumoBusiness.class);
 
 	private InsumoDAO insumoDAO;
+	private SubItemInsumoDAO subItemInsumoDAO;
 
 	@PostConstruct
 	public void init() {
 
 		this.insumoDAO = new InsumoDAO(this.entityManager);
-
+		this.subItemInsumoDAO = new SubItemInsumoDAO(this.entityManager);
 	}
 
 	/*
@@ -75,13 +78,35 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see br.com.forward.interfaces.business.InsumoBusinessLocal#
+	 * carregarSubItensInsumos(br.com.forward.common.InsumoVO)
+	 */
+	public List<InsumoVO> carregarSubItensInsumos(InsumoVO insumoVO) {
+		LOGGER.info("InsumoBusiness.salvar - INICIO = " + insumoVO);
+
+		Insumo insumo = new Insumo();
+		ConverterInsumo.convertVoToEntity(insumoVO, insumo);
+		
+		List<SubItemInsumo> listaSubItemInsumoByInsumo = this.subItemInsumoDAO.getListaSubItemInsumoByInsumo(insumo);
+		List<InsumoVO> listaInsumoVO = new ArrayList<InsumoVO>(); 
+		
+		ConverterSubItemInsumo.convertListEntityToListVo(listaSubItemInsumoByInsumo, insumoVO);
+
+		LOGGER.info("InsumoBusiness.salvar - INICIO = " + insumoVO);
+		return listaInsumoVO;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see
 	 * br.com.forward.interfaces.business.InsumoBusinessLocal#salvar(br.com.
 	 * forward.common.InsumoVO)
 	 */
 	@Override
 	public void salvar(InsumoVO insumoVO) throws InsumoException {
-		LOGGER.info("InsumoBean.salvar - INICIO = " + insumoVO);
+		LOGGER.info("InsumoBusiness.salvar - INICIO = " + insumoVO);
 
 		Insumo insumo = new Insumo();
 
@@ -95,7 +120,7 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 			LOGGER.error(msg, e);
 			throw new InsumoException(msg, e);
 		}
-		LOGGER.info("InsumoBean.salvar - FIM = " + insumoVO);
+		LOGGER.info("InsumoBusiness.salvar - FIM = " + insumoVO);
 	}
 
 	/*

@@ -9,6 +9,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.apache.log4j.Logger;
+import org.primefaces.model.DualListModel;
 
 import br.com.forward.common.CategoriaInsumoVO;
 import br.com.forward.common.InsumoVO;
@@ -28,17 +29,19 @@ public class InsumoBean extends BasicBean {
 	private InsumoVO insumoVO = new InsumoVO();
 
 	private List<CategoriaInsumoVO> listaCategoriaInsumo;
-	
+
 	private List<InsumoVO> resultList = new ArrayList<InsumoVO>();
-	
+
 	private List<UnidadeVO> listaUnidades;
+
+	private DualListModel<InsumoVO> listaSubItens;
 
 	@EJB
 	private InsumoFacadeLocal insumoFacadeLocal;
-	
+
 	@EJB
 	private CategoriaInsumoFacadeLocal categoriaLocal;
-	
+
 	@EJB
 	private UnidadeFacadeLocal unidadeLocal;
 
@@ -47,17 +50,21 @@ public class InsumoBean extends BasicBean {
 		LOGGER.info("InsumoBean.init - INICIO");
 
 		this.pesquisar();
+
+		this.insumoVO.setSubitens(new ArrayList<InsumoVO>());
+
+		resetSubItens();
 		LOGGER.info("InsumoBean.init - FIM");
 	}
 
 	public List<CategoriaInsumoVO> getListaCategoriaInsumo() {
-		
-		if(this.listaCategoriaInsumo == null || this.listaCategoriaInsumo.isEmpty()){
-			
+
+		if (this.listaCategoriaInsumo == null || this.listaCategoriaInsumo.isEmpty()) {
+
 			this.listaCategoriaInsumo = this.categoriaLocal.carregarCategoriaInsumos();
-			
+
 		}
-		
+
 		return this.listaCategoriaInsumo;
 	}
 
@@ -66,12 +73,12 @@ public class InsumoBean extends BasicBean {
 	}
 
 	public List<UnidadeVO> getListaUnidades() {
-		if(this.listaUnidades == null){
-			
+		if (this.listaUnidades == null) {
+
 			this.listaUnidades = this.unidadeLocal.carregarUnidades();
-			
+
 		}
-		
+
 		return this.listaUnidades;
 	}
 
@@ -96,6 +103,30 @@ public class InsumoBean extends BasicBean {
 		this.resultList = resultList;
 	}
 
+	/**
+	 * @return the listaSubItens
+	 */
+	public DualListModel<InsumoVO> getListaSubItens() {
+		return listaSubItens;
+	}
+
+	/**
+	 * @param listaSubItens
+	 *            the listaSubItens to set
+	 */
+	public void setListaSubItens(DualListModel<InsumoVO> listaSubItens) {
+		this.listaSubItens = listaSubItens;
+	}
+
+	public void carregarSubItensInsumo(){
+		LOGGER.info("InsumoBean.carregarSubItensInsumo - INICIO = " + this.insumoVO);
+		
+		this.insumoVO.setSubitens(this.insumoFacadeLocal.carregarSubItensInsumos(this.insumoVO));
+		
+		LOGGER.info("InsumoBean.carregarSubItensInsumo - FIM = " + this.insumoVO);
+		
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -104,9 +135,9 @@ public class InsumoBean extends BasicBean {
 	@Override
 	public void pesquisar() {
 		LOGGER.info("InsumoBean.pesquisar - INICIO = " + this.insumoVO);
-		
+
 		this.resultList = this.insumoFacadeLocal.carregarInsumos(this.insumoVO);
-		
+
 		LOGGER.info("InsumoBean.pesquisar - FIM = " + this.insumoVO);
 	}
 
@@ -119,16 +150,17 @@ public class InsumoBean extends BasicBean {
 	public void salvar() {
 		LOGGER.info("InsumoBean.salvar - INICIO = " + this.insumoVO);
 		try {
+			this.insumoVO.setSubitens(this.listaSubItens.getTarget());
+
 			this.insumoFacadeLocal.salvar(this.insumoVO);
 			this.reset();
 			this.pesquisar();
 			this.hideForm();
 		} catch (InsumoException e) {
 
-			//TODO Gerar mensagem no Modal
+			// TODO Gerar mensagem no Modal
 		}
-		
-		
+
 		LOGGER.info("InsumoBean.salvar - FIM = " + this.insumoVO);
 	}
 
@@ -144,7 +176,9 @@ public class InsumoBean extends BasicBean {
 		LOGGER.info("InsumoBean.excluir - FIM = " + this.insumoVO);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see br.com.forward.insumos.bean.BasicBean#reset()
 	 */
 	@Override
@@ -152,9 +186,15 @@ public class InsumoBean extends BasicBean {
 		LOGGER.info("InsumoBean.reset - INICIO = " + this.insumoVO);
 
 		this.insumoVO = new InsumoVO();
-
+		resetSubItens();
 		LOGGER.info("InsumoBean.reset - FIM");
-		
+
 	}
 
+	private void resetSubItens(){
+		
+		this.listaSubItens = new DualListModel<InsumoVO>(this.resultList, new ArrayList<InsumoVO>());
+		
+	}
+	
 }

@@ -68,7 +68,7 @@ import javax.persistence.TemporalType;
    @OneToMany(mappedBy="insumo", fetch=FetchType.LAZY)
    private List<InsumoPacote> insumoPacotes;
  
-   @OneToMany(mappedBy="insumo", fetch=FetchType.LAZY)
+   @OneToMany(mappedBy="insumoPai", fetch=FetchType.LAZY)
    private List<SubItemInsumo> subItens;
  
    public Integer getCodigoInsumo()
@@ -203,7 +203,21 @@ import javax.persistence.TemporalType;
      return insumoPacote;
    }
  
-   public InsumoPacote removeListaInsumoPacote(InsumoPacote insumoPacote) {
+   /**
+ * @return the subItens
+ */
+public List<SubItemInsumo> getSubItens() {
+	return subItens;
+}
+
+/**
+ * @param subItens the subItens to set
+ */
+public void setSubItens(List<SubItemInsumo> subItens) {
+	this.subItens = subItens;
+}
+
+public InsumoPacote removeListaInsumoPacote(InsumoPacote insumoPacote) {
      getListaInsumoPacote().remove(insumoPacote);
      insumoPacote.setInsumo(null);
  
