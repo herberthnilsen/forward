@@ -1,16 +1,18 @@
  package br.com.forward.entity;
  
  import java.util.List;
- import javax.persistence.Column;
- import javax.persistence.Entity;
- import javax.persistence.GeneratedValue;
- import javax.persistence.GenerationType;
- import javax.persistence.Id;
- import javax.persistence.JoinColumn;
- import javax.persistence.ManyToOne;
- import javax.persistence.NamedQuery;
- import javax.persistence.OneToMany;
- import javax.persistence.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
  
  @Entity
  @Table(name="fwdlgd")
@@ -42,6 +44,9 @@
    @JoinColumn(name="fwdtiplgdcod", nullable=false)
    private TipoLogradouro tipoLogradouro;
  
+   @OneToOne(mappedBy="logradouro")
+   private Espaco espaco;
+   
    public int getCep()
    {
      return this.cep;
@@ -96,6 +101,20 @@
    public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
      this.tipoLogradouro = tipoLogradouro;
    }
+
+/**
+ * @return the espaco
+ */
+public Espaco getEspaco() {
+	return espaco;
+}
+
+/**
+ * @param espaco the espaco to set
+ */
+public void setEspaco(Espaco espaco) {
+	this.espaco = espaco;
+}
  }
 
 /* Location:           D:\Projetos\Showtime\bkpforward-ear.ear - Copia\forward-ejb.jar\

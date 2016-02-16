@@ -1,7 +1,8 @@
  package br.com.forward.entity;
  
  import java.math.BigDecimal;
- import java.sql.Timestamp;
+import java.math.BigInteger;
+import java.sql.Timestamp;
  import javax.persistence.Column;
  import javax.persistence.Entity;
  import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@
    @Id
    @GeneratedValue(strategy=GenerationType.AUTO)
    @Column(name="fwdhstetqcod", unique=true, nullable=false)
-   private String codigoHistoricoEstoque;
+   private BigInteger codigoHistoricoEstoque;
  
    @Column(name="dtahst")
    private Timestamp dataHistorico;
@@ -39,12 +40,12 @@
    @JoinColumn(name="fwdetqinscod", nullable=false)
    private EstoqueInsumo estoqueInsumo;
  
-   public String getCodigoHistoricoEstoque()
+   public BigInteger getCodigoHistoricoEstoque()
    {
      return this.codigoHistoricoEstoque;
    }
  
-   public void setCodigoHistoricoEstoque(String fwdhstetqcod) {
+   public void setCodigoHistoricoEstoque(BigInteger fwdhstetqcod) {
      this.codigoHistoricoEstoque = fwdhstetqcod;
    }
  
