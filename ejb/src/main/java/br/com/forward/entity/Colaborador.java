@@ -1,15 +1,18 @@
  package br.com.forward.entity;
  
  import java.sql.Timestamp;
- import javax.persistence.Column;
- import javax.persistence.Entity;
- import javax.persistence.GeneratedValue;
- import javax.persistence.GenerationType;
- import javax.persistence.Id;
- import javax.persistence.JoinColumn;
- import javax.persistence.ManyToOne;
- import javax.persistence.NamedQuery;
- import javax.persistence.Table;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
  
  @Entity
  @Table(name="fwdclb")
@@ -37,6 +40,9 @@
    @JoinColumn(name="fwdpescod", nullable=false)
    private Pessoa pessoa;
  
+   @OneToMany(mappedBy="colaborador")
+   private List<Reuniao> listaReunioes;
+   
    public Integer getCodigoColaborador()
    {
      return this.codigoColaborador;
@@ -77,6 +83,20 @@
    public void setPessoa(Pessoa pessoa) {
      this.pessoa = pessoa;
    }
+
+/**
+ * @return the listaReunioes
+ */
+public List<Reuniao> getListaReunioes() {
+	return listaReunioes;
+}
+
+/**
+ * @param listaReunioes the listaReunioes to set
+ */
+public void setListaReunioes(List<Reuniao> listaReunioes) {
+	this.listaReunioes = listaReunioes;
+}
  }
 
 /* Location:           D:\Projetos\Showtime\bkpforward-ear.ear - Copia\forward-ejb.jar\

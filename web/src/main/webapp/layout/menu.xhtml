@@ -13,10 +13,15 @@
 			<p:menuitem value="#{msgs['menu.cadastro.insumos']}"
 				action="cadastroInsumo" />
 		</p:submenu>
+		<p:submenu label="#{msgs['menu.controle']}" icon="ui-icon-document">
+			<p:menuitem value="#{msgs['menu.controle.estoque']}" 
+				action="estoque" />
+		</p:submenu>
+		<p:submenu label="#{msgs['menu.atendimento']}" icon="ui-icon-document">
+			<p:menuitem value="#{msgs['menu.atendimento.prospeccao']}" 
+				action="prospeccao" />
+		</p:submenu>
 		<p:menuitem label="#{msgs['menu.home']}" action="home" />
 	</p:menubar>
-		<!-- 				<f:facet name="label"> -->
-		<!-- 					<h:outputText value="#{msgs['menu.cadastro']}" /> -->
-		<!-- 				</f:facet> -->
 
 </ui:composition>

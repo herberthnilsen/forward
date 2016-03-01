@@ -29,7 +29,7 @@ public class Evento implements EntityInterface {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(unique = true, nullable = false)
+	@Column(name="fwdevtcod",unique = true, nullable = false)
 	private BigInteger codigoEvento;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -45,7 +45,7 @@ public class Evento implements EntityInterface {
 
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "fwdevtclt", joinColumns = {
-			@JoinColumn(name = "codigoEvento", nullable = false) }, inverseJoinColumns = {
+			@JoinColumn(name = "fwdevtcod", nullable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "fwdcltcod", nullable = false) })
 	private List<Cliente> clientes;
 
@@ -58,6 +58,10 @@ public class Evento implements EntityInterface {
 	
 	@OneToOne(mappedBy="evento", fetch=FetchType.LAZY)
 	private EventoCliente eventoCliente;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="fwdorcid")
+	private Orcamento orcamento;
 	
 	public BigInteger getCodigoEvento() {
 		return this.codigoEvento;
@@ -205,6 +209,20 @@ public class Evento implements EntityInterface {
 		this.eventoCliente = eventoCliente;
 	}
 
+	/**
+	 * @return the orcamento
+	 */
+	public Orcamento getOrcamento() {
+		return orcamento;
+	}
+
+	/**
+	 * @param orcamento the orcamento to set
+	 */
+	public void setOrcamento(Orcamento orcamento) {
+		this.orcamento = orcamento;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */
@@ -218,6 +236,7 @@ public class Evento implements EntityInterface {
 		result = prime * result + ((dataEvento == null) ? 0 : dataEvento.hashCode());
 		result = prime * result + ((espaco == null) ? 0 : espaco.hashCode());
 		result = prime * result + ((eventoCliente == null) ? 0 : eventoCliente.hashCode());
+		result = prime * result + ((orcamento == null) ? 0 : orcamento.hashCode());
 		result = prime * result + ((pacoteEventos == null) ? 0 : pacoteEventos.hashCode());
 		result = prime * result + ((tipoEvento == null) ? 0 : tipoEvento.hashCode());
 		return result;
@@ -265,6 +284,11 @@ public class Evento implements EntityInterface {
 				return false;
 		} else if (!eventoCliente.equals(other.eventoCliente))
 			return false;
+		if (orcamento == null) {
+			if (other.orcamento != null)
+				return false;
+		} else if (!orcamento.equals(other.orcamento))
+			return false;
 		if (pacoteEventos == null) {
 			if (other.pacoteEventos != null)
 				return false;
@@ -277,5 +301,5 @@ public class Evento implements EntityInterface {
 			return false;
 		return true;
 	}
-	
+
 }

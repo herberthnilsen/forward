@@ -1,0 +1,43 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fw="http://xmlns.jcp.org/jsf/composite/forwardcomponents"
+	template="../../layout/template.xhtml">
+	<ui:define name="content">
+
+		<p:layout style="height:250px">
+
+			<!-- 	Cadastro Atendimento -->
+			<p:layoutUnit position="west" resizable="true" size="100"
+				minSize="40" maxSize="200">
+				<p:panelGrid layout="grid" columns="4">
+					<p:outputLabel value="#{msgs.evento}" />
+					<fw:OneMenu idt="eventos">
+					</fw:OneMenu>
+				</p:panelGrid>
+
+
+			</p:layoutUnit>
+			<p:layoutUnit position="center" size="100" minSize="40" maxSize="200">
+				<p:panelGrid layout="grid" columns="4">
+					<p:outputLabel value="#{msgs.evento}" />
+					<p:selectOneMenu effect="fade" editable="true">
+						<f:selectItem itemValue="0" itemLabel="centro" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+			</p:layoutUnit>
+			<p:layoutUnit position="east">
+				<p:panelGrid layout="grid" columns="4">
+					<p:outputLabel value="#{msgs.evento}" />
+					<p:selectOneMenu effect="fade" editable="true">
+						<f:selectItem itemValue="0" itemLabel="leste" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+			</p:layoutUnit>
+
+		</p:layout>
+
+	</ui:define>
+</ui:composition>

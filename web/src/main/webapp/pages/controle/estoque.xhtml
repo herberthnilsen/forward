@@ -1,0 +1,108 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fw="http://xmlns.jcp.org/jsf/composite/forwardcomponents"
+	template="../../layout/template.xhtml">
+	<ui:define name="content">
+
+		<h:outputText value="#{msgs['menu.controle.estoque']}" />
+
+		<fw:formSearch bean="#{categoriaInsumoBean}" idt="formSearch"
+			idGrid="form:gridCategoriaInsumo">
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['categoria.insumo.codigo']}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText id="codigoCatIns"
+					value="#{categoriaInsumoBean.categoriaVO.codigoCategoria}">
+				</h:inputText>
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['categoria.insumo.nome']}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText id="nomeCatIns"
+					value="#{categoriaInsumoBean.categoriaVO.nomeCategoria}">
+				</h:inputText>
+			</h:panelGroup>
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['categoria.insumo.descricao']}" />
+			</h:panelGroup>
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText
+					value="#{categoriaInsumoBean.categoriaVO.descricaoCategoria}" />
+			</h:panelGroup>
+		</fw:formSearch>
+
+		<fw:formPanel bean="#{categoriaInsumoBean}" idt="formCategoriaInsumo">
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['categoria.insumo.nome']}" />
+			</h:panelGroup>
+
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText id="nomeCatIns"
+					value="#{categoriaInsumoBean.categoriaVO.nomeCategoria}">
+				</h:inputText>
+			</h:panelGroup>
+			<h:panelGroup styleClass="fm_label_field">
+				<h:outputText value="#{msgs['categoria.insumo.descricao']}" />
+			</h:panelGroup>
+			<h:panelGroup styleClass="fm_field">
+				<h:inputText
+					value="#{categoriaInsumoBean.categoriaVO.descricaoCategoria}" />
+			</h:panelGroup>
+		</fw:formPanel>
+		<!-- 		GRID -->
+		<p:panel id="gridCategoriaInsumo" styleClass="pn_grid pn_buttons">
+			<f:facet name="header">
+				<p:commandLink id="bt_adicionar"
+					actionListener="#{categoriaInsumoBean.showForm}" update="form">
+					<h:graphicImage value="/img/bt/add.png" alt="Adicionar" />
+					<p:tooltip trackMouse="true" for="bt_adicionar">
+						<h:outputText value="#{msgs['button.adicionar']}" />
+					</p:tooltip>
+				</p:commandLink>
+			</f:facet>
+			<fw:dataGrid id="listaCategoriaInsumo"
+				resultList="#{categoriaInsumoBean.resultList}"
+				bean="#{categoriaInsumoBean}">
+				<p:column headerText="#{msgs['categoria.insumo.codigo']}"
+					styleClass="cl_codigo" filterBy="#{value.codigoCategoria}">
+					<h:outputText value="#{value.codigoCategoria}" />
+				</p:column>
+				<p:column headerText="#{msgs['categoria.insumo.nome']}"
+					filterBy="#{value.nomeCategoria}">
+					<h:outputText value="#{value.nomeCategoria}" />
+				</p:column>
+				<p:column headerText="#{msgs['categoria.insumo.descricao']}"
+					filterBy="#{value.nomeCategoria}">
+					<h:outputText value="#{value.descricaoCategoria}" />
+				</p:column>
+				<p:column styleClass="cl_actions">
+					<p:commandLink actionListener="#{categoriaInsumoBean.showForm}"
+						update="form">
+						<f:setPropertyActionListener value="#{value}"
+							target="#{categoriaInsumoBean.categoriaVO}" />
+						<h:graphicImage title="#{msgs['button.editar']}"
+							value="/img/bt/edit.png" />
+					</p:commandLink>
+				</p:column>
+				<p:column styleClass="cl_actions">
+					<p:commandLink action="#{categoriaInsumoBean.excluir}"
+						update="listaCategoriaInsumo">
+						<f:setPropertyActionListener value="#{value}"
+							target="#{categoriaInsumoBean.categoriaVO}" />
+						<h:graphicImage title="#{msgs['button.excluir']}"
+							value="/img/bt/delete.png" />
+					</p:commandLink>
+				</p:column>
+
+			</fw:dataGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>

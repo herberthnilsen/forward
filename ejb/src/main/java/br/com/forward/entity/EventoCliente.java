@@ -22,12 +22,12 @@ public class EventoCliente implements Serializable {
 	@EmbeddedId
 	private EventoClientePK id;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fwdcltcod", nullable = false)
+	@OneToOne( fetch = FetchType.LAZY)
+	@JoinColumn(name="fwdcltcod", insertable=false, updatable=false)
 	private Cliente cliente;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fwdevtcod", nullable = false)
+	@JoinColumn(name="fwdevtcod", insertable=false, updatable=false)
 	private Evento evento;
 
 	@OneToOne(fetch = FetchType.LAZY)

@@ -30,6 +30,20 @@
 		<class>br.com.forward.entity.TipoEvento</class>
 		<class>br.com.forward.entity.TipoLogradouro</class>
 		<class>br.com.forward.entity.Unidade</class>
+		<class>br.com.forward.entity.Atendimento</class>
+		<class>br.com.forward.entity.ClienteProspeccao</class>
+		<class>br.com.forward.entity.ClienteProspeccaoPK</class>
+		<class>br.com.forward.entity.ItemOrcamento</class>
+		<class>br.com.forward.entity.ItemOrcamentoPK</class>
+		<class>br.com.forward.entity.Orcamento</class>
+		<class>br.com.forward.entity.OrcamentoSituacao</class>
+		<class>br.com.forward.entity.Parceiro</class>
+		<class>br.com.forward.entity.Prospeccao</class>
+		<class>br.com.forward.entity.Reuniao</class>
+		<class>br.com.forward.entity.TipoAplicacao</class>
+		<class>br.com.forward.entity.TipoAtendimento</class>
+		<class>br.com.forward.entity.TipoRelacaoPessoa</class>
+		<class>br.com.forward.entity.TipoServicoParceiro</class>
 		<properties>
 			<!-- Properties for Hibernate -->
 <!-- 			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
