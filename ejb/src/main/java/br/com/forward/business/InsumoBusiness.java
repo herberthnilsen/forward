@@ -3,6 +3,7 @@
  */
 package br.com.forward.business;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,19 +82,21 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 	 * @see br.com.forward.interfaces.business.InsumoBusinessLocal#
 	 * carregarSubItensInsumos(br.com.forward.common.InsumoVO)
 	 */
-	public List<InsumoVO> carregarSubItensInsumos(InsumoVO insumoVO) {
+	public void carregarSubItensInsumos(InsumoVO insumoVO) {
 		LOGGER.info("InsumoBusiness.salvar - INICIO = " + insumoVO);
 
+		// Limpando todos os SubItens
+		if (insumoVO.getSubitens() != null && !insumoVO.getSubitens().isEmpty()) {
+			insumoVO.getSubitens().clear();
+		}
 		Insumo insumo = new Insumo();
 		ConverterInsumo.convertVoToEntity(insumoVO, insumo);
-		
+
 		List<SubItemInsumo> listaSubItemInsumoByInsumo = this.subItemInsumoDAO.getListaSubItemInsumoByInsumo(insumo);
-		List<InsumoVO> listaInsumoVO = new ArrayList<InsumoVO>(); 
-		
+
 		ConverterSubItemInsumo.convertListEntityToListVo(listaSubItemInsumoByInsumo, insumoVO);
 
 		LOGGER.info("InsumoBusiness.salvar - INICIO = " + insumoVO);
-		return listaInsumoVO;
 
 	}
 
@@ -131,9 +134,21 @@ public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLoc
 	 * forward.common.InsumoVO)
 	 */
 	@Override
-	public void excluir(InsumoVO paramInsumoVO) throws InsumoException {
-		// TODO Auto-generated method stub
-
+	public void excluir(InsumoVO insumoVO) throws InsumoException {
+		LOGGER.info("InsumoBusiness.excluir - INICIO = " + insumoVO);
+		Insumo insumo = new Insumo();
+		ConverterInsumo.convertVoToEntity(insumoVO, insumo);
+		try {
+			this.insumoDAO.excluir(insumo);
+		} catch (EntityManagerException e) {
+			LOGGER.error("Erro de conexão com o BD: " + e.getMessage());
+			throw new InsumoException(e.getMessage());
+		} catch (SQLIntegrityConstraintViolationException e) {
+			String msg = "Não foi possível excluir o insumo, pois o mesmo está associado à outro. ";
+			LOGGER.error(msg + e.getMessage());
+			throw new InsumoException(msg, e);
+		}
+		LOGGER.info("InsumoBusiness.excluir - FIM= " + insumoVO);
 	}
 
 }

@@ -7,22 +7,22 @@
 	template="../../../layout/template.xhtml">
 	<ui:define name="content">
 
+		<ui:include src="/pages/cadastro/insumos/modalSubItemInsumo.xhtml" />
+
 		<h:outputText value="#{msgs['menu.cadastro.insumos']}" />
 
 		<fw:formSearch bean="#{insumoBean}" idt="formSearch">
-			<p:panelGrid layout="grid" columns="4">
-				<h:selectOneMenu
+			<p:panelGrid layout="grid" columns="4" styleClass="ui-responsive">
+				<fw:OneMenu  showLabel="false" 
 					value="#{insumoBean.insumoVO.categoriaInsumoVO.codigoCategoria}"
-					id="comboCategoriaInsumo">
+					idt="comboCategoriaInsumo">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="#{msgs['campo.categoria.insumo']}" />
-					<f:selectItem noSelectionOption="true"
-						itemLabel="#{msgs['legenda.selecione']}" />
 					<f:selectItems value="#{insumoBean.listaCategoriaInsumo}"
 						var="categoriaInsumo"
 						itemValue="#{categoriaInsumo.codigoCategoria}"
 						itemLabel="#{categoriaInsumo.nomeCategoria}" />
-				</h:selectOneMenu>
+				</fw:OneMenu>
 
 				<fw:inputText idt="nomeIns" label="#{msgs['campo.nome']}"
 					value="#{insumoBean.insumoVO.nomeInsumo}" />
@@ -33,16 +33,14 @@
 				<fw:inputText idt="numSerIns" label="#{msgs['campo.numero.serie']}"
 					value="#{insumoBean.insumoVO.numeroSerie}" />
 
-				<h:selectOneMenu
-					value="#{insumoBean.insumoVO.unidadeVO.codigoUnidade}" id="unidade">
+				<fw:OneMenu 
+					value="#{insumoBean.insumoVO.unidadeVO.codigoUnidade}" idt="unidade">
 					<f:selectItem noSelectionOption="true"
 						itemLabel="#{msgs['campo.unidade']}" />
-					<f:selectItem noSelectionOption="true"
-						itemLabel="#{msgs['legenda.selecione']}" />
 					<f:selectItems value="#{insumoBean.listaUnidades}" var="unidade"
 						itemValue="#{unidade.codigoUnidade}"
 						itemLabel="#{unidade.siglaUnidade} - #{unidade.nomeUnidade} " />
-				</h:selectOneMenu>
+				</fw:OneMenu>
 			</p:panelGrid>
 			<p:panelGrid layout="grid" columns="4">
 
@@ -111,7 +109,8 @@
 						itemLabel="#{unidade.siglaUnidade} - #{unidade.nomeUnidade} " />
 				</h:selectOneMenu>
 
-				<p:commandButton action="#{insumoBean.carregarSubItensInsumo()}" oncomplete="PF('wModalForm').show()" type="button"
+				<p:commandButton action="#{insumoBean.carregarSubItensInsumo()}"
+					oncomplete="PF('mdCadastroSubItemInsumo').show()" 
 					value="#{msgs['titulo.subitem']}" />
 
 			</p:panelGrid>
@@ -181,8 +180,6 @@
 
 			</fw:dataGrid>
 		</p:panel>
-
-		<ui:include src="/pages/cadastro/insumos/modalSubItemInsumo.xhtml" />
 
 	</ui:define>
 </ui:composition>

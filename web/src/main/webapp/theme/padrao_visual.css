@@ -9,17 +9,6 @@ select {
 	border-radius: 4px;
 }
 
-/*Override classes richfaces*/
-*.rf-p-b {
-	padding: 0px !important;
-}
-
-*.rf-p {
-	border: none;
-	padding: 10px;
-	font-size: 20px;
-}
-
 textarea, input[type="text"], input[type="password"], select {
 	background-image: none;
 	font-size: 20px;
@@ -130,17 +119,23 @@ px
 
 
 }
+.fm_field .ui-panel-content{
+	width:237px;
+	padding: 0px
+	
+}
+	
 .fm_field {
-	display: block;
-	float: left;
 	width: 50px;
+	padding: 0px;
+	border: 0px;
 }
 
 .ui-panelgrid-content {
 	border: none;
 }
 
-.fm_label_field, .fm_field {
+.fm_label_field{
 	height: 35px;
 }
 
@@ -168,3 +163,46 @@ px
 .fm_button img {
 	width: 20px;
 }
+
+.fm_atendimento{
+	
+	
+}
+
+
+.ui-inputfield, .ui-selectonemenu-label, .ui-outputlabel{
+	
+	font-size: 12px !important;
+	font-weight: bold;
+}
+
+.grid_5 .ui-panelgrid-cell{
+	
+	width : 20%;
+	
+}
+.grid_6 .ui-panelgrid-cell{
+	
+	width : 12%;
+	
+}
+
+@media screen and   (min-width: 461px) and (max-width: 1109px){
+	.ui-grid-row{
+	
+		display: block !important;
+	
+	}
+	.grid_6 .ui-panelgrid-cell{
+		width: 29%;
+		float: left;
+	}
+	
+	.fm_noivos .ui-grid-col-4{
+	
+		clear: both;
+	
+	}
+	
+} 
+

@@ -46,46 +46,25 @@
 
 			<h:form id="form">
 				<!-- Conteudo -->
-				<h:panelGroup layout="block" id="cabecalho">
-					<h:panelGrid columns="2" width="100%" style="padding-top: 8px;">
-						<p:column width="20%" styleClass="border_zero">
-							<!-- LOGO       	<h:graphicImage id="logo_porto" value="/img/logo_porto_seguro.png" styleClass="logo_image" rendered="true" /> -->
-						</p:column>
-						<p:column width="80%" styleClass="border_zero"
-							style="vertical-align: bottom;">
-							<h:panelGrid columns="2" styleClass="margin_correction">
-								<h:outputText value="#{msgs['application.bemvindo']}"
-									styleClass="text_bold_white" />
-								<h:outputText value="USUARIO LOGADO"
-									styleClass="text_bold_white" />
-							</h:panelGrid>
-						</p:column>
-					</h:panelGrid>
-				</h:panelGroup>
+				<p:panelGrid width="100%" id="cabecalho" style="padding-top: 8px;">
+					<!-- LOGO       	<h:graphicImage id="logo_porto" value="/img/logo_porto_seguro.png" styleClass="logo_image" rendered="true" /> -->
+					<p:panelGrid columns="2" styleClass="margin_correction">
+						<p:outputLabel value="#{msgs['application.bemvindo']}"
+							styleClass="text_bold_white" />
+						<p:outputLabel value="USUARIO LOGADO" styleClass="text_bold_white" />
+					</p:panelGrid>
+				</p:panelGrid>
 
-				<h:panelGroup layout="block" id="menu">
-					<ui:include src="menu.xhtml" />
-				</h:panelGroup>
-				<h:panelGroup layout="block" id="conteudo">
+				<ui:include src="menu.xhtml" />
 
-					<h:panelGroup layout="block" styleClass="padrao-visual">
-						<h:panelGroup styleClass="pv-breadcrumb"
-							style="margin-left: 16px;">
-							<ui:insert name="breadcrumb" />
-						</h:panelGroup>
-					</h:panelGroup>
+				<ui:insert name="content" />
 
-					<ui:insert name="content" />
-
-				</h:panelGroup>
 			</h:form>
 
 			<!-- Mensagens de sistema -->
-			<h:panelGroup layout="block" id="popupsBlock">
-				<ui:include src="modalAlerta.xhtml" />
-				<!-- Pop-up´s específicos de cada implementação -->
-				<ui:insert name="popBlock" />
-			</h:panelGroup>
+			<ui:include src="modalAlerta.xhtml" />
+			<!-- Pop-up´s específicos de cada implementação -->
+			<ui:insert name="popBlock" />
 
 		</p:outputPanel>
 	</h:panelGroup>

@@ -11,6 +11,7 @@
 	<cc:attribute name="bean" required="true"
 		type="br.com.forward.insumos.bean.BasicBean" />
 	<cc:attribute name="idGrid" />
+	<cc:attribute name="showCancelar" default="true" type="boolean"/>
 	<cc:attribute name="idt" required="true"/>
 </cc:interface>
 
@@ -44,7 +45,7 @@
 						</p:tooltip>
 					</p:commandLink>
 				</p:panel>
-				<p:panel id="bt_cancel" styleClass="fm_button">
+				<p:panel id="bt_cancel" styleClass="fm_button" rendered="#{cc.attrs.showCancelar}">
 					<p:commandLink actionListener="#{cc.attrs.bean.hideForm}"
 						update="form">
 						<h:graphicImage value="/img/bt/cancel.ico" />

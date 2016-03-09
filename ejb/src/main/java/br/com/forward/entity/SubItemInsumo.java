@@ -28,4 +28,33 @@ public class SubItemInsumo {
 	public void setSubItemPK(SubItemInsumoPK subItemPK) {
 		this.subItemPK = subItemPK;
 	}
+
+	/**
+	 * @return the insumoPai
+	 */
+	public Insumo getInsumoPai() {
+		return insumoPai;
+	}
+
+	/**
+	 * @param insumoPai the insumoPai to set
+	 */
+	public void setInsumoPai(Insumo insumoPai) {
+		this.insumoPai = insumoPai;
+	}
+
+	/**
+	 * @return the subItemInsumo
+	 */
+	public Insumo getSubItemInsumo() {
+		return subItemInsumo;
+	}
+
+	/**
+	 * @param subItemInsumo the subItemInsumo to set
+	 */
+	public void setSubItemInsumo(Insumo subItemInsumo) {
+		this.subItemInsumo = subItemInsumo;
+	}
+	
 }

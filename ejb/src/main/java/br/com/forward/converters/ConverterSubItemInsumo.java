@@ -10,6 +10,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import br.com.forward.common.InsumoVO;
+import br.com.forward.entity.Insumo;
 import br.com.forward.entity.SubItemInsumo;
 import br.com.forward.entity.SubItemInsumoPK;
 
@@ -34,17 +35,19 @@ public class ConverterSubItemInsumo {
 				+ ", SubItemInsumo=" + subItemInsumo);
 	}
 
-	public static void convertEntityToVO(final SubItemInsumo subItemInsumo, final InsumoVO insumoVO) {
+	public static void convertEntityToVO(final Insumo subItemInsumo, final InsumoVO insumoVO) {
 		LOGGER.info("ConverterSubItemInsumo.convertVoToEntity - INICIO - PARAMETROS: insumoVO=" + insumoVO
 				+ ", SubItemInsumo=" + subItemInsumo);
 
-		if (insumoVO.getSubitens().isEmpty()) {
+		if (insumoVO.getSubitens() == null) {
 
 			insumoVO.setSubitens(new ArrayList<InsumoVO>());
 		}
 
 		InsumoVO subItemInsumoVO = new InsumoVO();
 
+		ConverterInsumo.convertEntityToVO(subItemInsumo, subItemInsumoVO);
+		
 		insumoVO.getSubitens().add(subItemInsumoVO);
 
 		LOGGER.info("ConverterSubItemInsumo.convertVoToEntity - INICIO - PARAMETROS: insumoVO=" + insumoVO
@@ -56,7 +59,7 @@ public class ConverterSubItemInsumo {
 		if (!listaSubItemInsumo.isEmpty()) {
 			for (SubItemInsumo subItemInsumo : listaSubItemInsumo) {
 
-				ConverterSubItemInsumo.convertEntityToVO(subItemInsumo, insumoVO);
+				ConverterSubItemInsumo.convertEntityToVO(subItemInsumo.getSubItemInsumo(), insumoVO);
 
 			}
 

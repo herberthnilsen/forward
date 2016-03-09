@@ -8,18 +8,16 @@
 	xmlns:cc="http://xmlns.jcp.org/jsf/composite">
 
 <cc:interface>
-	<cc:attribute name="label" />
+	<cc:attribute name="label" required="true" />
 	<cc:attribute name="idt" required="true" />
-	<cc:attribute name="value"/>
-	<cc:attribute name="showLabel" default="true" type="boolean"/>
+	<cc:attribute name="value" required="true" />
 </cc:interface>
 
 <cc:implementation>
-
-	<p:outputLabel for="#{cc.attrs.idt}" value="#{cc.attrs.label}" rendered="#{cc.attrs.showLabel}" ><br/></p:outputLabel>
-	<p:selectOneMenu id="#{cc.attrs.idt}" value="#{cc.attrs.value}">
-		<f:selectItem itemValue="0" itemLabel="#{msgs['button.selecionar']}" />
-		<cc:insertChildren />
-	</p:selectOneMenu>
+	<p:panel styleClass="fm_field" >
+		<p:outputLabel value="#{cc.attrs.label}" for="#{cc.attrs.idt}" />
+		<br />
+		<p:inputText id="#{cc.attrs.idt}" value="#{cc.attrs.value}" />
+	</p:panel>
 </cc:implementation>
 </html>

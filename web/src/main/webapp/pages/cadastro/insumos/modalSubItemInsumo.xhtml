@@ -5,11 +5,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:fw="http://xmlns.jcp.org/jsf/composite/forwardcomponents">
 
-	<fw:dialog idt="cadastroSubItemInsumo"
-		titulo="#{msgs['titulo.subitem']}" bean="#{insumoBean}">
+	<fw:dialog idt="mdCadastroSubItemInsumo"
+		titulo="#{msgs['titulo.subitem']}" >
 
 		<fw:formPanel bean="#{insumoBean}" idt="formInsumoSubItem"
-			idGrid="form:gridInsumo">
+			idGrid="form:gridInsumo" showCancelar="false">
 
 			<p:outputLabel
 				value="#{msgs['titulo.insumo']} #{insumoBean.insumoVO.nomeInsumo}" />

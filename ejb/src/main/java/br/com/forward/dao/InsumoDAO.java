@@ -3,6 +3,7 @@
  */
 package br.com.forward.dao;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -159,7 +160,7 @@ public class InsumoDAO extends GenericEntityManager {
 		
 	}
 	
-	public void excluir(Insumo Insumo) throws EntityManagerException {
+	public void excluir(Insumo Insumo) throws EntityManagerException, SQLIntegrityConstraintViolationException {
 		LOGGER.info("InsumoDAO.excluir - INICIO");
 
 		Insumo = (Insumo) find(Insumo.class, Insumo.getCodigoInsumo());

@@ -53,7 +53,6 @@ public class InsumoBean extends BasicBean {
 
 		this.insumoVO.setSubitens(new ArrayList<InsumoVO>());
 
-		resetSubItens();
 		LOGGER.info("InsumoBean.init - FIM");
 	}
 
@@ -120,8 +119,11 @@ public class InsumoBean extends BasicBean {
 
 	public void carregarSubItensInsumo(){
 		LOGGER.info("InsumoBean.carregarSubItensInsumo - INICIO = " + this.insumoVO);
-		
-		this.insumoVO.setSubitens(this.insumoFacadeLocal.carregarSubItensInsumos(this.insumoVO));
+
+		if(this.insumoVO.getCodigoInsumo() != null && this.insumoVO.getCodigoInsumo() != 0){
+			this.insumoFacadeLocal.carregarSubItensInsumos(this.insumoVO);
+		}
+		resetSubItens();
 		
 		LOGGER.info("InsumoBean.carregarSubItensInsumo - FIM = " + this.insumoVO);
 		
@@ -173,6 +175,14 @@ public class InsumoBean extends BasicBean {
 	public void excluir() {
 		LOGGER.info("InsumoBean.excluir - INICIO = " + this.insumoVO);
 
+		try {
+			this.insumoFacadeLocal.excluir(this.insumoVO);
+			this.reset();
+			this.pesquisar();
+		} catch (InsumoException e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+		
 		LOGGER.info("InsumoBean.excluir - FIM = " + this.insumoVO);
 	}
 
@@ -193,7 +203,17 @@ public class InsumoBean extends BasicBean {
 
 	private void resetSubItens(){
 		
-		this.listaSubItens = new DualListModel<InsumoVO>(this.resultList, new ArrayList<InsumoVO>());
+		List<InsumoVO> subitens = null;
+		
+		if(!this.insumoVO.getSubitens().isEmpty()){
+			subitens = this.insumoVO.getSubitens();
+		}else{
+			
+			subitens = new ArrayList<InsumoVO>();
+			
+		}
+		
+		this.listaSubItens = new DualListModel<InsumoVO>(this.resultList, subitens);
 		
 	}
 	

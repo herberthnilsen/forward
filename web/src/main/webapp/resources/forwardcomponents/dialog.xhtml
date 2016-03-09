@@ -8,16 +8,14 @@
 	xmlns:cc="http://xmlns.jcp.org/jsf/composite">
 
 <cc:interface>
-	<cc:attribute name="bean" required="true"
-		type="br.com.forward.insumos.bean.BasicBean" />
 	<cc:attribute name="idt" required="true" />
 	<cc:attribute name="titulo" required="true" />
 </cc:interface>
 
 <cc:implementation>
 
-	<p:dialog header="#{cc.attrs.titulo}" widgetVar="wModalForm"
-		showEffect="fade" hideEffect="slide" modal="true">
+	<p:dialog header="#{cc.attrs.titulo}" widgetVar="#{cc.attrs.idt}"
+		showEffect="fade" hideEffect="slide" modal="true" dynamic="true">
 
 		<cc:insertChildren />
 

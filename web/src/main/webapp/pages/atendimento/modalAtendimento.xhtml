@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:fw="http://xmlns.jcp.org/jsf/composite/forwardcomponents">
+
+	<fw:dialog idt="mdAtendimento" titulo="#{msgs['menu.atendimento']}"
+		bean="#{insumoBean}">
+
+
+		<p:panelGrid columns="1" styleClass="ui-responsive">
+			<pm:field>
+				<fw:OneMenu idt="colaboradorAtendimento" label="#{msgs.contato}">
+				</fw:OneMenu>
+			</pm:field>
+			<pm:field>
+				<fw:OneMenu idt="formaAtendimento" label="forma ">
+				</fw:OneMenu>
+			</pm:field>
+
+
+			<pm:field>
+				<p:outputLabel for="descricaoAtendimento"  value="#{msgs['campo.descricao']}"/><br/>
+				<p:inputTextarea cols="50" rows="10" value="0" autoResize="false"
+					id="descricaoAtendimento" maxlength="1000" counter="display"
+					counterTemplate="{0} restantes" />
+				<p:outputLabel id="display"/>	
+				
+			</pm:field>
+
+		</p:panelGrid>
+
+
+	</fw:dialog>
+
+</ui:composition>

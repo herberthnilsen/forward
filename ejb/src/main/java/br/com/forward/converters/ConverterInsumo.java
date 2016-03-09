@@ -70,7 +70,6 @@ public class ConverterInsumo {
 				"ConverterInsumo.convertVoToEntity - INICIO - PARAMETROS: insumoVO=" + insumoVO + ", Insumo=" + insumo);
 		try {
 			BeanUtils.copyProperties(insumoVO, insumo);
-
 			ConverterCategoriaInsumo.converterCategoriaInsumoToCategoriaInsumoVO(insumo.getCategoriaInsumo(),
 					insumoVO.getCategoriaInsumoVO());
 			ConverterUnidade.convertEntityToVO(insumo.getUnidade(), insumoVO.getUnidadeVO());

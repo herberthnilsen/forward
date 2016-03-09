@@ -49,13 +49,12 @@ public class InsumoFacade implements InsumoFacadeLocal {
 
 	}
 
-	public List<InsumoVO> carregarSubItensInsumos(InsumoVO insumoVO) {
+	public void carregarSubItensInsumos(InsumoVO insumoVO) {
 		LOGGER.info("InsumoFacade.carregarSubItensInsumos - INICIO = " + insumoVO);
 
-		List<InsumoVO> carregarSubItensInsumos = this.insumoBusinessLocal.carregarSubItensInsumos(insumoVO);
+		this.insumoBusinessLocal.carregarSubItensInsumos(insumoVO);
 
 		LOGGER.info("InsumoFacade.carregarSubItensInsumos - FIM = " + insumoVO);
-		return carregarSubItensInsumos;
 	}
 
 	/*
@@ -81,9 +80,10 @@ public class InsumoFacade implements InsumoFacadeLocal {
 	 * .common.InsumoVO)
 	 */
 	@Override
-	public void excluir(InsumoVO paramInsumoVO) {
-		// TODO Auto-generated method stub
-
+	public void excluir(InsumoVO insumoVO) throws InsumoException {
+		LOGGER.info("InsumoFacade.excluir - INICIO = " + insumoVO);
+		this.insumoBusinessLocal.excluir(insumoVO);
+		LOGGER.info("InsumoFacade.excluir - FIM = " + insumoVO);
 	}
 
 }
