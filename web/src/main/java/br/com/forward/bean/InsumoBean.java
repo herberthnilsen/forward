@@ -1,4 +1,4 @@
-package br.com.forward.insumos.bean;
+package br.com.forward.bean;
 
 import java.util.ArrayList;
 import java.util.List;

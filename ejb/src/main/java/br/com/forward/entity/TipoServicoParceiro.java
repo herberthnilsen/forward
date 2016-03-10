@@ -1,30 +1,37 @@
 package br.com.forward.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the fwdtposrvpcr database table.
- * 
  */
 @Entity
-@Table(name="fwdtposrvpcr")
-@NamedQuery(name="TipoServicoParceiro.findAll", query="SELECT t FROM TipoServicoParceiro t")
+@Table(name = "fwdtposrvpcr")
+@NamedQuery(name = "TipoServicoParceiro.findAll", query = "SELECT t FROM TipoServicoParceiro t")
 public class TipoServicoParceiro implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="fwdtposrvpcrid")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "fwdtposrvpcrid")
 	private Integer codigoTipoServicoParceiro;
 
-	@Column(name="dsctposrvpcr")
+	@Column(name = "dsctposrvpcr")
 	private String descricaoTipoServicoParceiro;
 
-	//bi-directional many-to-one association to Parceiro
-	@OneToMany(mappedBy="fwdtposrvpcr")
+	// bi-directional many-to-one association to Parceiro
+	@OneToMany(mappedBy = "tipoServicoParceiro")
 	private List<Parceiro> listaParceiros;
 
 	public TipoServicoParceiro() {
@@ -55,14 +62,14 @@ public class TipoServicoParceiro implements Serializable {
 	}
 
 	public Parceiro addParceiro(Parceiro parceiro) {
-		getListaParceiros().add(parceiro);
+		this.getListaParceiros().add(parceiro);
 		parceiro.setFwdtposrvpcr(this);
 
 		return parceiro;
 	}
 
 	public Parceiro removeParceiro(Parceiro parceiro) {
-		getListaParceiros().remove(parceiro);
+		this.getListaParceiros().remove(parceiro);
 		parceiro.setFwdtposrvpcr(null);
 
 		return parceiro;

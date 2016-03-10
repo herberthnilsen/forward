@@ -1,4 +1,4 @@
-package br.com.forward.insumos.bean;
+package br.com.forward.bean;
 
 import br.com.forward.common.CategoriaInsumoVO;
 import br.com.forward.interfaces.facade.CategoriaInsumoFacadeLocal;

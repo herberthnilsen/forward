@@ -1,51 +1,60 @@
 package br.com.forward.entity;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the fwdppc database table.
- * 
  */
 @Entity
-@Table(name="fwdppc")
-@NamedQuery(name="Prospeccao.findAll", query="SELECT p FROM Prospeccao p")
+@Table(name = "fwdppc")
+@NamedQuery(name = "Prospeccao.findAll", query = "SELECT p FROM Prospeccao p")
 public class Prospeccao implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="idfwdppc")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "idfwdppc")
 	private Long codigoProspeccao;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="dtacadppc")
+	@Column(name = "dtacadppc")
 	private Date dataCadastro;
 
 	private int fwdclbcod;
 
-	//bi-directional many-to-one association to Atendimento
-	@OneToMany(mappedBy="fwdppc")
+	// bi-directional many-to-one association to Atendimento
+	@OneToMany(mappedBy = "fwdppc")
 	private List<Atendimento> fwdatds;
 
-	//bi-directional many-to-one association to ClienteProspeccao
-	@OneToMany(mappedBy="fwdppc")
+	// bi-directional many-to-one association to ClienteProspeccao
+	@OneToMany(mappedBy = "fwdppc")
 	private List<ClienteProspeccao> fwdcltpccs;
 
-	//bi-directional many-to-one association to Orcamento
-	@OneToMany(mappedBy="prospeccao")
+	// bi-directional many-to-one association to Orcamento
+	@OneToMany(mappedBy = "prospeccao")
 	private List<Orcamento> listaOrcamentos;
 
+	// bi-directional many-to-many association to Parceiro
+	@ManyToMany(mappedBy = "prospeccao")
+	private List<Parceiro> parceiros;
 
-	//bi-directional many-to-many association to Parceiro
-	@ManyToMany(mappedBy="fwdppcs")
-	private List<Parceiro> fwdpcrs;
-
-	//bi-directional many-to-one association to Reuniao
-	@OneToMany(mappedBy="fwdppc")
+	// bi-directional many-to-one association to Reuniao
+	@OneToMany(mappedBy = "fwdppc")
 	private List<Reuniao> fwdrnos;
 
 	public Prospeccao() {
@@ -84,14 +93,14 @@ public class Prospeccao implements Serializable {
 	}
 
 	public Atendimento addFwdatd(Atendimento fwdatd) {
-		getFwdatds().add(fwdatd);
+		this.getFwdatds().add(fwdatd);
 		fwdatd.setFwdppc(this);
 
 		return fwdatd;
 	}
 
 	public Atendimento removeFwdatd(Atendimento fwdatd) {
-		getFwdatds().remove(fwdatd);
+		this.getFwdatds().remove(fwdatd);
 		fwdatd.setFwdppc(null);
 
 		return fwdatd;
@@ -106,14 +115,14 @@ public class Prospeccao implements Serializable {
 	}
 
 	public ClienteProspeccao addFwdcltpcc(ClienteProspeccao fwdcltpcc) {
-		getFwdcltpccs().add(fwdcltpcc);
+		this.getFwdcltpccs().add(fwdcltpcc);
 		fwdcltpcc.setFwdppc(this);
 
 		return fwdcltpcc;
 	}
 
 	public ClienteProspeccao removeFwdcltpcc(ClienteProspeccao fwdcltpcc) {
-		getFwdcltpccs().remove(fwdcltpcc);
+		this.getFwdcltpccs().remove(fwdcltpcc);
 		fwdcltpcc.setFwdppc(null);
 
 		return fwdcltpcc;
@@ -128,26 +137,17 @@ public class Prospeccao implements Serializable {
 	}
 
 	public Orcamento addFwdorcs1(Orcamento orcamento) {
-		getFwdorcs1().add(orcamento);
+		this.getFwdorcs1().add(orcamento);
 		orcamento.setProspeccao(this);
 
 		return orcamento;
 	}
 
 	public Orcamento removeFwdorcs1(Orcamento orcamento) {
-		getFwdorcs1().remove(orcamento);
+		this.getFwdorcs1().remove(orcamento);
 		orcamento.setProspeccao(null);
 
 		return orcamento;
-	}
-
-
-	public List<Parceiro> getFwdpcrs() {
-		return this.fwdpcrs;
-	}
-
-	public void setFwdpcrs(List<Parceiro> fwdpcrs) {
-		this.fwdpcrs = fwdpcrs;
 	}
 
 	public List<Reuniao> getFwdrnos() {
@@ -159,17 +159,135 @@ public class Prospeccao implements Serializable {
 	}
 
 	public Reuniao addFwdrno(Reuniao fwdrno) {
-		getFwdrnos().add(fwdrno);
+		this.getFwdrnos().add(fwdrno);
 		fwdrno.setFwdppc(this);
 
 		return fwdrno;
 	}
 
 	public Reuniao removeFwdrno(Reuniao fwdrno) {
-		getFwdrnos().remove(fwdrno);
+		this.getFwdrnos().remove(fwdrno);
 		fwdrno.setFwdppc(null);
 
 		return fwdrno;
+	}
+
+	/**
+	 * @return o valor do atributo listaOrcamentos
+	 */
+	public List<Orcamento> getListaOrcamentos() {
+		return this.listaOrcamentos;
+	}
+
+	/**
+	 * @param listaOrcamentos o valor a ser atribuído no atributo listaOrcamentos
+	 */
+	public void setListaOrcamentos(List<Orcamento> listaOrcamentos) {
+		this.listaOrcamentos = listaOrcamentos;
+	}
+
+	/**
+	 * @return o valor do atributo parceiros
+	 */
+	public List<Parceiro> getParceiros() {
+		return this.parceiros;
+	}
+
+	/**
+	 * @param parceiros o valor a ser atribuído no atributo parceiros
+	 */
+	public void setParceiros(List<Parceiro> parceiros) {
+		this.parceiros = parceiros;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.codigoProspeccao == null) ? 0 : this.codigoProspeccao.hashCode());
+		result = prime * result + ((this.dataCadastro == null) ? 0 : this.dataCadastro.hashCode());
+		result = prime * result + ((this.fwdatds == null) ? 0 : this.fwdatds.hashCode());
+		result = prime * result + this.fwdclbcod;
+		result = prime * result + ((this.fwdcltpccs == null) ? 0 : this.fwdcltpccs.hashCode());
+		result = prime * result + ((this.fwdrnos == null) ? 0 : this.fwdrnos.hashCode());
+		result = prime * result + ((this.listaOrcamentos == null) ? 0 : this.listaOrcamentos.hashCode());
+		result = prime * result + ((this.parceiros == null) ? 0 : this.parceiros.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Prospeccao)) {
+			return false;
+		}
+		final Prospeccao other = (Prospeccao) obj;
+		if (this.codigoProspeccao == null) {
+			if (other.codigoProspeccao != null) {
+				return false;
+			}
+		} else if (!this.codigoProspeccao.equals(other.codigoProspeccao)) {
+			return false;
+		}
+		if (this.dataCadastro == null) {
+			if (other.dataCadastro != null) {
+				return false;
+			}
+		} else if (!this.dataCadastro.equals(other.dataCadastro)) {
+			return false;
+		}
+		if (this.fwdatds == null) {
+			if (other.fwdatds != null) {
+				return false;
+			}
+		} else if (!this.fwdatds.equals(other.fwdatds)) {
+			return false;
+		}
+		if (this.fwdclbcod != other.fwdclbcod) {
+			return false;
+		}
+		if (this.fwdcltpccs == null) {
+			if (other.fwdcltpccs != null) {
+				return false;
+			}
+		} else if (!this.fwdcltpccs.equals(other.fwdcltpccs)) {
+			return false;
+		}
+		if (this.fwdrnos == null) {
+			if (other.fwdrnos != null) {
+				return false;
+			}
+		} else if (!this.fwdrnos.equals(other.fwdrnos)) {
+			return false;
+		}
+		if (this.listaOrcamentos == null) {
+			if (other.listaOrcamentos != null) {
+				return false;
+			}
+		} else if (!this.listaOrcamentos.equals(other.listaOrcamentos)) {
+			return false;
+		}
+		if (this.parceiros == null) {
+			if (other.parceiros != null) {
+				return false;
+			}
+		} else if (!this.parceiros.equals(other.parceiros)) {
+			return false;
+		}
+		return true;
 	}
 
 }
