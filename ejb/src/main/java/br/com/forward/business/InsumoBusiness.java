@@ -31,7 +31,7 @@ import br.com.forward.interfaces.business.InsumoBusinessLocal;
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class InsumoBusiness extends GenericBusiness implements InsumoBusinessLocal {
+public class InsumoBusiness extends GenericEJB implements InsumoBusinessLocal {
 	public static final Logger LOGGER = Logger.getLogger(InsumoBusiness.class);
 
 	private InsumoDAO insumoDAO;

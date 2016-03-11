@@ -19,7 +19,7 @@ import br.com.forward.interfaces.business.CategoriaInsumoBusinessLocal;
 
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
-public class CategoriaInsumoBusiness extends GenericBusiness implements CategoriaInsumoBusinessLocal {
+public class CategoriaInsumoBusiness extends GenericEJB implements CategoriaInsumoBusinessLocal {
 	public static final Logger LOGGER = Logger.getLogger(CategoriaInsumoBusiness.class);
 	private CategoriaInsumoDAO categoriaInsumoDAO;
 

@@ -27,7 +27,7 @@ import br.com.forward.interfaces.business.UnidadeBusinessLocal;
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
-public class UnidadeBusiness extends GenericBusiness implements UnidadeBusinessLocal {
+public class UnidadeBusiness extends GenericEJB implements UnidadeBusinessLocal {
 	public static final Logger LOGGER = Logger.getLogger(UnidadeBusiness.class);
 
 	private UnidadeDAO unidadeDAO;

@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import br.com.forward.interfaces.business.GenericBusinessLocal;
 
-public abstract class GenericBusiness implements GenericBusinessLocal {
+public abstract class GenericEJB implements GenericBusinessLocal {
 	public static final LogManager LOGGER = LogManager.getLogManager();
 
 	@PersistenceContext(unitName = "pu_forward")
