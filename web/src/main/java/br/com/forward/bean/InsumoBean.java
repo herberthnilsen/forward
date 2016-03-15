@@ -132,7 +132,7 @@ public class InsumoBean extends BasicBean {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see br.com.forward.insumos.bean.BasicBean#pesquisar()
+	 * @see br.com.forward.bean.BasicBean#pesquisar()
 	 */
 	@Override
 	public void pesquisar() {
@@ -146,7 +146,7 @@ public class InsumoBean extends BasicBean {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see br.com.forward.insumos.bean.BasicBean#salvar()
+	 * @see br.com.forward.bean.BasicBean#salvar()
 	 */
 	@Override
 	public void salvar() {
@@ -169,7 +169,7 @@ public class InsumoBean extends BasicBean {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see br.com.forward.insumos.bean.BasicBean#excluir()
+	 * @see br.com.forward.bean.BasicBean#excluir()
 	 */
 	@Override
 	public void excluir() {
@@ -189,7 +189,7 @@ public class InsumoBean extends BasicBean {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see br.com.forward.insumos.bean.BasicBean#reset()
+	 * @see br.com.forward.bean.BasicBean#reset()
 	 */
 	@Override
 	public void reset() {

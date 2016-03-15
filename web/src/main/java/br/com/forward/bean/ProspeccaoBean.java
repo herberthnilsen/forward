@@ -90,9 +90,9 @@ public class ProspeccaoBean extends BasicBean {
 
 		this.atendimentoVO = new AtendimentoVO();
 		this.listaAtendimentos = new ArrayList<AtendimentoVO>();
-		this.listaColaboradores = new ArrayList<PessoaVO>();
+		this.carregarColaboradores();
+		this.carregarParceiros();
 
-		this.listaParceiro = new ArrayList<ParceiroVO>();
 		this.listaProspeccoes = new ArrayList<ProspeccaoVO>();
 		this.prospeccaoVO = new ProspeccaoVO();
 
