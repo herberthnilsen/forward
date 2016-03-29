@@ -103,6 +103,14 @@ public class ProspeccaoBean extends BasicBean {
 
 	}
 
+	public String cortarDescricaoAtendimento(AtendimentoVO atendimentoVO) {
+
+		final StringBuffer retorno = new StringBuffer();
+		retorno.append(atendimentoVO.getDescricaoAtendimento().substring(0, 30)).append("...");
+
+		return retorno.toString();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see br.com.forward.bean.BasicBean#pesquisar()

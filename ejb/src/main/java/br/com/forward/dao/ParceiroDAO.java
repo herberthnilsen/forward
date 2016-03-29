@@ -6,6 +6,7 @@ package br.com.forward.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
@@ -36,7 +37,9 @@ public class ParceiroDAO extends GenericEntityManager {
 
 		LOGGER.info("listarColaboradores() - INICIO");
 
-		final List<Parceiro> parceiros = (List<Parceiro>) this.getEntityManager().find(Parceiro.class, null);
+		final Query namedQuery = this.getEntityManager().createNamedQuery("Parceiro.findAll");
+
+		final List<Parceiro> parceiros = (List<Parceiro>) namedQuery.getResultList();
 
 		LOGGER.info("listarColaboradores() - FIM");
 		return parceiros;

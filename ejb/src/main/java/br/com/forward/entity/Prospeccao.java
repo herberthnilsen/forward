@@ -38,7 +38,7 @@ public class Prospeccao implements Serializable {
 	private int fwdclbcod;
 
 	// bi-directional many-to-one association to Atendimento
-	@OneToMany(mappedBy = "fwdppc")
+	@OneToMany(mappedBy = "prospeccao")
 	private List<Atendimento> fwdatds;
 
 	// bi-directional many-to-one association to ClienteProspeccao
@@ -94,14 +94,14 @@ public class Prospeccao implements Serializable {
 
 	public Atendimento addFwdatd(Atendimento fwdatd) {
 		this.getFwdatds().add(fwdatd);
-		fwdatd.setFwdppc(this);
+		fwdatd.setProspeccao(this);
 
 		return fwdatd;
 	}
 
 	public Atendimento removeFwdatd(Atendimento fwdatd) {
 		this.getFwdatds().remove(fwdatd);
-		fwdatd.setFwdppc(null);
+		fwdatd.setProspeccao(null);
 
 		return fwdatd;
 	}

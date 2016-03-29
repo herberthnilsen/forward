@@ -6,6 +6,7 @@ package br.com.forward.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
@@ -41,8 +42,9 @@ public class ColaboradorDAO extends GenericEntityManager {
 	public List<Colaborador> listarColaboradores() throws EntityManagerException {
 		LOGGER.info("listarColaboradores() - INICIO");
 
-		final List<Colaborador> colaboradores = (List<Colaborador>) this.getEntityManager().find(Colaborador.class, null);
+		final Query namedQuery = this.getEntityManager().createNamedQuery("Colaborador.findAll");
 
+		final List<Colaborador> colaboradores = (List<Colaborador>) namedQuery.getResultList();
 		LOGGER.info("listarColaboradores() - FIM");
 		return colaboradores;
 	}

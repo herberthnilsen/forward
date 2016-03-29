@@ -11,9 +11,12 @@ package br.com.forward.enumcode;
  */
 public enum FormaAtendimentoEnum {
 
-	EMAIL(1, "E-mail"), TELEFONE(2, "Telefone"), FEIRA(3, "Feira"), VISITA(4, "Visita");
+	EMAIL(new Short("1"), "E-mail"),
+	TELEFONE(new Short("2"), "Telefone"),
+	FEIRA(new Short("3"), "Feira"),
+	VISITA(new Short("4"), "Visita");
 
-	private Integer codigo;
+	private Short codigo;
 
 	private String descricao;
 
@@ -23,12 +26,12 @@ public enum FormaAtendimentoEnum {
 	 * @param codigo
 	 * @param descricao
 	 */
-	private FormaAtendimentoEnum(Integer codigo, String descricao) {
+	private FormaAtendimentoEnum(Short codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 	}
 
-	public static FormaAtendimentoEnum getEnumByCodigo(Integer codigo) {
+	public static FormaAtendimentoEnum getEnumByCodigo(Short codigo) {
 
 		FormaAtendimentoEnum retorno = null;
 
@@ -49,14 +52,14 @@ public enum FormaAtendimentoEnum {
 	/**
 	 * @return o valor do atributo codigo
 	 */
-	public Integer getCodigo() {
+	public Short getCodigo() {
 		return this.codigo;
 	}
 
 	/**
 	 * @param codigo o valor a ser atribuído no atributo codigo
 	 */
-	public void setCodigo(Integer codigo) {
+	public void setCodigo(Short codigo) {
 		this.codigo = codigo;
 	}
 

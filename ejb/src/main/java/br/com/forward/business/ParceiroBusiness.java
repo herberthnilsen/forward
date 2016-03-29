@@ -43,6 +43,7 @@ public class ParceiroBusiness extends GenericEJB implements ParceiroBusinessLoca
 		LOGGER.info("init() - INICIO");
 
 		this.parceiroDAO = new ParceiroDAO(this.entityManager);
+		this.converterParceiro = new ConverterParceiro();
 
 		LOGGER.info("init() - FIM");
 

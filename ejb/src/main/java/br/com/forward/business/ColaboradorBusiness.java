@@ -10,7 +10,10 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
+import org.apache.log4j.Logger;
+
 import br.com.forward.common.ColaboradorVO;
+import br.com.forward.converters.ConverterColaborador;
 import br.com.forward.dao.ColaboradorDAO;
 import br.com.forward.entity.Colaborador;
 import br.com.forward.exception.EntityManagerException;
@@ -25,7 +28,15 @@ import br.com.forward.interfaces.business.ColaboradorBusinessLocal;
 @Stateless
 public class ColaboradorBusiness extends GenericEJB implements ColaboradorBusinessLocal {
 
+	private static final Logger LOGGER = Logger.getLogger(ColaboradorBusiness.class);
+	/**
+	 * Atributo colaboradorDAO
+	 */
 	private ColaboradorDAO colaboradorDAO;
+	/**
+	 * Atributo converterColaborador
+	 */
+	private final ConverterColaborador converterColaborador = new ConverterColaborador();
 
 	@PostConstruct
 	public void init() {
@@ -41,10 +52,13 @@ public class ColaboradorBusiness extends GenericEJB implements ColaboradorBusine
 	@Override
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	public List<ColaboradorVO> listarColaboradores() throws EntityManagerException {
-
+		LOGGER.info("listarColaboradores - INICIO");
 		final List<Colaborador> colaboradores = this.colaboradorDAO.listarColaboradores();
 
-		return null;
+		final List<ColaboradorVO> colaboradoresVO = this.converterColaborador.converterEntitytoVO(colaboradores);
+
+		LOGGER.info("listarColaboradores - FIM");
+		return colaboradoresVO;
 	}
 
 }
