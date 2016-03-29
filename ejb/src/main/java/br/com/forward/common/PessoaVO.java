@@ -13,7 +13,12 @@ import java.util.Date;
  * @since 9 de mar de 2016 20:31:05
  * @version x.x
  */
-public class PessoaVO {
+public class PessoaVO extends AbstractVO {
+
+	/**
+	 * Atributo serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Atributo codigoPessoa

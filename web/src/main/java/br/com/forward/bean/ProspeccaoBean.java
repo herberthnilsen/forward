@@ -11,14 +11,17 @@ import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.apache.log4j.Logger;
+
 import br.com.forward.common.AtendimentoVO;
+import br.com.forward.common.ColaboradorVO;
 import br.com.forward.common.ParceiroVO;
-import br.com.forward.common.PessoaVO;
 import br.com.forward.common.ProspeccaoVO;
 import br.com.forward.enumcode.FormaAtendimentoEnum;
 import br.com.forward.enumcode.StatusMarketingEnum;
 import br.com.forward.enumcode.StatusProspeccaoEnum;
 import br.com.forward.enumcode.TipoEventoEnum;
+import br.com.forward.exception.EntityManagerException;
 import br.com.forward.interfaces.facade.ProspeccaoFacadeLocal;
 
 /**
@@ -32,6 +35,8 @@ public class ProspeccaoBean extends BasicBean {
 	 * Atributo serialVersionUID
 	 */
 	private static final long serialVersionUID = 1L;
+
+	private static final Logger LOGGER = Logger.getLogger(ProspeccaoBean.class);
 
 	/**
 	 * Atributo prospeccaoVO
@@ -80,7 +85,7 @@ public class ProspeccaoBean extends BasicBean {
 	/**
 	 * Atributo listaColaboradores
 	 */
-	private List<PessoaVO> listaColaboradores;
+	private List<ColaboradorVO> listaColaboradores;
 
 	@EJB
 	private ProspeccaoFacadeLocal prospeccaoFacade;
@@ -139,14 +144,26 @@ public class ProspeccaoBean extends BasicBean {
 	}
 
 	private void carregarParceiros() {
+		LOGGER.info("carregarParceiros - INICIO");
+		try {
 
-		this.listaParceiro = this.prospeccaoFacade.carregarParceiros();
+			this.listaParceiro = this.prospeccaoFacade.carregarParceiros();
+
+		} catch (final EntityManagerException e) {
+			LOGGER.error(e.getMessage(), e);
+		}
+		LOGGER.info("carregarParceiros - FIM");
 	}
 
 	private void carregarColaboradores() {
+		LOGGER.info("carregarColaboradores() - INICIO");
+		try {
+			this.listaColaboradores = this.prospeccaoFacade.carregarColaboradores();
+		} catch (final EntityManagerException e) {
+			LOGGER.error(e.getMessage());
+		}
 
-		this.listaColaboradores = this.prospeccaoFacade.carregarColaboradores();
-
+		LOGGER.info("carregarColaboradores() - FIM");
 	}
 
 	/**
@@ -278,14 +295,14 @@ public class ProspeccaoBean extends BasicBean {
 	/**
 	 * @return o valor do atributo listaColaboradores
 	 */
-	public List<PessoaVO> getListaColaboradores() {
+	public List<ColaboradorVO> getListaColaboradores() {
 		return this.listaColaboradores;
 	}
 
 	/**
 	 * @param listaColaboradores o valor a ser atribuído no atributo listaColaboradores
 	 */
-	public void setListaColaboradores(List<PessoaVO> listaColaboradores) {
+	public void setListaColaboradores(List<ColaboradorVO> listaColaboradores) {
 		this.listaColaboradores = listaColaboradores;
 	}
 

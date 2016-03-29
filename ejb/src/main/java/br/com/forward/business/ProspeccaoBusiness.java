@@ -3,6 +3,8 @@
  */
 package br.com.forward.business;
 
+import java.util.List;
+
 import br.com.forward.common.ProspeccaoVO;
 import br.com.forward.interfaces.business.ProspeccaoBusinessLocal;
 
@@ -32,6 +34,16 @@ public class ProspeccaoBusiness extends GenericEJB implements ProspeccaoBusiness
 	public void excluirPropeccao(ProspeccaoVO prospeccao) {
 		// TODO Auto-generated method stub
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see br.com.forward.interfaces.business.ProspeccaoBusinessLocal#consultarProspeccoes()
+	 */
+	@Override
+	public List<ProspeccaoVO> consultarProspeccoes() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

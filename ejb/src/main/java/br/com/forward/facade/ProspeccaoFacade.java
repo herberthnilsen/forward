@@ -5,13 +5,17 @@ package br.com.forward.facade;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 
+import br.com.forward.common.ColaboradorVO;
 import br.com.forward.common.ParceiroVO;
-import br.com.forward.common.PessoaVO;
 import br.com.forward.common.ProspeccaoVO;
+import br.com.forward.exception.EntityManagerException;
+import br.com.forward.interfaces.business.ColaboradorBusinessLocal;
+import br.com.forward.interfaces.business.ParceiroBusinessLocal;
 import br.com.forward.interfaces.facade.ProspeccaoFacadeLocal;
 
 /**
@@ -23,6 +27,12 @@ import br.com.forward.interfaces.facade.ProspeccaoFacadeLocal;
 @Stateless
 @TransactionAttribute(TransactionAttributeType.SUPPORTS)
 public class ProspeccaoFacade implements ProspeccaoFacadeLocal {
+
+	@EJB
+	private ColaboradorBusinessLocal colaboradorBusinessLocal;
+
+	@EJB
+	private ParceiroBusinessLocal parceiroBusinessLocal;
 
 	/*
 	 * (non-Javadoc)
@@ -39,9 +49,10 @@ public class ProspeccaoFacade implements ProspeccaoFacadeLocal {
 	 * @see br.com.forward.interfaces.facade.ProspeccaoFacadeLocal#carregarColaboradores()
 	 */
 	@Override
-	public List<PessoaVO> carregarColaboradores() {
+	public List<ColaboradorVO> carregarColaboradores() throws EntityManagerException {
 
-		return null;
+		final List<ColaboradorVO> colaboradores = this.colaboradorBusinessLocal.listarColaboradores();
+		return colaboradores;
 	}
 
 	/*
@@ -49,9 +60,11 @@ public class ProspeccaoFacade implements ProspeccaoFacadeLocal {
 	 * @see br.com.forward.interfaces.facade.ProspeccaoFacadeLocal#carregarParceiros()
 	 */
 	@Override
-	public List<ParceiroVO> carregarParceiros() {
+	public List<ParceiroVO> carregarParceiros() throws EntityManagerException {
 
-		return null;
+		final List<ParceiroVO> listarParceiros = this.parceiroBusinessLocal.listarParceiros();
+
+		return listarParceiros;
 
 	}
 

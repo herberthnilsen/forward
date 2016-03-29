@@ -58,28 +58,28 @@ public class Parceiro implements Serializable {
 		this.codigoParceiro = codigoParceiro;
 	}
 
-	public Pessoa getCodigoPessoa() {
+	public Pessoa getPessoa() {
 		return this.pessoa;
 	}
 
-	public void setCodigoPessoa(Pessoa pessoa) {
+	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
 
-	public TipoServicoParceiro getFwdtposrvpcr() {
+	public TipoServicoParceiro getTipoServicoParceiro() {
 		return this.tipoServicoParceiro;
 	}
 
-	public void setFwdtposrvpcr(TipoServicoParceiro fwdtposrvpcr) {
-		this.tipoServicoParceiro = fwdtposrvpcr;
+	public void setTipoServicoParceiro(TipoServicoParceiro tipoServicoParceiro) {
+		this.tipoServicoParceiro = tipoServicoParceiro;
 	}
 
-	public List<Prospeccao> getFwdppcs() {
+	public List<Prospeccao> getProspeccao() {
 		return this.prospeccao;
 	}
 
-	public void setFwdppcs(List<Prospeccao> fwdppcs) {
-		this.prospeccao = fwdppcs;
+	public void setProspeccao(List<Prospeccao> prospeccao) {
+		this.prospeccao = prospeccao;
 	}
 
 }

@@ -3,6 +3,8 @@
  */
 package br.com.forward.interfaces.business;
 
+import java.util.List;
+
 import javax.ejb.Local;
 
 import br.com.forward.common.ProspeccaoVO;
@@ -16,8 +18,28 @@ import br.com.forward.common.ProspeccaoVO;
 @Local
 public interface ProspeccaoBusinessLocal {
 
+	/**
+	 * Método responsável por consultar prospecções
+	 *
+	 * @since 14 de mar de 2016 21:56:19
+	 * @return
+	 */
+	public List<ProspeccaoVO> consultarProspeccoes();
+
+	/**
+	 * Método responsável por salvar uma prospeccção
+	 *
+	 * @since 14 de mar de 2016 21:55:25
+	 * @param prospeccao
+	 */
 	public void salvarPropeccao(ProspeccaoVO prospeccao);
 
+	/**
+	 * Método responsável por ...
+	 *
+	 * @since 14 de mar de 2016 21:55:26
+	 * @param prospeccao
+	 */
 	public void excluirPropeccao(ProspeccaoVO prospeccao);
 
 }
