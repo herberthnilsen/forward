@@ -29,10 +29,12 @@ import br.com.forward.interfaces.business.ParceiroBusinessLocal;
 public class ParceiroBusiness extends GenericEJB implements ParceiroBusinessLocal {
 
 	private static final Logger LOGGER = Logger.getLogger(ParceiroBusiness.class);
+
 	/**
 	 * Atributo parceiroDAO
 	 */
 	private ParceiroDAO parceiroDAO;
+
 	/**
 	 * Atributo converterParceiro
 	 */

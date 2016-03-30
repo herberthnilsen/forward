@@ -35,13 +35,13 @@ public class ParceiroDAO extends GenericEntityManager {
 	@SuppressWarnings("unchecked")
 	public List<Parceiro> listarParceiros() throws EntityManagerException {
 
-		LOGGER.info("listarColaboradores() - INICIO");
+		LOGGER.info("listarParceiros() - INICIO");
 
 		final Query namedQuery = this.getEntityManager().createNamedQuery("Parceiro.findAll");
 
 		final List<Parceiro> parceiros = (List<Parceiro>) namedQuery.getResultList();
 
-		LOGGER.info("listarColaboradores() - FIM");
+		LOGGER.info("listarParceiros() - FIM");
 		return parceiros;
 
 	}

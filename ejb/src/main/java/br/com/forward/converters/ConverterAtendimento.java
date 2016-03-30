@@ -16,6 +16,7 @@ import br.com.forward.entity.Atendimento;
 import br.com.forward.entity.Atendimento;
 import br.com.forward.enumcode.FormaAtendimentoEnum;
 import br.com.forward.interfaces.converter.IConverter;
+import br.com.forward.util.Utils;
 
 /**
  * Classe responsável por ...
@@ -60,19 +61,18 @@ public class ConverterAtendimento implements IConverter<AtendimentoVO, Atendimen
 	 */
 	@Override
 	public AtendimentoVO converterEntitytoVO(Atendimento entidade) {
-		LOGGER.info("converterEntitytoVO - INICIO - Parametros: " + entidade);
+		LOGGER.info("converterEntitytoVO - INICIO ");
 		final AtendimentoVO atendimentoVO = new AtendimentoVO();
 		try {
 			BeanUtils.copyProperties(atendimentoVO, entidade);
 			atendimentoVO.setFormaAtendimento(FormaAtendimentoEnum.getEnumByCodigo(entidade.getTipoAtendimento()));
 			atendimentoVO.setContato(this.converterColaborador.converterEntitytoVO(entidade.getColaborador()));
+			atendimentoVO.setDescricaoResumida(this.cortarDescricaoAtendimento(atendimentoVO));
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			LOGGER.error("Erro ao realizar a conversão" + e.getMessage(), e);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
-		LOGGER.info("converterEntitytoVO - FIM - Parametros: " + entidade);
+		LOGGER.info("converterEntitytoVO - FIM - Parametros: ");
 		return atendimentoVO;
 	}
 
@@ -110,6 +110,21 @@ public class ConverterAtendimento implements IConverter<AtendimentoVO, Atendimen
 
 		}
 		return atendimentosVO;
+	}
+
+	private String cortarDescricaoAtendimento(AtendimentoVO atendimentoVO) {
+
+		final StringBuffer retorno = new StringBuffer();
+		if (Utils.isNotEmpty(atendimentoVO) && Utils.isNotEmpty(atendimentoVO.getDescricaoAtendimento())) {
+
+			if (atendimentoVO.getDescricaoAtendimento().length() > 30) {
+				retorno.append(atendimentoVO.getDescricaoAtendimento().substring(0, 30)).append("...");
+			} else {
+				retorno.append(atendimentoVO.getDescricaoAtendimento());
+			}
+		}
+
+		return retorno.toString();
 	}
 
 }

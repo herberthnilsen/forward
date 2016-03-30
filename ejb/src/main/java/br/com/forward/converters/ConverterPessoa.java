@@ -27,6 +27,8 @@ public class ConverterPessoa implements IConverter<PessoaVO, Pessoa> {
 	 */
 	private static final Logger LOGGER = Logger.getLogger(ConverterPessoa.class);
 
+	// private final ConverterPessoaContato converterPessoaContato = new ConverterPessoaContato();
+
 	/*
 	 * (non-Javadoc)
 	 * @see br.com.forward.interfaces.converter.IConverter#converterVOtoEntity(java.lang.Object)
@@ -38,6 +40,7 @@ public class ConverterPessoa implements IConverter<PessoaVO, Pessoa> {
 
 		try {
 			BeanUtils.copyProperties(pessoa, objetoVO);
+			// pessoa.setPessoaContatos(this.converterPessoaContato.converterVOtoEntity(objetoVO.getContatos()));
 		} catch (final IllegalAccessException e) {
 			LOGGER.error(e.getMessage());
 		} catch (final InvocationTargetException e) {
@@ -53,12 +56,13 @@ public class ConverterPessoa implements IConverter<PessoaVO, Pessoa> {
 	 */
 	@Override
 	public PessoaVO converterEntitytoVO(Pessoa entidade) {
-		LOGGER.info("converterVOtoEntity - FIM- Paramentro: pessoa=" + entidade);
+		LOGGER.info("converterVOtoEntity - FIM- Paramentro: pessoa=");
 
 		final PessoaVO pessoaVO = new PessoaVO();
 
 		try {
 			BeanUtils.copyProperties(pessoaVO, entidade);
+			// pessoaVO.setContatos(this.converterPessoaContato.converterEntitytoVO(entidade.getPessoaContatos()));
 		} catch (final IllegalAccessException e) {
 			LOGGER.error(e.getMessage());
 		} catch (final InvocationTargetException e) {
@@ -66,7 +70,7 @@ public class ConverterPessoa implements IConverter<PessoaVO, Pessoa> {
 		}
 
 		LOGGER.info("converterVOtoEntity - FIM- Paramentro: pessoa=" + pessoaVO);
-		return null;
+		return pessoaVO;
 	}
 
 	/*

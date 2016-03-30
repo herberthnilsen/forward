@@ -7,10 +7,12 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import br.com.forward.common.AtendimentoVO;
 import br.com.forward.common.ColaboradorVO;
 import br.com.forward.common.ParceiroVO;
 import br.com.forward.common.ProspeccaoVO;
 import br.com.forward.exception.EntityManagerException;
+import br.com.forward.exception.ProspeccaoException;
 
 /**
  * Classe responsável por ...
@@ -26,8 +28,9 @@ public interface ProspeccaoFacadeLocal {
 	 *
 	 * @since 11 de mar de 2016 20:22:55
 	 * @param prospeccao
+	 * @throws ProspeccaoException
 	 */
-	public void salvarPropeccao(ProspeccaoVO prospeccao);
+	public void salvarPropeccao(ProspeccaoVO prospeccao) throws ProspeccaoException;
 
 	/**
 	 * Método responsável por carregar lista de Colaboradores
@@ -46,5 +49,15 @@ public interface ProspeccaoFacadeLocal {
 	 * @since 11 de mar de 2016 20:22:15
 	 */
 	List<ParceiroVO> carregarParceiros() throws EntityManagerException;
+
+	/**
+	 * Método responsável por listar os atendimentos da prospecção
+	 *
+	 * @since 29 de mar de 2016 21:11:43
+	 * @param codigoProspeccao
+	 * @return
+	 * @throws EntityManagerException
+	 */
+	List<AtendimentoVO> carregarAtendimentosPorProspeccao(Long codigoProspeccao) throws EntityManagerException;
 
 }

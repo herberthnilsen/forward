@@ -1,7 +1,6 @@
 package br.com.forward.entity;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +32,8 @@ public class Pessoa implements EntityInterface {
 	private BigDecimal cnpjCpfPessoa;
 
 	@Column(name = "datcad", nullable = false)
-	private Timestamp dataCadastro;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "dtansc", nullable = true)
@@ -66,6 +66,9 @@ public class Pessoa implements EntityInterface {
 	@OneToOne(mappedBy = "pessoa")
 	private Parceiro parceiro;
 
+	@OneToMany(mappedBy = "pessoa")
+	private List<PessoaContato> pessoaContatos;
+
 	/**
 	 * @return o valor do atributo codigoPessoa
 	 */
@@ -97,14 +100,14 @@ public class Pessoa implements EntityInterface {
 	/**
 	 * @return o valor do atributo dataCadastro
 	 */
-	public Timestamp getDataCadastro() {
+	public Date getDataCadastro() {
 		return this.dataCadastro;
 	}
 
 	/**
 	 * @param dataCadastro o valor a ser atribuído no atributo dataCadastro
 	 */
-	public void setDataCadastro(Timestamp dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
@@ -246,6 +249,172 @@ public class Pessoa implements EntityInterface {
 	 */
 	public void setParceiro(Parceiro parceiro) {
 		this.parceiro = parceiro;
+	}
+
+	/**
+	 * @return o valor do atributo pessoaContatos
+	 */
+	public List<PessoaContato> getPessoaContatos() {
+		return this.pessoaContatos;
+	}
+
+	/**
+	 * @param pessoaContatos o valor a ser atribuído no atributo pessoaContatos
+	 */
+	public void setPessoaContatos(List<PessoaContato> pessoaContatos) {
+		this.pessoaContatos = pessoaContatos;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Pessoa [codigoPessoa=" + this.codigoPessoa + ", cnpjCpfPessoa=" + this.cnpjCpfPessoa + ", dataCadastro="
+				+ this.dataCadastro + ", dataNascimento=" + this.dataNascimento + ", nomePessoa=" + this.nomePessoa
+				+ ", tipoPessoa=" + this.tipoPessoa + ", colaboradores=" + this.colaboradores + ", cliente=" + this.cliente
+				+ ", colaborador=" + this.colaborador + ", enderecoPessoas=" + this.enderecoPessoas + ", historicoEstoques="
+				+ this.historicoEstoques + ", pacotes=" + this.pacotes + ", parceiro=" + this.parceiro + ", pessoaContatos="
+				+ this.pessoaContatos + "]";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((this.cliente == null) ? 0 : this.cliente.hashCode());
+		result = prime * result + ((this.cnpjCpfPessoa == null) ? 0 : this.cnpjCpfPessoa.hashCode());
+		result = prime * result + this.codigoPessoa;
+		result = prime * result + ((this.colaborador == null) ? 0 : this.colaborador.hashCode());
+		result = prime * result + ((this.colaboradores == null) ? 0 : this.colaboradores.hashCode());
+		result = prime * result + ((this.dataCadastro == null) ? 0 : this.dataCadastro.hashCode());
+		result = prime * result + ((this.dataNascimento == null) ? 0 : this.dataNascimento.hashCode());
+		result = prime * result + ((this.enderecoPessoas == null) ? 0 : this.enderecoPessoas.hashCode());
+		result = prime * result + ((this.historicoEstoques == null) ? 0 : this.historicoEstoques.hashCode());
+		result = prime * result + ((this.nomePessoa == null) ? 0 : this.nomePessoa.hashCode());
+		result = prime * result + ((this.pacotes == null) ? 0 : this.pacotes.hashCode());
+		result = prime * result + ((this.parceiro == null) ? 0 : this.parceiro.hashCode());
+		result = prime * result + ((this.pessoaContatos == null) ? 0 : this.pessoaContatos.hashCode());
+		result = prime * result + ((this.tipoPessoa == null) ? 0 : this.tipoPessoa.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Pessoa)) {
+			return false;
+		}
+		final Pessoa other = (Pessoa) obj;
+		if (this.cliente == null) {
+			if (other.cliente != null) {
+				return false;
+			}
+		} else if (!this.cliente.equals(other.cliente)) {
+			return false;
+		}
+		if (this.cnpjCpfPessoa == null) {
+			if (other.cnpjCpfPessoa != null) {
+				return false;
+			}
+		} else if (!this.cnpjCpfPessoa.equals(other.cnpjCpfPessoa)) {
+			return false;
+		}
+		if (this.codigoPessoa != other.codigoPessoa) {
+			return false;
+		}
+		if (this.colaborador == null) {
+			if (other.colaborador != null) {
+				return false;
+			}
+		} else if (!this.colaborador.equals(other.colaborador)) {
+			return false;
+		}
+		if (this.colaboradores == null) {
+			if (other.colaboradores != null) {
+				return false;
+			}
+		} else if (!this.colaboradores.equals(other.colaboradores)) {
+			return false;
+		}
+		if (this.dataCadastro == null) {
+			if (other.dataCadastro != null) {
+				return false;
+			}
+		} else if (!this.dataCadastro.equals(other.dataCadastro)) {
+			return false;
+		}
+		if (this.dataNascimento == null) {
+			if (other.dataNascimento != null) {
+				return false;
+			}
+		} else if (!this.dataNascimento.equals(other.dataNascimento)) {
+			return false;
+		}
+		if (this.enderecoPessoas == null) {
+			if (other.enderecoPessoas != null) {
+				return false;
+			}
+		} else if (!this.enderecoPessoas.equals(other.enderecoPessoas)) {
+			return false;
+		}
+		if (this.historicoEstoques == null) {
+			if (other.historicoEstoques != null) {
+				return false;
+			}
+		} else if (!this.historicoEstoques.equals(other.historicoEstoques)) {
+			return false;
+		}
+		if (this.nomePessoa == null) {
+			if (other.nomePessoa != null) {
+				return false;
+			}
+		} else if (!this.nomePessoa.equals(other.nomePessoa)) {
+			return false;
+		}
+		if (this.pacotes == null) {
+			if (other.pacotes != null) {
+				return false;
+			}
+		} else if (!this.pacotes.equals(other.pacotes)) {
+			return false;
+		}
+		if (this.parceiro == null) {
+			if (other.parceiro != null) {
+				return false;
+			}
+		} else if (!this.parceiro.equals(other.parceiro)) {
+			return false;
+		}
+		if (this.pessoaContatos == null) {
+			if (other.pessoaContatos != null) {
+				return false;
+			}
+		} else if (!this.pessoaContatos.equals(other.pessoaContatos)) {
+			return false;
+		}
+		if (this.tipoPessoa == null) {
+			if (other.tipoPessoa != null) {
+				return false;
+			}
+		} else if (!this.tipoPessoa.equals(other.tipoPessoa)) {
+			return false;
+		}
+		return true;
 	}
 
 }

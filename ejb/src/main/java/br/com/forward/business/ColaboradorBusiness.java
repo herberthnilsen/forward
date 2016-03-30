@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 
 import br.com.forward.common.ColaboradorVO;
 import br.com.forward.converters.ConverterColaborador;
-import br.com.forward.dao.ColaboradorDAO;
+import br.com.forward.dao.PessoaDAO;
 import br.com.forward.entity.Colaborador;
 import br.com.forward.exception.EntityManagerException;
 import br.com.forward.interfaces.business.ColaboradorBusinessLocal;
@@ -30,9 +30,9 @@ public class ColaboradorBusiness extends GenericEJB implements ColaboradorBusine
 
 	private static final Logger LOGGER = Logger.getLogger(ColaboradorBusiness.class);
 	/**
-	 * Atributo colaboradorDAO
+	 * Atributo pessoaDAO
 	 */
-	private ColaboradorDAO colaboradorDAO;
+	private PessoaDAO pessoaDAO;
 	/**
 	 * Atributo converterColaborador
 	 */
@@ -41,7 +41,7 @@ public class ColaboradorBusiness extends GenericEJB implements ColaboradorBusine
 	@PostConstruct
 	public void init() {
 
-		this.colaboradorDAO = new ColaboradorDAO(this.entityManager);
+		this.pessoaDAO = new PessoaDAO(this.entityManager);
 
 	}
 
@@ -53,7 +53,7 @@ public class ColaboradorBusiness extends GenericEJB implements ColaboradorBusine
 	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	public List<ColaboradorVO> listarColaboradores() throws EntityManagerException {
 		LOGGER.info("listarColaboradores - INICIO");
-		final List<Colaborador> colaboradores = this.colaboradorDAO.listarColaboradores();
+		final List<Colaborador> colaboradores = this.pessoaDAO.listarColaboradores();
 
 		final List<ColaboradorVO> colaboradoresVO = this.converterColaborador.converterEntitytoVO(colaboradores);
 

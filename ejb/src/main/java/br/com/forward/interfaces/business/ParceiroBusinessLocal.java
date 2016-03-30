@@ -13,6 +13,13 @@ import br.com.forward.exception.EntityManagerException;
  */
 public interface ParceiroBusinessLocal {
 
+	/**
+	 * Método responsável por listas as prospecções cadastradas
+	 *
+	 * @since 5 de abr de 2016 10:11:06
+	 * @return
+	 * @throws EntityManagerException
+	 */
 	public List<ParceiroVO> listarParceiros() throws EntityManagerException;
 
 }

@@ -19,16 +19,16 @@ import br.com.forward.exception.EntityManagerException;
  * @since 16 de mar de 2016 20:33:26
  * @version x.x
  */
-public class ColaboradorDAO extends GenericEntityManager {
+public class PessoaDAO extends GenericEntityManager {
 
-	private static final Logger LOGGER = Logger.getLogger(ColaboradorDAO.class);
+	private static final Logger LOGGER = Logger.getLogger(PessoaDAO.class);
 
 	/**
-	 * Construtor da classe ColaboradorDAO
+	 * Construtor da classe PessoaDAO
 	 *
 	 * @param entityManager
 	 */
-	public ColaboradorDAO(EntityManager entityManager) {
+	public PessoaDAO(EntityManager entityManager) {
 		super(entityManager);
 	}
 

@@ -4,6 +4,7 @@
 package br.com.forward.bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -22,6 +23,7 @@ import br.com.forward.enumcode.StatusMarketingEnum;
 import br.com.forward.enumcode.StatusProspeccaoEnum;
 import br.com.forward.enumcode.TipoEventoEnum;
 import br.com.forward.exception.EntityManagerException;
+import br.com.forward.exception.ProspeccaoException;
 import br.com.forward.interfaces.facade.ProspeccaoFacadeLocal;
 
 /**
@@ -90,25 +92,19 @@ public class ProspeccaoBean extends BasicBean {
 	@EJB
 	private ProspeccaoFacadeLocal prospeccaoFacade;
 
+	private Date dataAtual;
+
 	@PostConstruct
 	public void init() {
-
+		this.dataAtual = new Date();
 		this.atendimentoVO = new AtendimentoVO();
 		this.listaAtendimentos = new ArrayList<AtendimentoVO>();
 		this.carregarColaboradores();
 		this.carregarParceiros();
-
+		this.carregarAtendimentosProspeccao();
 		this.listaProspeccoes = new ArrayList<ProspeccaoVO>();
 		this.prospeccaoVO = new ProspeccaoVO();
 
-	}
-
-	public String cortarDescricaoAtendimento(AtendimentoVO atendimentoVO) {
-
-		final StringBuffer retorno = new StringBuffer();
-		retorno.append(atendimentoVO.getDescricaoAtendimento().substring(0, 30)).append("...");
-
-		return retorno.toString();
 	}
 
 	/*
@@ -137,7 +133,16 @@ public class ProspeccaoBean extends BasicBean {
 	 */
 	@Override
 	public void salvar() {
-		// TODO Auto-generated method stub
+		LOGGER.info("salvar - INICIO");
+
+		try {
+			this.prospeccaoFacade.salvarPropeccao(this.prospeccaoVO);
+		} catch (final ProspeccaoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		LOGGER.info("salvar - FIM");
 
 	}
 
@@ -172,6 +177,21 @@ public class ProspeccaoBean extends BasicBean {
 		}
 
 		LOGGER.info("carregarColaboradores() - FIM");
+	}
+
+	public void carregarAtendimentosProspeccao() {
+		LOGGER.info("carregarAtendimentosProspeccao - INICIO");
+
+		// TODO Arrumar para a prospecção Selecionada
+		try {
+			this.listaAtendimentos = this.prospeccaoFacade.carregarAtendimentosPorProspeccao(1L);
+		} catch (final EntityManagerException e) {
+
+			// TODO Colocar alerta no popup quando implementado
+			e.printStackTrace();
+		}
+		LOGGER.info("carregarAtendimentosProspeccao - FIM");
+
 	}
 
 	/**
@@ -312,6 +332,20 @@ public class ProspeccaoBean extends BasicBean {
 	 */
 	public void setListaColaboradores(List<ColaboradorVO> listaColaboradores) {
 		this.listaColaboradores = listaColaboradores;
+	}
+
+	/**
+	 * @return o valor do atributo dataAtual
+	 */
+	public Date getDataAtual() {
+		return this.dataAtual;
+	}
+
+	/**
+	 * @param dataAtual o valor a ser atribuído no atributo dataAtual
+	 */
+	public void setDataAtual(Date dataAtual) {
+		this.dataAtual = dataAtual;
 	}
 
 }

@@ -8,7 +8,6 @@ import java.util.Date;
 
 import br.com.forward.enumcode.StatusMarketingEnum;
 import br.com.forward.enumcode.StatusProspeccaoEnum;
-import br.com.forward.enumcode.TipoEventoEnum;
 
 /**
  * @author Herberth Nilsen
@@ -21,14 +20,9 @@ public class ProspeccaoVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Atributo tipoEvento
+	 * Atributo eventoVO
 	 */
-	private TipoEventoEnum tipoEvento;
-
-	/**
-	 * Atributo dataEvento
-	 */
-	private Date dataEvento;
+	private EventoVO eventoVO;
 
 	/**
 	 * Atributo colaborador
@@ -40,44 +34,45 @@ public class ProspeccaoVO implements Serializable {
 	 */
 	private StatusProspeccaoEnum status;
 
+	/**
+	 * Atributo statusMarketing
+	 */
 	private StatusMarketingEnum statusMarketing;
 
+	/**
+	 * Atributo dataPendencia
+	 */
 	private Date dataPendencia;
 
+	/**
+	 * Atributo horaPendencia
+	 */
 	private Date horaPendencia;
 
+	/**
+	 * Atributo parceiroIndicado
+	 */
 	private ParceiroVO parceiroIndicado;
 
+	/**
+	 * Atributo noiva
+	 */
 	private PessoaVO noiva;
 
+	/**
+	 * Atributo noivo
+	 */
 	private PessoaVO noivo;
 
 	/**
-	 * @return o valor do atributo tipoEvento
+	 * Construtor da classe ProspeccaoVO
 	 */
-	public TipoEventoEnum getTipoEvento() {
-		return this.tipoEvento;
-	}
-
-	/**
-	 * @param tipoEvento o valor a ser atribuído no atributo tipoEvento
-	 */
-	public void setTipoEvento(TipoEventoEnum tipoEvento) {
-		this.tipoEvento = tipoEvento;
-	}
-
-	/**
-	 * @return o valor do atributo dataEvento
-	 */
-	public Date getDataEvento() {
-		return this.dataEvento;
-	}
-
-	/**
-	 * @param dataEvento o valor a ser atribuído no atributo dataEvento
-	 */
-	public void setDataEvento(Date dataEvento) {
-		this.dataEvento = dataEvento;
+	public ProspeccaoVO() {
+		this.colaborador = new PessoaVO();
+		this.eventoVO = new EventoVO();
+		this.noiva = new PessoaVO();
+		this.noivo = new PessoaVO();
+		this.parceiroIndicado = new ParceiroVO();
 	}
 
 	/**
@@ -201,15 +196,14 @@ public class ProspeccaoVO implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((this.colaborador == null) ? 0 : this.colaborador.hashCode());
-		result = prime * result + ((this.dataEvento == null) ? 0 : this.dataEvento.hashCode());
 		result = prime * result + ((this.dataPendencia == null) ? 0 : this.dataPendencia.hashCode());
+		result = prime * result + ((this.eventoVO == null) ? 0 : this.eventoVO.hashCode());
 		result = prime * result + ((this.horaPendencia == null) ? 0 : this.horaPendencia.hashCode());
 		result = prime * result + ((this.noiva == null) ? 0 : this.noiva.hashCode());
 		result = prime * result + ((this.noivo == null) ? 0 : this.noivo.hashCode());
 		result = prime * result + ((this.parceiroIndicado == null) ? 0 : this.parceiroIndicado.hashCode());
 		result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
 		result = prime * result + ((this.statusMarketing == null) ? 0 : this.statusMarketing.hashCode());
-		result = prime * result + ((this.tipoEvento == null) ? 0 : this.tipoEvento.hashCode());
 		return result;
 	}
 
@@ -236,18 +230,18 @@ public class ProspeccaoVO implements Serializable {
 		} else if (!this.colaborador.equals(other.colaborador)) {
 			return false;
 		}
-		if (this.dataEvento == null) {
-			if (other.dataEvento != null) {
-				return false;
-			}
-		} else if (!this.dataEvento.equals(other.dataEvento)) {
-			return false;
-		}
 		if (this.dataPendencia == null) {
 			if (other.dataPendencia != null) {
 				return false;
 			}
 		} else if (!this.dataPendencia.equals(other.dataPendencia)) {
+			return false;
+		}
+		if (this.eventoVO == null) {
+			if (other.eventoVO != null) {
+				return false;
+			}
+		} else if (!this.eventoVO.equals(other.eventoVO)) {
 			return false;
 		}
 		if (this.horaPendencia == null) {
@@ -284,9 +278,6 @@ public class ProspeccaoVO implements Serializable {
 		if (this.statusMarketing != other.statusMarketing) {
 			return false;
 		}
-		if (this.tipoEvento != other.tipoEvento) {
-			return false;
-		}
 		return true;
 	}
 
@@ -296,10 +287,24 @@ public class ProspeccaoVO implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "ProspeccaoVO [tipoEvento=" + this.tipoEvento + ", dataEvento=" + this.dataEvento + ", colaborador="
-				+ this.colaborador + ", status=" + this.status + ", statusMarketing=" + this.statusMarketing + ", dataPendencia="
-				+ this.dataPendencia + ", horaPendencia=" + this.horaPendencia + ", parceiroIndicado=" + this.parceiroIndicado
-				+ ", noiva=" + this.noiva + ", noivo=" + this.noivo + "]";
+		return "ProspeccaoVO [eventoVO=" + this.eventoVO + ", colaborador=" + this.colaborador + ", status=" + this.status
+				+ ", statusMarketing=" + this.statusMarketing + ", dataPendencia=" + this.dataPendencia + ", horaPendencia="
+				+ this.horaPendencia + ", parceiroIndicado=" + this.parceiroIndicado + ", noiva=" + this.noiva + ", noivo="
+				+ this.noivo + "]";
+	}
+
+	/**
+	 * @return o valor do atributo eventoVO
+	 */
+	public EventoVO getEventoVO() {
+		return this.eventoVO;
+	}
+
+	/**
+	 * @param eventoVO o valor a ser atribuído no atributo eventoVO
+	 */
+	public void setEventoVO(EventoVO eventoVO) {
+		this.eventoVO = eventoVO;
 	}
 
 }

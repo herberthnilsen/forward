@@ -1,6 +1,7 @@
 package br.com.forward.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "fwdclb")
@@ -27,7 +30,8 @@ public class Colaborador implements EntityInterface {
 	private Integer codigoColaborador;
 
 	@Column(name = "datcad", nullable = false)
-	private Timestamp dataCadastro;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCadastro;
 
 	@Column(name = "nomusr", length = 15)
 	private String nomeUsuario;
@@ -53,7 +57,7 @@ public class Colaborador implements EntityInterface {
 		this.codigoColaborador = codigoColaborador;
 	}
 
-	public Timestamp getDataCadastro() {
+	public Date getDataCadastro() {
 		return this.dataCadastro;
 	}
 

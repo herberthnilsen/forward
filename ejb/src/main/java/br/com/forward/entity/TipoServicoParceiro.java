@@ -63,14 +63,14 @@ public class TipoServicoParceiro implements Serializable {
 
 	public Parceiro addParceiro(Parceiro parceiro) {
 		this.getListaParceiros().add(parceiro);
-		parceiro.setFwdtposrvpcr(this);
+		parceiro.setTipoServicoParceiro(this);
 
 		return parceiro;
 	}
 
 	public Parceiro removeParceiro(Parceiro parceiro) {
 		this.getListaParceiros().remove(parceiro);
-		parceiro.setFwdtposrvpcr(null);
+		parceiro.setTipoServicoParceiro(null);
 
 		return parceiro;
 	}

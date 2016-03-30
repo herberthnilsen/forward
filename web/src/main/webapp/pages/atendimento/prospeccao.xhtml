@@ -3,7 +3,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-    xmlns:pm="http://primefaces.org/mobile"
+	xmlns:pm="http://primefaces.org/mobile"
 	xmlns:fw="http://xmlns.jcp.org/jsf/composite/forwardcomponents"
 	template="../../layout/template.xhtml">
 	<ui:define name="content">
@@ -12,91 +12,138 @@
 
 		<p:commandButton value="Atendimento"
 			onclick="PF('mdAtendimento').show();" />
-		<p:panelGrid id="prospeccao" layout="grid" columns="7" styleClass="grid_6 ui-responsive">
+		<p:panelGrid id="prospeccao" layout="grid" columns="7"
+			styleClass="grid_6 ui-responsive">
 			<f:facet name="header">tas</f:facet>
-			<fw:OneMenu idt="eventos" label="#{msgs.evento}">
+			<fw:OneMenu idt="eventos" label="#{msgs.evento}"
+				value="#{prospeccaoBean.prospeccaoVO.eventoVO.tipoEvento}">
+				<f:selectItems value="#{prospeccaoBean.listaTipoEvento}" var="evento" itemLabel="#{evento.descricao}" itemValue="#{evento}"/>
 			</fw:OneMenu>
 			<p:panel styleClass="fm_field">
 				<p:outputLabel value="#{msgs['data.evento']}" />
 				<br />
-				<p:calendar id="dataEvento" mindate="" />
+				<p:calendar id="dataEvento" mindate="#{prospeccaoBean.dataAtual}"
+					value="#{prospeccaoBean.prospeccaoVO.eventoVO.dataEvento}" />
 			</p:panel>
-			<fw:labelInputText idt="contatoComercial" label="#{msgs.contato}"
-				value="0" />
-			<fw:labelInputText idt="status" label="#{msgs.status}" value="0" />
-			<fw:labelInputText idt="statusMarketing"
-				label="#{msgs['status.marketing']}" value="0" />
+			<fw:OneMenu idt="colaboradores" label="#{msgs.contato}"
+				value="#{prospeccaoBean.prospeccaoVO.colaborador}">
+				<f:selectItems value="#{prospeccaoBean.listaColaboradores}"
+					var="contato" itemLabel="#{contato.nomePessoa}"
+					itemValue="#{contato}" />
+			</fw:OneMenu>
+			<fw:OneMenu idt="status" label="#{msgs.status}"
+				value="#{prospeccaoBean.prospeccaoVO.status}">
+				<f:selectItems value="#{prospeccaoBean.listaStatusProspeccao}" var="status" itemValue="#{status}" itemLabel="#{status.descricao}" />
+			</fw:OneMenu>
+			<fw:OneMenu idt="statusMarketing" label="#{msgs['status.marketing']}"
+				value="#{prospeccaoBean.prospeccaoVO.statusMarketing}">
+				<f:selectItems value="#{prospeccaoBean.listaStatusMarketing}" var="status" itemValue="#{status}" itemLabel="#{status.descricao}"/>
+			</fw:OneMenu>
 
 			<p:panel styleClass="fm_field">
 				<p:outputLabel value="#{msgs['data.pendencia']}" />
 				<br />
-				<p:calendar id="dataPendencia" mindate="" />
-				<p:inputMask mask="99:99" id="horaPendencia" value="00:00" />
+				<p:calendar id="dataPendencia" mindate="#{prospeccaoBean.dataAtual}"
+					value="#{prospeccaoBean.prospeccaoVO.dataPendencia}" />
+				<p:inputMask mask="99:99" id="horaPendencia"
+					value="#{prospeccaoBean.prospeccaoVO.horaPendencia}" />
 			</p:panel>
 
-			<fw:OneMenu idt="indicacao" label="#{msgs.indicacao}">
+			<fw:OneMenu idt="indicacao" label="#{msgs.indicacao}"
+				value="#{prospeccaoBean.prospeccaoVO.parceiroIndicado}">
+				<f:selectItems value="#{prospeccaoBean.listaParceiro}" var="parceiro" itemLabel="#{parceiro.nomePessoa}" itemValue="#{parceiro}"/>
 			</fw:OneMenu>
 
 		</p:panelGrid>
 		<p:panelGrid columns="2" styleClass="ui-responsive" style="width:100%">
 
-			<p:panelGrid layout="grid" columns="3" styleClass=" fm_noivos ui-responsive">
+			<p:panelGrid layout="grid" columns="3"
+				styleClass=" fm_noivos ui-responsive">
 				<f:facet name="header">
 					<p:outputLabel value="#{msgs['noiva.dados']}" />
 				</f:facet>
 				<fw:labelInputText idt="nomeNoiva" label="#{msgs['campo.nome']}"
-					value="0" />
-				<fw:labelInputText idt="celularNoiva"
-					label="#{msgs['campo.celular']}" value="0" />
+					value="#{prospeccaoBean.prospeccaoVO.noiva.nomePessoa}" />
+				<fw:labelInputMask mask="(99) 99999-9999" idt="celularNoiva"
+					label="#{msgs['campo.celular']}"
+					value="#{prospeccaoBean.prospeccaoVO.noiva.nomePessoa}" />
 
 				<fw:labelInputText idt="emailNoiva" label="#{msgs['campo.email']}"
 					value="0" />
 
 			</p:panelGrid>
-			<p:panelGrid layout="grid" columns="3" styleClass="fm_noivos ui-responsive">
+			<p:panelGrid layout="grid" columns="3"
+				styleClass="fm_noivos ui-responsive">
 				<f:facet name="header">
 					<p:outputLabel value="#{msgs['noivo.dados']}" />
 				</f:facet>
 				<fw:labelInputText idt="nomeNoivo" label="#{msgs['campo.nome']}"
 					value="0" />
-				<fw:labelInputText idt="celularNoivo"
+				<fw:labelInputMask mask="(99) 99999-9999" idt="celularNoivo"
 					label="#{msgs['campo.celular']}" value="0" />
 
 				<fw:labelInputText idt="emailNoivo" label="#{msgs['campo.email']}"
 					value="0" />
 
 			</p:panelGrid>
-			<p:panelGrid layout="grid" columns="2">
-			
-				<p:dataGrid id="gridAtendimentos" value="#{prospeccaoBean.listaAtendimentos}" var="atendimento">
-					<p:row id="linhaAtendimento#{atendimento.codigoAtendimento}">
-						<p:column sortable="true">
-							<f:facet name="header" >#{msgs['campo.data.atendimento']}</f:facet>
-							#{atendimento.dataCadastroAtendimentoFormatado}
-						</p:column>
-						<p:column>
-							<f:facet name="header">#{msgs['campo.descricao']}</f:facet>
-							#{prospeccaoBean.cortarDescricaoAtendimento(atendimento)}
-						</p:column>
-						<p:column> 
-							<f:facet name="header">#{msgs['campo.nome.atendente']}</f:facet>
-							#{atendimento.contato.nomePessoa} 
-						</p:column>
-						<p:column> 
-							<f:facet name="header">#{msgs['campo.forma.contato']}</f:facet>
-							#{atendimento.formaAtendimento.descricao} 
-						</p:column>
-						<p:tooltip showEffect="fade" hideEffect="fade">
-							<b>#{msgs['campo.data.atendimento']}:</b>#{atendimento.dataCadastroAtendimentoFormatado}<br/>
-							<b>#{msgs['campo.nome.atendente']}:</b>#{atendimento.contato.nomePessoa}<br/>
-							<b>#{msgs['campo.forma.contato']}:</b>#{atendimento.formaAtendimento.descricao}<br/>
-							<b>#{msgs['campo.descricao']}:</b>#{atendimento.descricaoAtendimento}<br/>
+			<h:panelGroup layout="block" styleClass="fm_buttons">
+				<p:panel styleClass="fm_button" id="bt_salvar">
+					<p:commandLink actionListener="#{prospeccaoBean.salvar()}"
+						update="form #{cc.attrs.idGrid}">
+						<h:graphicImage value="/img/bt/salvar.ico" />
+						<p:tooltip trackMouse="true" for="bt_salvar">
+							<h:outputText value="#{msgs['button.salvar']}" />
 						</p:tooltip>
-					</p:row>
-					
-				</p:dataGrid>
-			
-			</p:panelGrid>
+					</p:commandLink>
+				</p:panel>
+				<p:panel styleClass="fm_button" id="bt_limpar">
+					<p:commandLink actionListener="#{prospeccaoBean.reset()}"
+						update="form">
+						<h:graphicImage value="/img/bt/limpar.ico" />
+						<p:tooltip trackMouse="true" for="bt_limpar">
+							<h:outputText value="#{msgs['button.limpar']}" />
+						</p:tooltip>
+					</p:commandLink>
+				</p:panel>
+				<p:panel id="bt_cancel" styleClass="fm_button"
+					rendered="#{cc.attrs.showCancelar}">
+					<p:commandLink actionListener="#{prospeccaoBean.hideForm}"
+						update="form">
+						<h:graphicImage value="/img/bt/cancel.ico" />
+						<p:tooltip trackMouse="true" for="bt_cancel">
+							<h:outputText value="#{msgs['button.cancelar']}" />
+						</p:tooltip>
+					</p:commandLink>
+				</p:panel>
+			</h:panelGroup>
+		</p:panelGrid>
+		<p:panelGrid layout="grid" columns="2">
+			<p:dataTable value="#{prospeccaoBean.listaAtendimentos}"
+				id="gridAtendimentosProspeccao" var="value">
+				<f:facet name="header">#{msgs['lista.atendimentos']}</f:facet>
+				<p:column width="10">
+					<p:rowToggler />
+				</p:column>
+				<p:column sortable="true"
+					headerText="#{msgs['campo.data.atendimento']}">
+					<h:outputText value="#{value.dataCadastroAtendimentoFormatado}" />
+				</p:column>
+				<p:column headerText="#{msgs['campo.descricao']}">
+					<h:outputText value="#{value.descricaoResumida}" />
+				</p:column>
+				<p:column headerText="#{msgs['campo.nome.atendente']}">
+					<h:outputText value="#{value.contato.nomeUsuario}" />
+				</p:column>
+				<p:column headerText="#{msgs['campo.forma.contato']}">
+					<h:outputText value="#{value.formaAtendimento.descricao}" />
+				</p:column>
+				<p:rowExpansion>
+					<b>#{msgs['campo.data.atendimento']}:</b>#{value.dataCadastroAtendimentoFormatado}<br />
+					<b>#{msgs['campo.nome.atendente']}:</b>#{value.contato.nomePessoa}<br />
+					<b>#{msgs['campo.forma.contato']}:</b>#{value.formaAtendimento.descricao}<br />
+					<b>#{msgs['campo.descricao']}:</b>#{value.descricaoAtendimento}<br />
+				</p:rowExpansion>
+			</p:dataTable>
 		</p:panelGrid>
 
 

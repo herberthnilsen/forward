@@ -17,7 +17,7 @@
 <cc:implementation>
 
 	<p:dataTable id="#{cc.attrs.id}" rows="10" styleClass="pn_grid" 
-		value="#{cc.attrs.bean.resultList}" paginator="true"
+		value="#{cc.attrs.resultList}" paginator="true"
 		paginatorPosition="bottom" rowsPerPageTemplate="10,50,100"
 		currentPageReportTemplate=" {currentPage} #{msgs['application.de']} {totalPages}" emptyMessage="#{msgs['legenda.mensagem.lista.vazia']}"
 		paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}  {CurrentPageReport}  {RowsPerPageDropdown}"

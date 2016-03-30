@@ -48,6 +48,11 @@ public class AtendimentoVO implements Serializable {
 	private String descricaoAtendimento;
 
 	/**
+	 * Atributo descricaoResumida
+	 */
+	private String descricaoResumida;
+
+	/**
 	 * @return o valor do atributo contato
 	 */
 	public PessoaVO getContato() {
@@ -197,6 +202,20 @@ public class AtendimentoVO implements Serializable {
 	 */
 	public void setCodigoAtendimento(Long codigoAtendimento) {
 		this.codigoAtendimento = codigoAtendimento;
+	}
+
+	/**
+	 * @return o valor do atributo descricaoResumida
+	 */
+	public String getDescricaoResumida() {
+		return this.descricaoResumida;
+	}
+
+	/**
+	 * @param descricaoResumida o valor a ser atribuído no atributo descricaoResumida
+	 */
+	public void setDescricaoResumida(String descricaoResumida) {
+		this.descricaoResumida = descricaoResumida;
 	}
 
 }

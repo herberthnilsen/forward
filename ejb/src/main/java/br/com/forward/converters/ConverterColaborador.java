@@ -3,10 +3,15 @@
  */
 package br.com.forward.converters;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.log4j.Logger;
+
 import br.com.forward.common.ColaboradorVO;
+import br.com.forward.common.PessoaVO;
 import br.com.forward.entity.Colaborador;
 import br.com.forward.interfaces.converter.IConverter;
 
@@ -17,6 +22,11 @@ import br.com.forward.interfaces.converter.IConverter;
  * @version x.x
  */
 public class ConverterColaborador implements IConverter<ColaboradorVO, Colaborador> {
+
+	/**
+	 * Atributo LOGGER
+	 */
+	private static final Logger LOGGER = Logger.getLogger(ConverterColaborador.class);
 
 	/**
 	 * Atributo converterPessoa
@@ -42,7 +52,17 @@ public class ConverterColaborador implements IConverter<ColaboradorVO, Colaborad
 	 */
 	@Override
 	public ColaboradorVO converterEntitytoVO(Colaborador entidade) {
-		final ColaboradorVO colaboradorVO = (ColaboradorVO) this.converterPessoa.converterEntitytoVO(entidade.getPessoa());
+
+		final ColaboradorVO colaboradorVO = new ColaboradorVO();
+		final PessoaVO pessoaVO = this.converterPessoa.converterEntitytoVO(entidade.getPessoa());
+
+		try {
+			BeanUtils.copyProperties(colaboradorVO, pessoaVO);
+			BeanUtils.copyProperties(colaboradorVO, entidade);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			LOGGER.info("Erro na conversão do ColaboradorVO " + e.getMessage(), e);
+
+		}
 
 		return colaboradorVO;
 	}

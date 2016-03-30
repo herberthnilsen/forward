@@ -4,8 +4,8 @@
 package br.com.forward.common;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Classe responsável por ...
@@ -33,7 +33,7 @@ public class PessoaVO extends AbstractVO {
 	/**
 	 * Atributo dataCadastro
 	 */
-	private Timestamp dataCadastro;
+	private Date dataCadastro;
 
 	/**
 	 * Atributo dataNascimento
@@ -49,6 +49,11 @@ public class PessoaVO extends AbstractVO {
 	 * Atributo tipoPessoa
 	 */
 	private String tipoPessoa;
+
+	/**
+	 * Atributo contatos
+	 */
+	private List<ContatoVO> contatos;
 
 	/**
 	 * @return o valor do atributo codigoPessoa
@@ -81,14 +86,14 @@ public class PessoaVO extends AbstractVO {
 	/**
 	 * @return o valor do atributo dataCadastro
 	 */
-	public Timestamp getDataCadastro() {
+	public Date getDataCadastro() {
 		return this.dataCadastro;
 	}
 
 	/**
 	 * @param dataCadastro o valor a ser atribuído no atributo dataCadastro
 	 */
-	public void setDataCadastro(Timestamp dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
@@ -141,9 +146,10 @@ public class PessoaVO extends AbstractVO {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((this.cnpjCpfPessoa == null) ? 0 : this.cnpjCpfPessoa.hashCode());
 		result = prime * result + this.codigoPessoa;
+		result = prime * result + ((this.contatos == null) ? 0 : this.contatos.hashCode());
 		result = prime * result + ((this.dataCadastro == null) ? 0 : this.dataCadastro.hashCode());
 		result = prime * result + ((this.dataNascimento == null) ? 0 : this.dataNascimento.hashCode());
 		result = prime * result + ((this.nomePessoa == null) ? 0 : this.nomePessoa.hashCode());
@@ -160,7 +166,7 @@ public class PessoaVO extends AbstractVO {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
+		if (!super.equals(obj)) {
 			return false;
 		}
 		if (!(obj instanceof PessoaVO)) {
@@ -175,6 +181,13 @@ public class PessoaVO extends AbstractVO {
 			return false;
 		}
 		if (this.codigoPessoa != other.codigoPessoa) {
+			return false;
+		}
+		if (this.contatos == null) {
+			if (other.contatos != null) {
+				return false;
+			}
+		} else if (!this.contatos.equals(other.contatos)) {
 			return false;
 		}
 		if (this.dataCadastro == null) {
@@ -216,7 +229,21 @@ public class PessoaVO extends AbstractVO {
 	public String toString() {
 		return "PessoaVO [codigoPessoa=" + this.codigoPessoa + ", cnpjCpfPessoa=" + this.cnpjCpfPessoa + ", dataCadastro="
 				+ this.dataCadastro + ", dataNascimento=" + this.dataNascimento + ", nomePessoa=" + this.nomePessoa
-				+ ", tipoPessoa=" + this.tipoPessoa + "]";
+				+ ", tipoPessoa=" + this.tipoPessoa + ", contatos=" + this.contatos + "]";
+	}
+
+	/**
+	 * @return o valor do atributo contatos
+	 */
+	public List<ContatoVO> getContatos() {
+		return this.contatos;
+	}
+
+	/**
+	 * @param contatos o valor a ser atribuído no atributo contatos
+	 */
+	public void setContatos(List<ContatoVO> contatos) {
+		this.contatos = contatos;
 	}
 
 }

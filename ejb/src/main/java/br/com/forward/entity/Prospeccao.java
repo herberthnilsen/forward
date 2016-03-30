@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,15 +37,17 @@ public class Prospeccao implements Serializable {
 	@Column(name = "dtacadppc")
 	private Date dataCadastro;
 
-	private int fwdclbcod;
+	@ManyToOne
+	@JoinColumn(name = "fwdclbcod")
+	private Colaborador colaborador;
 
 	// bi-directional many-to-one association to Atendimento
 	@OneToMany(mappedBy = "prospeccao")
-	private List<Atendimento> fwdatds;
+	private List<Atendimento> listaAtendimentos;
 
 	// bi-directional many-to-one association to ClienteProspeccao
 	@OneToMany(mappedBy = "fwdppc")
-	private List<ClienteProspeccao> fwdcltpccs;
+	private List<ClienteProspeccao> clienteProspeccao;
 
 	// bi-directional many-to-one association to Orcamento
 	@OneToMany(mappedBy = "prospeccao")
@@ -55,7 +59,17 @@ public class Prospeccao implements Serializable {
 
 	// bi-directional many-to-one association to Reuniao
 	@OneToMany(mappedBy = "fwdppc")
-	private List<Reuniao> fwdrnos;
+	private List<Reuniao> listaReuniao;
+
+	@Column(name = "fwdsttmktid")
+	private Integer statusMarketing;
+
+	@Column(name = "fwdsttatdid")
+	private Integer statusAtendimento;
+
+	@ManyToOne
+	@JoinColumn(name = "fwdpcrid")
+	private Parceiro parceiro;
 
 	public Prospeccao() {
 	}
@@ -76,97 +90,89 @@ public class Prospeccao implements Serializable {
 		this.dataCadastro = dataCadastro;
 	}
 
-	public int getFwdclbcod() {
-		return this.fwdclbcod;
+	public Colaborador getColaborador() {
+		return this.colaborador;
 	}
 
-	public void setFwdclbcod(int fwdclbcod) {
-		this.fwdclbcod = fwdclbcod;
+	public void setColaborador(Colaborador fwdclbcod) {
+		this.colaborador = fwdclbcod;
 	}
 
-	public List<Atendimento> getFwdatds() {
-		return this.fwdatds;
+	public List<Atendimento> getListaAtendimentos() {
+		return this.listaAtendimentos;
 	}
 
-	public void setFwdatds(List<Atendimento> fwdatds) {
-		this.fwdatds = fwdatds;
+	public void setListaAtendimentos(List<Atendimento> fwdatds) {
+		this.listaAtendimentos = fwdatds;
 	}
 
 	public Atendimento addFwdatd(Atendimento fwdatd) {
-		this.getFwdatds().add(fwdatd);
+		this.getListaAtendimentos().add(fwdatd);
 		fwdatd.setProspeccao(this);
 
 		return fwdatd;
 	}
 
 	public Atendimento removeFwdatd(Atendimento fwdatd) {
-		this.getFwdatds().remove(fwdatd);
+		this.getListaAtendimentos().remove(fwdatd);
 		fwdatd.setProspeccao(null);
 
 		return fwdatd;
 	}
 
-	public List<ClienteProspeccao> getFwdcltpccs() {
-		return this.fwdcltpccs;
+	public List<ClienteProspeccao> getClienteProspeccao() {
+		return this.clienteProspeccao;
 	}
 
-	public void setFwdcltpccs(List<ClienteProspeccao> fwdcltpccs) {
-		this.fwdcltpccs = fwdcltpccs;
+	public void setClienteProspeccao(List<ClienteProspeccao> fwdcltpccs) {
+		this.clienteProspeccao = fwdcltpccs;
 	}
 
 	public ClienteProspeccao addFwdcltpcc(ClienteProspeccao fwdcltpcc) {
-		this.getFwdcltpccs().add(fwdcltpcc);
+		this.getClienteProspeccao().add(fwdcltpcc);
 		fwdcltpcc.setFwdppc(this);
 
 		return fwdcltpcc;
 	}
 
 	public ClienteProspeccao removeFwdcltpcc(ClienteProspeccao fwdcltpcc) {
-		this.getFwdcltpccs().remove(fwdcltpcc);
+		this.getClienteProspeccao().remove(fwdcltpcc);
 		fwdcltpcc.setFwdppc(null);
 
 		return fwdcltpcc;
 	}
 
-	public List<Orcamento> getFwdorcs1() {
-		return this.listaOrcamentos;
-	}
-
-	public void setFwdorcs1(List<Orcamento> fwdorcs1) {
-		this.listaOrcamentos = fwdorcs1;
-	}
-
-	public Orcamento addFwdorcs1(Orcamento orcamento) {
-		this.getFwdorcs1().add(orcamento);
+	public Orcamento addListaOrcamentos(Orcamento orcamento) {
+		this.getListaOrcamentos().add(orcamento);
 		orcamento.setProspeccao(this);
 
 		return orcamento;
 	}
 
-	public Orcamento removeFwdorcs1(Orcamento orcamento) {
-		this.getFwdorcs1().remove(orcamento);
+	public Orcamento removeListaOrcamentos(Orcamento orcamento) {
+		this.getListaOrcamentos().remove(orcamento);
 		orcamento.setProspeccao(null);
 
 		return orcamento;
 	}
 
-	public List<Reuniao> getFwdrnos() {
-		return this.fwdrnos;
+	public List<Reuniao> getListaReuniao() {
+		return this.listaReuniao;
 	}
 
-	public void setFwdrnos(List<Reuniao> fwdrnos) {
-		this.fwdrnos = fwdrnos;
+	public void setListaReuniao(List<Reuniao> fwdrnos) {
+		this.listaReuniao = fwdrnos;
 	}
 
 	public Reuniao addFwdrno(Reuniao fwdrno) {
-		this.getFwdrnos().add(fwdrno);
+		this.getListaReuniao().add(fwdrno);
 		fwdrno.setFwdppc(this);
 
 		return fwdrno;
 	}
 
 	public Reuniao removeFwdrno(Reuniao fwdrno) {
-		this.getFwdrnos().remove(fwdrno);
+		this.getListaReuniao().remove(fwdrno);
 		fwdrno.setFwdppc(null);
 
 		return fwdrno;
@@ -208,14 +214,17 @@ public class Prospeccao implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((this.clienteProspeccao == null) ? 0 : this.clienteProspeccao.hashCode());
 		result = prime * result + ((this.codigoProspeccao == null) ? 0 : this.codigoProspeccao.hashCode());
+		result = prime * result + ((this.colaborador == null) ? 0 : this.colaborador.hashCode());
 		result = prime * result + ((this.dataCadastro == null) ? 0 : this.dataCadastro.hashCode());
-		result = prime * result + ((this.fwdatds == null) ? 0 : this.fwdatds.hashCode());
-		result = prime * result + this.fwdclbcod;
-		result = prime * result + ((this.fwdcltpccs == null) ? 0 : this.fwdcltpccs.hashCode());
-		result = prime * result + ((this.fwdrnos == null) ? 0 : this.fwdrnos.hashCode());
+		result = prime * result + ((this.listaAtendimentos == null) ? 0 : this.listaAtendimentos.hashCode());
 		result = prime * result + ((this.listaOrcamentos == null) ? 0 : this.listaOrcamentos.hashCode());
+		result = prime * result + ((this.listaReuniao == null) ? 0 : this.listaReuniao.hashCode());
+		result = prime * result + ((this.parceiro == null) ? 0 : this.parceiro.hashCode());
 		result = prime * result + ((this.parceiros == null) ? 0 : this.parceiros.hashCode());
+		result = prime * result + ((this.statusAtendimento == null) ? 0 : this.statusAtendimento.hashCode());
+		result = prime * result + ((this.statusMarketing == null) ? 0 : this.statusMarketing.hashCode());
 		return result;
 	}
 
@@ -235,11 +244,25 @@ public class Prospeccao implements Serializable {
 			return false;
 		}
 		final Prospeccao other = (Prospeccao) obj;
+		if (this.clienteProspeccao == null) {
+			if (other.clienteProspeccao != null) {
+				return false;
+			}
+		} else if (!this.clienteProspeccao.equals(other.clienteProspeccao)) {
+			return false;
+		}
 		if (this.codigoProspeccao == null) {
 			if (other.codigoProspeccao != null) {
 				return false;
 			}
 		} else if (!this.codigoProspeccao.equals(other.codigoProspeccao)) {
+			return false;
+		}
+		if (this.colaborador == null) {
+			if (other.colaborador != null) {
+				return false;
+			}
+		} else if (!this.colaborador.equals(other.colaborador)) {
 			return false;
 		}
 		if (this.dataCadastro == null) {
@@ -249,28 +272,11 @@ public class Prospeccao implements Serializable {
 		} else if (!this.dataCadastro.equals(other.dataCadastro)) {
 			return false;
 		}
-		if (this.fwdatds == null) {
-			if (other.fwdatds != null) {
+		if (this.listaAtendimentos == null) {
+			if (other.listaAtendimentos != null) {
 				return false;
 			}
-		} else if (!this.fwdatds.equals(other.fwdatds)) {
-			return false;
-		}
-		if (this.fwdclbcod != other.fwdclbcod) {
-			return false;
-		}
-		if (this.fwdcltpccs == null) {
-			if (other.fwdcltpccs != null) {
-				return false;
-			}
-		} else if (!this.fwdcltpccs.equals(other.fwdcltpccs)) {
-			return false;
-		}
-		if (this.fwdrnos == null) {
-			if (other.fwdrnos != null) {
-				return false;
-			}
-		} else if (!this.fwdrnos.equals(other.fwdrnos)) {
+		} else if (!this.listaAtendimentos.equals(other.listaAtendimentos)) {
 			return false;
 		}
 		if (this.listaOrcamentos == null) {
@@ -280,6 +286,20 @@ public class Prospeccao implements Serializable {
 		} else if (!this.listaOrcamentos.equals(other.listaOrcamentos)) {
 			return false;
 		}
+		if (this.listaReuniao == null) {
+			if (other.listaReuniao != null) {
+				return false;
+			}
+		} else if (!this.listaReuniao.equals(other.listaReuniao)) {
+			return false;
+		}
+		if (this.parceiro == null) {
+			if (other.parceiro != null) {
+				return false;
+			}
+		} else if (!this.parceiro.equals(other.parceiro)) {
+			return false;
+		}
 		if (this.parceiros == null) {
 			if (other.parceiros != null) {
 				return false;
@@ -287,7 +307,76 @@ public class Prospeccao implements Serializable {
 		} else if (!this.parceiros.equals(other.parceiros)) {
 			return false;
 		}
+		if (this.statusAtendimento == null) {
+			if (other.statusAtendimento != null) {
+				return false;
+			}
+		} else if (!this.statusAtendimento.equals(other.statusAtendimento)) {
+			return false;
+		}
+		if (this.statusMarketing == null) {
+			if (other.statusMarketing != null) {
+				return false;
+			}
+		} else if (!this.statusMarketing.equals(other.statusMarketing)) {
+			return false;
+		}
 		return true;
+	}
+
+	/**
+	 * @return o valor do atributo statusMarketing
+	 */
+	public Integer getStatusMarketing() {
+		return this.statusMarketing;
+	}
+
+	/**
+	 * @param statusMarketing o valor a ser atribuído no atributo statusMarketing
+	 */
+	public void setStatusMarketing(Integer statusMarketing) {
+		this.statusMarketing = statusMarketing;
+	}
+
+	/**
+	 * @return o valor do atributo statusAtendimento
+	 */
+	public Integer getStatusAtendimento() {
+		return this.statusAtendimento;
+	}
+
+	/**
+	 * @param statusAtendimento o valor a ser atribuído no atributo statusAtendimento
+	 */
+	public void setStatusAtendimento(Integer statusAtendimento) {
+		this.statusAtendimento = statusAtendimento;
+	}
+
+	/**
+	 * @return o valor do atributo parceiro
+	 */
+	public Parceiro getParceiro() {
+		return this.parceiro;
+	}
+
+	/**
+	 * @param parceiro o valor a ser atribuído no atributo parceiro
+	 */
+	public void setParceiro(Parceiro parceiro) {
+		this.parceiro = parceiro;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Prospeccao [codigoProspeccao=" + this.codigoProspeccao + ", dataCadastro=" + this.dataCadastro + ", colaborador="
+				+ this.colaborador + ", listaAtendimentos=" + this.listaAtendimentos + ", clienteProspeccao="
+				+ this.clienteProspeccao + ", listaOrcamentos=" + this.listaOrcamentos + ", parceiros=" + this.parceiros
+				+ ", listaReuniao=" + this.listaReuniao + ", statusMarketing=" + this.statusMarketing + ", statusAtendimento="
+				+ this.statusAtendimento + ", parceiro=" + this.parceiro + "]";
 	}
 
 }
