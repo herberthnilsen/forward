@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.apache.log4j.Logger;
 
 import br.com.forward.entity.Colaborador;
+import br.com.forward.entity.Pessoa;
 import br.com.forward.exception.EntityManagerException;
 
 /**
@@ -47,6 +48,22 @@ public class PessoaDAO extends GenericEntityManager {
 		final List<Colaborador> colaboradores = (List<Colaborador>) namedQuery.getResultList();
 		LOGGER.info("listarColaboradores() - FIM");
 		return colaboradores;
+	}
+
+	/**
+	 * Método responsável por salvar a pessoa
+	 *
+	 * @since 5 de abr de 2016 21:06:30
+	 * @param pessoa
+	 * @throws EntityManagerException
+	 */
+	public void salvarPessoa(Pessoa pessoa) throws EntityManagerException {
+		LOGGER.info("salvarCliente - INICIO - PARÂMETROS:" + pessoa);
+
+		this.getEntityManager().persist(pessoa);
+
+		LOGGER.info("salvarCliente - FIM");
+
 	}
 
 }

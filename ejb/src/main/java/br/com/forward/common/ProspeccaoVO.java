@@ -27,7 +27,7 @@ public class ProspeccaoVO implements Serializable {
 	/**
 	 * Atributo colaborador
 	 */
-	private PessoaVO colaborador;
+	private ColaboradorVO colaborador;
 
 	/**
 	 * Atributo status
@@ -45,6 +45,11 @@ public class ProspeccaoVO implements Serializable {
 	private Date dataPendencia;
 
 	/**
+	 * Atributo dataCadastro
+	 */
+	private Date dataCadastro;
+
+	/**
 	 * Atributo horaPendencia
 	 */
 	private Date horaPendencia;
@@ -57,35 +62,35 @@ public class ProspeccaoVO implements Serializable {
 	/**
 	 * Atributo noiva
 	 */
-	private PessoaVO noiva;
+	private ClienteVO noiva;
 
 	/**
 	 * Atributo noivo
 	 */
-	private PessoaVO noivo;
+	private ClienteVO noivo;
 
 	/**
 	 * Construtor da classe ProspeccaoVO
 	 */
 	public ProspeccaoVO() {
-		this.colaborador = new PessoaVO();
+		this.colaborador = new ColaboradorVO();
 		this.eventoVO = new EventoVO();
-		this.noiva = new PessoaVO();
-		this.noivo = new PessoaVO();
+		this.noiva = new ClienteVO();
+		this.noivo = new ClienteVO();
 		this.parceiroIndicado = new ParceiroVO();
 	}
 
 	/**
 	 * @return o valor do atributo colaborador
 	 */
-	public PessoaVO getColaborador() {
+	public ColaboradorVO getColaborador() {
 		return this.colaborador;
 	}
 
 	/**
 	 * @param colaborador o valor a ser atribuído no atributo colaborador
 	 */
-	public void setColaborador(PessoaVO colaborador) {
+	public void setColaborador(ColaboradorVO colaborador) {
 		this.colaborador = colaborador;
 	}
 
@@ -162,28 +167,28 @@ public class ProspeccaoVO implements Serializable {
 	/**
 	 * @return o valor do atributo noiva
 	 */
-	public PessoaVO getNoiva() {
+	public ClienteVO getNoiva() {
 		return this.noiva;
 	}
 
 	/**
 	 * @param noiva o valor a ser atribuído no atributo noiva
 	 */
-	public void setNoiva(PessoaVO noiva) {
+	public void setNoiva(ClienteVO noiva) {
 		this.noiva = noiva;
 	}
 
 	/**
 	 * @return o valor do atributo noivo
 	 */
-	public PessoaVO getNoivo() {
+	public ClienteVO getNoivo() {
 		return this.noivo;
 	}
 
 	/**
 	 * @param noivo o valor a ser atribuído no atributo noivo
 	 */
-	public void setNoivo(PessoaVO noivo) {
+	public void setNoivo(ClienteVO noivo) {
 		this.noivo = noivo;
 	}
 
@@ -288,9 +293,9 @@ public class ProspeccaoVO implements Serializable {
 	@Override
 	public String toString() {
 		return "ProspeccaoVO [eventoVO=" + this.eventoVO + ", colaborador=" + this.colaborador + ", status=" + this.status
-				+ ", statusMarketing=" + this.statusMarketing + ", dataPendencia=" + this.dataPendencia + ", horaPendencia="
-				+ this.horaPendencia + ", parceiroIndicado=" + this.parceiroIndicado + ", noiva=" + this.noiva + ", noivo="
-				+ this.noivo + "]";
+				+ ", statusMarketing=" + this.statusMarketing + ", dataPendencia=" + this.dataPendencia + ", dataCadastro="
+				+ this.dataCadastro + ", horaPendencia=" + this.horaPendencia + ", parceiroIndicado=" + this.parceiroIndicado
+				+ ", noiva=" + this.noiva + ", noivo=" + this.noivo + "]";
 	}
 
 	/**
@@ -305,6 +310,20 @@ public class ProspeccaoVO implements Serializable {
 	 */
 	public void setEventoVO(EventoVO eventoVO) {
 		this.eventoVO = eventoVO;
+	}
+
+	/**
+	 * @return o valor do atributo dataCadastro
+	 */
+	public Date getDataCadastro() {
+		return this.dataCadastro;
+	}
+
+	/**
+	 * @param dataCadastro o valor a ser atribuído no atributo dataCadastro
+	 */
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 }

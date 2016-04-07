@@ -46,4 +46,13 @@ public class EventoDAO extends GenericEntityManager {
 
 	}
 
+	public void salvar(Evento evento) throws EntityManagerException {
+		LOGGER.info("salvar - INICIO - PARÂMETROS:" + evento);
+
+		this.getEntityManager().persist(evento);
+
+		LOGGER.info("salvar - FIM");
+
+	}
+
 }

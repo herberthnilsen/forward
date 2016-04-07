@@ -71,6 +71,10 @@ public class Prospeccao implements Serializable {
 	@JoinColumn(name = "fwdpcrid")
 	private Parceiro parceiro;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "datpen")
+	private Date dataPendencia;
+
 	public Prospeccao() {
 	}
 
@@ -218,6 +222,7 @@ public class Prospeccao implements Serializable {
 		result = prime * result + ((this.codigoProspeccao == null) ? 0 : this.codigoProspeccao.hashCode());
 		result = prime * result + ((this.colaborador == null) ? 0 : this.colaborador.hashCode());
 		result = prime * result + ((this.dataCadastro == null) ? 0 : this.dataCadastro.hashCode());
+		result = prime * result + ((this.dataPendencia == null) ? 0 : this.dataPendencia.hashCode());
 		result = prime * result + ((this.listaAtendimentos == null) ? 0 : this.listaAtendimentos.hashCode());
 		result = prime * result + ((this.listaOrcamentos == null) ? 0 : this.listaOrcamentos.hashCode());
 		result = prime * result + ((this.listaReuniao == null) ? 0 : this.listaReuniao.hashCode());
@@ -270,6 +275,13 @@ public class Prospeccao implements Serializable {
 				return false;
 			}
 		} else if (!this.dataCadastro.equals(other.dataCadastro)) {
+			return false;
+		}
+		if (this.dataPendencia == null) {
+			if (other.dataPendencia != null) {
+				return false;
+			}
+		} else if (!this.dataPendencia.equals(other.dataPendencia)) {
 			return false;
 		}
 		if (this.listaAtendimentos == null) {
@@ -376,7 +388,21 @@ public class Prospeccao implements Serializable {
 				+ this.colaborador + ", listaAtendimentos=" + this.listaAtendimentos + ", clienteProspeccao="
 				+ this.clienteProspeccao + ", listaOrcamentos=" + this.listaOrcamentos + ", parceiros=" + this.parceiros
 				+ ", listaReuniao=" + this.listaReuniao + ", statusMarketing=" + this.statusMarketing + ", statusAtendimento="
-				+ this.statusAtendimento + ", parceiro=" + this.parceiro + "]";
+				+ this.statusAtendimento + ", parceiro=" + this.parceiro + ", dataPendencia=" + this.dataPendencia + "]";
+	}
+
+	/**
+	 * @return o valor do atributo dataPendencia
+	 */
+	public Date getDataPendencia() {
+		return this.dataPendencia;
+	}
+
+	/**
+	 * @param dataPendencia o valor a ser atribuído no atributo dataPendencia
+	 */
+	public void setDataPendencia(Date dataPendencia) {
+		this.dataPendencia = dataPendencia;
 	}
 
 }

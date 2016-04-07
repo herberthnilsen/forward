@@ -123,8 +123,7 @@ public class ProspeccaoBean extends BasicBean {
 	 */
 	@Override
 	public void reset() {
-		// TODO Auto-generated method stub
-
+		this.prospeccaoVO = new ProspeccaoVO();
 	}
 
 	/*
