@@ -26,10 +26,10 @@
 					value="#{prospeccaoBean.prospeccaoVO.eventoVO.dataEvento}" />
 			</p:panel>
 			<fw:OneMenu idt="colaboradores" label="#{msgs.contato}"
-				value="#{prospeccaoBean.prospeccaoVO.colaborador}">
+				value="#{prospeccaoBean.prospeccaoVO.colaborador.codigoColaborador}">
 				<f:selectItems value="#{prospeccaoBean.listaColaboradores}"
 					var="contato" itemLabel="#{contato.nomePessoa}"
-					itemValue="#{contato}" />
+					itemValue="#{contato.codigoColaborador}" />
 			</fw:OneMenu>
 			<fw:OneMenu idt="status" label="#{msgs.status}"
 				value="#{prospeccaoBean.prospeccaoVO.status}">

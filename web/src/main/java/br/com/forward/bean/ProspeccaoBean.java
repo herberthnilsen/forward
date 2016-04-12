@@ -170,7 +170,9 @@ public class ProspeccaoBean extends BasicBean {
 	private void carregarColaboradores() {
 		LOGGER.info("carregarColaboradores() - INICIO");
 		try {
+
 			this.listaColaboradores = this.prospeccaoFacade.carregarColaboradores();
+
 		} catch (final EntityManagerException e) {
 			LOGGER.error(e.getMessage());
 		}

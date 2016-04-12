@@ -7,9 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.forward.common.ParceiroVO;
-import br.com.forward.common.ParceiroVO;
-import br.com.forward.common.ParceiroVO;
-import br.com.forward.entity.Parceiro;
 import br.com.forward.entity.Parceiro;
 import br.com.forward.enumcode.TipoServicoParceiroEnum;
 import br.com.forward.interfaces.converter.IConverter;
@@ -23,9 +20,9 @@ import br.com.forward.interfaces.converter.IConverter;
 public class ConverterParceiro implements IConverter<ParceiroVO, Parceiro> {
 
 	/**
-	 * Atributo converterPessoa
+	 * Atributo converterParceiro
 	 */
-	private final ConverterPessoa converterPessoa = new ConverterPessoa();
+	private final ConverterParceiro converterParceiro = new ConverterParceiro();
 
 	/*
 	 * (non-Javadoc)
@@ -34,8 +31,7 @@ public class ConverterParceiro implements IConverter<ParceiroVO, Parceiro> {
 	@Override
 	public Parceiro converterVOtoEntity(ParceiroVO objetoVO) {
 
-		final Parceiro parceiro = new Parceiro();
-		parceiro.setPessoa(this.converterPessoa.converterVOtoEntity(objetoVO));
+		final Parceiro parceiro = this.converterParceiro.converterVOtoEntity(objetoVO);
 
 		return parceiro;
 	}
@@ -46,7 +42,7 @@ public class ConverterParceiro implements IConverter<ParceiroVO, Parceiro> {
 	 */
 	@Override
 	public ParceiroVO converterEntitytoVO(Parceiro entidade) {
-		final ParceiroVO parceiroVO = (ParceiroVO) this.converterPessoa.converterEntitytoVO(entidade.getPessoa());
+		final ParceiroVO parceiroVO = this.converterParceiro.converterEntitytoVO(entidade);
 
 		parceiroVO.setTipoServicoEnum(
 				TipoServicoParceiroEnum.getEnumByCodigo(entidade.getTipoServicoParceiro().getCodigoTipoServicoParceiro()));
